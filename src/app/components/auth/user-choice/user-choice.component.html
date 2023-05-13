@@ -1,0 +1,27 @@
+<div class="user p-4 break-all">
+  <img src="/assets/images/header.png" alt="image" [routerLink]="['/home']" width="70rem" height="70rem" class="m-auto pb-4" />
+  
+  <mat-card>
+    <mat-card-content>
+      <label id="example-radio-group-label">
+        <h2 class="text-blue-800">What type of account do you want to open?</h2>
+      </label>
+      <mat-radio-group
+        aria-labelledby="example-radio-group-label"
+        class="example-radio-group"
+        [(ngModel)]="user">
+        <mat-radio-button class="example-radio-button" *ngFor="let user of users" [value]="user">
+          <span class="font-medium">{{user | uppercase}}</span>
+        </mat-radio-button>
+      </mat-radio-group>
+      <button mat-flat-button color="primary" type="submit" [disabled]="!user" (click)="selectUser(user)" class="btn w-[100%] text-lg">
+        Proceed
+      </button>
+
+      <div class="text-center w-[80%] text-base font-medium m-auto pt-2">
+        Already have an account? 
+        <span [routerLink]="['/login']" class="text-blue-700 hover:text-teal-500 cursor-pointer">Login</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,54 @@
+<div class="fixed bg-slate-300 top-0 left-0 w-full h-[100vh] z-50 break-all">
+  <div class="bg-slate-400">
+    <span class="text-blue-700 text-xl font-semibold px-4 py-6 shadow-lg">CashMingle</span>
+  </div>
+  <div class="login p-4">
+    <img src="/assets/images/header.png" alt="image" [routerLink]="['/home']" width="70rem" height="70rem" class="m-auto pb-4" />
+
+    <mat-card>
+      <mat-card-content>
+        <div class="header text-blue-800">
+          <h2>Login</h2>
+        </div>
+  
+        <form [formGroup]="loginForm" (submit)="loginUser()" class="py-2">
+          <div class="space">
+            <mat-form-field class="length">
+              <mat-label>UserName or Email</mat-label>
+              <input formControlName="emailAddressOrUserName" matInput required />
+              <mat-error>
+                UserName or Email required
+              </mat-error>
+            </mat-form-field>
+          </div>
+    
+          <div class="space">
+            <mat-form-field class="length">
+              <mat-label>Password</mat-label>
+              <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" required />
+              <button mat-icon-button matSuffix (click)="hide = !hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              <mat-error>
+                Password required
+              </mat-error>
+            </mat-form-field>
+            <div class="flex items-center justify-between w-[90%] text-teal-500 text-base font-medium m-auto pb-4">
+              <span class="flex items-center"><input type="checkbox" />Remember Me</span>
+              <span class="cursor-pointer hover:text-red-300">Forgot Password?</span>
+            </div>
+          </div>
+    
+          <div>
+            <button mat-flat-button color="primary" type="submit" [disabled]="loginForm.invalid" class="btn w-[90%] text-lg">Login</button>
+          </div>
+        </form>
+  
+        <div class="text-center w-[80%] text-base font-medium m-auto pt-2">
+          Don't have an account? 
+          <span [routerLink]="['/register']" class=" text-blue-700 cursor-pointer hover:text-teal-500">Create an Account</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

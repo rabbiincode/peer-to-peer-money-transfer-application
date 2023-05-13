@@ -1,0 +1,29 @@
+.user{
+  max-width: 500px;
+  max-height: 400px;
+  text-align: center;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+  
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  align-items: flex-start;
+}
+  
+.example-radio-button {
+  margin: 5px;
+}
+  
+.btn:disabled,
+.btn.disabled{
+  color:#fff;
+  border-color: #a0a0a0;
+  background-color: #a0a0a0;
+}

@@ -1,0 +1,76 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+html, body {
+  min-height: 100%;
+  font-size: clamp(10px, 16px, 20px);
+
+  @media only screen and (max-width: 768px) {
+    font-size: clamp(8px, 14.5px, 18px);
+  }
+
+  @media only screen and (max-width: 500px) {
+    font-size: clamp(7px, 13px, 15px);
+  }
+}
+
+body { 
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+@layer components {
+  .image{
+    //background-color: linear-gradient(to right, #42a5f5 20%, #2196f3 30%, #0d47a1 50%);
+    background-color: #321d61;
+    background-image: url(/assets/images/b6.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: screen;
+    padding: 100px 0;
+    animation: change 60s infinite ease-in-out;
+  }
+
+  @keyframes change{
+    0% {
+      background-image: url(/assets/images/b5.jpg);
+    }
+    20% {
+      background-image: url(/assets/images/b4.jpg);
+    }
+    40% {
+      background-image: url(/assets/images/b3.jpg);
+    }
+    60% {
+      background-image: url(/assets/images/b2.jpg);
+    }
+    80% {
+      background-image: url(/assets/images/b1.jpg);
+    }
+  }    
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #FFFFFF;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(94, 94, 243);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: teal;
+}
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
