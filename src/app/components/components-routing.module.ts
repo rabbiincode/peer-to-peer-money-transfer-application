@@ -2,17 +2,16 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './body/home/home.component';
 import { LoginComponent } from './auth/login/login.component';
-import { RegisterRoutingModule } from './auth/register/register-routing.module';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'register', loadChildren: () => import('./components.module').then(m => m.ComponentsModule) },
-  { path: '', redirectTo: '/home', pathMatch: 'full' }
+  { path: 'register', loadChildren: () => import('./auth/register/register.module').then(m => m.RegisterModule) },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes), RegisterRoutingModule],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ComponentsRoutingModule { }
+export class ComponentsRoutingModule {}

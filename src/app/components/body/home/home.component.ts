@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Card } from '../body';
 
 @Component({
@@ -8,6 +8,19 @@ import { Card } from '../body';
 })
 
 export class HomeComponent {
+  scroll = false
+  @HostListener("document:scroll")
+
+  changeBackground(){
+    const scrollPosition = document.body.scrollTop || document.documentElement.scrollTop
+    if(scrollPosition > 0){
+      this.scroll = true
+    }
+    else{
+      this.scroll = false
+    }
+  }
+  
   cards: Card[] = [
     {
       service: 'Deposit',

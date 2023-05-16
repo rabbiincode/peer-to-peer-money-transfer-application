@@ -4,6 +4,19 @@ export interface Card {
   background: string
 }
 
+export interface Slider {
+  image: string,
+  title: string,
+  content: string,
+  color: string
+}
+
+export interface Accordion {
+  position: string,
+  title: string,
+  content: string
+}
+
 export interface Team {
   name: string,
   position: string,

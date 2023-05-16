@@ -16,8 +16,10 @@ export class RegisterComponent implements OnInit {
   arrow = false
   arrow1 = false
   arrow2 = false
+  loading = false
   
   user!: string
+  registerUserResponse: any
 
   choiceUser(selectedUser: string){
     this.user = selectedUser
@@ -57,6 +59,7 @@ export class RegisterComponent implements OnInit {
       // here potentially add some visual feedback for a user
        return;
     }
+    this.loading = !this.loading
 
     // For removing empty fields in reactive forms
     let formValue = { ...this.registerForm.value }
@@ -68,9 +71,10 @@ export class RegisterComponent implements OnInit {
     }
 
     this.register.registerUser(formValue, this.user).subscribe((data) => {
-      // console.log(data)
+      this.registerUserResponse = data
+      this.loading = !this.loading
     })
 
-    // this.registerForm.reset()
+    this.registerForm.reset()
   }
 }

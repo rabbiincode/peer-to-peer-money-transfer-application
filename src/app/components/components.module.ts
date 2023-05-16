@@ -4,7 +4,6 @@ import { ComponentsRoutingModule } from './components-routing.module';
 import { HomeComponent } from './body/home/home.component';
 import { HeaderComponent } from './body/header/header.component';
 import { SidebarComponent } from './body/sidebar/sidebar.component';
-import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -22,13 +21,19 @@ import { TeamComponent } from './body/team/team.component';
 import { ContactComponent } from './body/contact/contact.component';
 import { FooterComponent } from './body/footer/footer.component';
 import { FaqComponent } from './body/faq/faq.component';
+import { ScrollToTopComponent } from './body/scroll-to-top/scroll-to-top.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgbAccordionModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     SidebarComponent,
-    RegisterComponent,
     LoginComponent,
+    RegisterComponent,
     HomeComponent,
     UserChoiceComponent,
     AboutComponent,
@@ -37,6 +42,8 @@ import { FaqComponent } from './body/faq/faq.component';
     ContactComponent,
     FooterComponent,
     FaqComponent,
+    ScrollToTopComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     CommonModule,
@@ -50,7 +57,11 @@ import { FaqComponent } from './body/faq/faq.component';
     MatRadioModule,
     MatExpansionModule,
     MatFormFieldModule,
-    HttpClientModule
+    HttpClientModule,
+    MdbCarouselModule,
+    NgbAccordionModule,
+    NgbAlertModule,
+    MatProgressSpinnerModule,
   ]
 })
 export class ComponentsModule { }

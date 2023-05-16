@@ -15,7 +15,7 @@
            <i class="bi bi-envelope circle-icon text-xl"></i>
            <div class="flex flex-col text-base font-medium px-3">
              <span class="text-lg">Email:</span>
-             <span>cashminglesupport@cashmingle.com</span>
+             <span>support@cashmingle.com</span>
            </div>
          </div>
 
@@ -39,6 +39,7 @@
       </div>
 
       <div class="col-lg-8">
+
         <div class="bg-[#eceff1] text-center px-4 py-2 rounded-r-2xl">
           <form [formGroup]="contactForm" (submit)="contactUs()" class="m-auto py-6">
             <div class="flex pb-2 max-sm:flex-col">
@@ -89,16 +90,27 @@
                 </mat-error>
               </mat-form-field>
             </div>
+            <input formControlName="_template" type="hidden" name="_template" value="table">
+            <input formControlName="_captcha" type="hidden" name="_captcha" value="false">
   
             <div class="m-auto">
-              <button mat-flat-button color="primary" type="submit" [disabled]="contactForm.invalid" class="btn text-lg rounded-2xl p-4">
+              <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="contactForm.invalid" class="btn text-lg rounded-2xl p-4">
                 Send Message
               </button>
+              <button *ngIf="loading" mat-flat-button color="accent" type="submit" class="btn text-lg rounded-2xl p-4">
+                <span>Loading...</span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner>
+              </button>
+
+              <div class="pt-2">
+                <ngb-alert *ngIf="sendMailResponse" [type]="'success'">Message sent successfully ✔️</ngb-alert>
+              </div>
+              
             </div>
           </form>
         </div>
       </div>
       
     </div>
+    
   </div>
 </div>

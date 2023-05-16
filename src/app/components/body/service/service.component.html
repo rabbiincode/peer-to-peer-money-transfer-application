@@ -1,4 +1,4 @@
-<div class="bg-[#b0bec5] break-all">
+<div class="bg-[#b0bec5]">
   <div class="container py-16">
 
     <div class="text-center pb-4">
@@ -6,60 +6,20 @@
       <p class="font-medium text-lg text-[#009688]">Here are services available to you</p>
     </div>
 
-    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 5"></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="/assets/images/s1.jpg" class="d-block w-100" alt="image">
-          <div class="carousel-caption d-none d-md-block">
-            <h2 class="text-black">DEPOSIT</h2>
-            <p class="text-yellow-100 font-semibold text-2xl">Deposit money to your CashMingle account directly from your bank account</p>
-          </div>
+    
+    <mdb-carousel [controls]="true" [indicators]="true" [animation]="'fade'">
+      <mdb-carousel-item *ngFor="let slider of slide">
+        <img
+          src={{slider.image}}
+          class="d-block w-100"
+          alt="image"
+        />
+        <div class="carousel-caption block">
+          <h2 class="text-orange-600">{{slider.title}}</h2>
+          <p [style]="slider.color" class="font-medium text-xl">{{slider.content}}</p>
         </div>
-        <div class="carousel-item">
-          <img src="/assets/images/s2.jpg" class="d-block w-100" alt="image">
-          <div class="carousel-caption d-none d-md-block">
-            <h2 class="text-black">WITHDRAWAL</h2>
-            <p class="text-yellow-100 font-semibold text-2xl">Withdraw funds to any account of your choice completely free. No hidden Charges</p>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <img src="/assets/images/s3.jpg" class="d-block w-100" alt="image">
-          <div class="carousel-caption d-none d-md-block">
-            <h2 class="text-white">MONEY TRANSFER</h2>
-            <p class="text-yellow-100 font-semibold text-2xl">Transfer funds seamlessly with lightening speed</p>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <img src="/assets/images/s4.jpg" class="d-block w-100" alt="image">
-          <div class="carousel-caption d-none d-md-block">
-            <h2 class="text-white">SAVINGS</h2>
-            <p class="text-yellow-100 font-semibold text-2xl">Save funds for a specific amount of time. No one accesses it until it's due, not even you</p>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <img src="/assets/images/s5.jpg" class="d-block w-100" alt="image">
-          <div class="carousel-caption d-none d-md-block">
-            <h2 class="text-yellow-800">FINANCIAL PLANING</h2>
-            <p class="text-yellow-900 font-semibold text-2xl">we discuss with you to find the best financial plan for you</p>
-          </div>
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-
+      </mdb-carousel-item>
+    </mdb-carousel>
+    
   </div>
 </div>

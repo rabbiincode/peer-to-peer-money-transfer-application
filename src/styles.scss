@@ -24,7 +24,7 @@ body {
 @layer components {
   .image{
     //background-color: linear-gradient(to right, #42a5f5 20%, #2196f3 30%, #0d47a1 50%);
-    background-color: #321d61;
+    background-color: #5a52ce;
     background-image: url(/assets/images/b6.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -64,12 +64,12 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: rgb(94, 94, 243);
+    background: #5e5ef3;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: teal;
+    background: #008080;
 }
 
 /* Importing Bootstrap SCSS file. */

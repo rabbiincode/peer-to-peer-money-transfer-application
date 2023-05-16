@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { EmailValidator, PhoneNumberValidator } from '../../auth/customValidation/custom-validation/custom-validation.component';
+import { BodyService } from '../body/body.service';
 
 @Component({
   selector: 'cashMingle-contact',
@@ -8,9 +9,11 @@ import { EmailValidator, PhoneNumberValidator } from '../../auth/customValidatio
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent {
+  loading = false
+  sendMailResponse = false
   contactForm!: FormGroup
   
-  constructor(private formBuilder: FormBuilder){}
+  constructor(private formBuilder: FormBuilder, private mail: BodyService){}
 
   ngOnInit(): void {
     this.contactForm = this.formBuilder.group({
@@ -19,7 +22,14 @@ export class ContactComponent {
       phoneNumber: ['', {validators: PhoneNumberValidator}],
       subject: [''],
       message: [''],
+      _template: [''],
+      _captcha: [''],
     })
+    this.setValue()
+  }
+
+  setValue(){
+    this.contactForm.patchValue({_template: 'table', _captcha: 'false'})
   }
 
   get contactFormControl() {
@@ -30,9 +40,20 @@ export class ContactComponent {
     if (this.contactForm.invalid) {
       // here potentially add some visual feedback for a user
        return;
-     }
+    }
+    this.loading = !this.loading
 
+    let formValue = { ...this.contactForm.value }
 
-    // this.loginForm.reset()
+    for(let data in formValue) {
+      if(!formValue[data]) {
+        delete formValue[data]
+      }
+    }
+    this.mail.sendMail(formValue).subscribe()
+
+    this.sendMailResponse = !this.sendMailResponse
+    this.loading = false
+    this.contactForm.reset()
   }
 }

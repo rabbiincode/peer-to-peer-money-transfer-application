@@ -1,12 +1,14 @@
-<div *ngIf="open" class='fixed bg-slate-300 top-0 left-0 w-full h-full z-50'>
+<div *ngIf="open" class='fixed bg-slate-300 top-0 left-0 w-full h-full z-[100]'>
   <cashMingle-sidebar (closeSidebar)="SidebarClose()"></cashMingle-sidebar>
 </div>
 
-<nav *ngIf="!open" class="bg-gradient-to-r from-blue-950 from-20% via-blue-500 via-30% to-blue-950 to-80%
-                          flex items-center bg-blue-950 text-white justify-between flex-wrap p-6 break-all shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]">
+<!-- transition-all duration-200 -->
+<nav *ngIf="!open" [style]="changeBackground ? '': background"  class="bg-gradient-to-r from-blue-950 from-20% via-blue-500 via-30% to-blue-950 to-80%
+  flex items-center bg-blue-950 text-white justify-between flex-wrap px-6 py-4 break-all"
+>
   <div class="flex items-center">
     <img src="/assets/images/header.png" alt="image" width="40rem" height=40rem>
-    <span class="text-blue-400 text-2xl font-semibold pl-2" [routerLink]="['/home']">CashMingle</span>
+    <span [style]="changeBackground ? '': color" class="text-blue-400 text-2xl font-semibold pl-2" [routerLink]="['/home']">CashMingle</span>
   </div>
  
   <div (click)="SidebarOpen()" class="block md:hidden">
