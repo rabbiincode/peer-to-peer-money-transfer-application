@@ -1,237 +1,240 @@
 <div *ngIf="!user" class='fixed bg-slate-300 top-0 left-0 w-full h-full z-50 break-all'>
-    <div class="bg-slate-400">
-      <span class="text-blue-700 text-xl font-semibold px-4 py-6 shadow-lg">CashMingle</span>
-    </div>
-    <cashMingle-user-choice (selectedUser)="choiceUser($event)"></cashMingle-user-choice>
+  <div class="bg-slate-400">
+    <span class="text-blue-700 text-xl font-semibold px-4 py-6 shadow-lg">CashMingle</span>
   </div>
+  <cashMingle-user-choice (selectedUser)="choiceUser($event)"></cashMingle-user-choice>
+</div>
   
-  <div class="bg-slate-300 min-h-screen break-all">
-    <div class="bg-slate-400">
-      <span class="text-blue-700 text-xl font-semibold px-4 py-6 shadow-lg">CashMingle</span>
-    </div>
-    <div class="register p-4">
-      <img src="/assets/images/header.png" alt="image" [routerLink]="['/home']" width="40rem" height="40rem" class="m-auto pb-4" />
-  
-      <mat-card>
-        <mat-card-content>
-          <div>
-            <ngb-alert *ngIf="!registerUserResponse" [type]="'info'">{{registerUserResponse?.message}}</ngb-alert>
+<div class="bg-slate-300 min-h-screen break-all">
+  <div class="bg-slate-400">
+    <span class="text-blue-700 text-xl font-semibold px-4 py-6 shadow-lg">CashMingle</span>
+  </div>
+  <div class="register p-4">
+    <img src="/assets/images/header.png" alt="image" [routerLink]="['/home']" width="40rem" height="40rem" class="m-auto pb-4" />
+
+    <mat-card>
+      <mat-card-content>
+        <div class="header text-blue-800">
+          <h2>Register</h2>
+        </div>
+        
+        <form [formGroup]="registerForm" (ngSubmit)="registerUser()" class="py-2">
+          <div class="pb-4">
+            <mat-form-field class="length">
+              <mat-label>FirstName</mat-label>
+              <input formControlName="firstName" matInput required placeholder="James" />
+              <mat-error *ngIf="registerForm.value.firstName == ''">
+                FirstName required
+              </mat-error>
+              <mat-error *ngIf="registerFormControl?.['firstName']?.errors?.['invalidWord']">
+                Name Invalid
+              </mat-error>
+            </mat-form-field>
+          </div>
+    
+          <div class="pb-4">
+            <mat-form-field class="length">
+              <mat-label>LastName</mat-label>
+              <input formControlName="lastName" matInput required placeholder="Wilson" />
+              <mat-error *ngIf="registerForm.value.lastName == ''">
+                LastName required
+              </mat-error>
+              <mat-error *ngIf="registerFormControl?.['lastName']?.errors?.['invalidWord']">
+                Name Invalid
+              </mat-error>
+            </mat-form-field>
           </div>
 
-          <div class="header text-blue-800">
-            <h2>Register</h2>
+          <div class="pb-4">
+            <mat-form-field class="length">
+              <mat-label>MiddleName</mat-label>
+              <input formControlName="middleName" matInput placeholder="Matt" />
+            </mat-form-field>
+          </div>
+
+          <div class="pb-8 length m-auto">
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header (click)="arrow = !arrow">
+                  <mat-panel-title class="text-teal-500 text-lg font-medium">Contact</mat-panel-title>
+                  <mat-icon>account_circle</mat-icon>
+                  <mat-icon *ngIf="arrow">arrow_drop_up</mat-icon>
+                  <mat-icon *ngIf="!arrow">arrow_drop_down</mat-icon>
+                </mat-expansion-panel-header>
+  
+                <mat-form-field class="length pb-4">
+                  <mat-label>EmailAddress</mat-label>
+                  <input formControlName="email" matInput required placeholder="example@mail.com" />
+                  <mat-error *ngIf="registerForm.value.email == ''">
+                    Email Address required
+                  </mat-error>
+                  <mat-error *ngIf="registerFormControl?.['email']?.errors?.['invalidEmail']">
+                    Email address is invalid
+                  </mat-error>
+                </mat-form-field>
+      
+                <mat-form-field class="length pb-4">
+                  <mat-label>PhoneNumber</mat-label>
+                  <input formControlName="phoneNumber" matInput required placeholder="08000000000" />
+                  <mat-error *ngIf="registerForm.value.phoneNumber == ''">
+                    PhoneNumber required
+                  </mat-error>
+                  <mat-error *ngIf="registerFormControl?.['phoneNumber']?.errors?.['invalidPhoneNumber']">
+                    PhoneNumber not valid
+                  </mat-error>
+                </mat-form-field>
+      
+                <mat-form-field class="length pb-4">
+                  <mat-label>UserName</mat-label>
+                  <input formControlName="userName" matInput required minlength="4" placeholder="Wilson"/>
+                  <mat-error>
+                    UserName required
+                  </mat-error>
+                </mat-form-field>
+  
+                <mat-form-field class="length pb-4" *ngIf="user !== 'admin'">
+                  <mat-label>Recovery Email Address</mat-label>
+                  <input formControlName="recoveryMail" matInput placeholder="recover@mail.com" />
+                  <mat-error *ngIf="registerFormControl?.['recoveryMail']?.errors?.['invalidEmail']">
+                    Email address is invalid
+                  </mat-error>
+                </mat-form-field>
+                 
+              </mat-expansion-panel>
+            </mat-accordion>
           </div>
           
-          <form [formGroup]="registerForm" (ngSubmit)="registerUser()" class="py-2">
-            <div class="pb-4">
-              <mat-form-field class="length">
-                <mat-label>FirstName</mat-label>
-                <input formControlName="firstName" matInput required placeholder="James" />
-                <mat-error *ngIf="registerForm.value.firstName == ''">
-                  FirstName required
-                </mat-error>
-                <mat-error *ngIf="registerFormControl?.['firstName']?.errors?.['invalidWord']">
-                  Name Invalid
-                </mat-error>
-              </mat-form-field>
-            </div>
+          <div class="pb-8 length m-auto">
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header (click)="arrow1 = !arrow1">
+                  <mat-panel-title class="text-teal-500 text-lg font-medium">Security</mat-panel-title>
+                  <mat-icon>lock</mat-icon>
+                  <mat-icon *ngIf="arrow1">arrow_drop_up</mat-icon>
+                  <mat-icon *ngIf="!arrow1">arrow_drop_down</mat-icon>
+                </mat-expansion-panel-header>
+
+                <mat-form-field class="length pb-4">
+                  <mat-label>Password</mat-label>
+                  <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" required placeholder="123@Aa" />
+                  <button mat-icon-button matSuffix (click)="hide = !hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                  <mat-error *ngIf="registerForm.value.password == ''">
+                    Password required
+                  </mat-error>
+                  <mat-error *ngIf="registerFormControl?.['password']?.errors?.['invalidPassword']">
+                    Password should have minimum of 6 characters, at least 1 uppercase and lowercase letter, number and special character
+                  </mat-error>
+                </mat-form-field>
       
-            <div class="pb-4">
-              <mat-form-field class="length">
-                <mat-label>LastName</mat-label>
-                <input formControlName="lastName" matInput required placeholder="Wilson" />
-                <mat-error *ngIf="registerForm.value.lastName == ''">
-                  LastName required
-                </mat-error>
-                <mat-error *ngIf="registerFormControl?.['lastName']?.errors?.['invalidWord']">
-                  Name Invalid
-                </mat-error>
-              </mat-form-field>
-            </div>
-  
-            <div class="pb-4">
-              <mat-form-field class="length">
-                <mat-label>MiddleName</mat-label>
-                <input formControlName="middleName" matInput placeholder="Matt" />
-              </mat-form-field>
-            </div>
-  
-            <div class="pb-8 length m-auto">
-              <mat-accordion>
-                <mat-expansion-panel>
-                  <mat-expansion-panel-header (click)="arrow = !arrow">
-                    <mat-panel-title class="text-teal-500 text-lg font-medium">Contact</mat-panel-title>
-                    <mat-icon>account_circle</mat-icon>
-                    <mat-icon *ngIf="arrow">arrow_drop_up</mat-icon>
-                    <mat-icon *ngIf="!arrow">arrow_drop_down</mat-icon>
-                  </mat-expansion-panel-header>
+                <mat-form-field class="length pb-4">
+                  <mat-label>Confirm Password</mat-label>
+                  <input formControlName="confirmPassword" matInput [type]="hide1 ? 'password' : 'text'" required placeholder="123@Aa" />
+                  <button mat-icon-button matSuffix (click)="hide1 = !hide1">
+                    <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                  <mat-error *ngIf="registerForm.value.password == ''">
+                    Confirm Password required
+                  </mat-error>
+                  <mat-error *ngIf="registerFormControl?.['confirmPassword']?.errors?.['passwordMatchError']">
+                    Password does not match
+                  </mat-error>
+                </mat-form-field>
+      
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>      
     
-                  <mat-form-field class="length pb-4">
-                    <mat-label>EmailAddress</mat-label>
-                    <input formControlName="email" matInput required placeholder="example@mail.com" />
-                    <mat-error *ngIf="registerForm.value.email == ''">
-                      Email Address required
-                    </mat-error>
-                    <mat-error *ngIf="registerFormControl?.['email']?.errors?.['invalidEmail']">
-                      Email address is invalid
-                    </mat-error>
-                  </mat-form-field>
-        
-                  <mat-form-field class="length pb-4">
-                    <mat-label>PhoneNumber</mat-label>
-                    <input formControlName="phoneNumber" matInput required placeholder="08000000000" />
-                    <mat-error *ngIf="registerForm.value.phoneNumber == ''">
-                      PhoneNumber required
-                    </mat-error>
-                    <mat-error *ngIf="registerFormControl?.['phoneNumber']?.errors?.['invalidPhoneNumber']">
-                      PhoneNumber not valid
-                    </mat-error>
-                  </mat-form-field>
-        
-                  <mat-form-field class="length pb-4">
-                    <mat-label>UserName</mat-label>
-                    <input formControlName="userName" matInput required minlength="4" placeholder="Wilson"/>
-                    <mat-error>
-                      UserName required
-                    </mat-error>
-                  </mat-form-field>
-    
-                  <mat-form-field class="length pb-4" *ngIf="user !== 'admin'">
-                    <mat-label>Recovery Email Address</mat-label>
-                    <input formControlName="recoveryMail" matInput placeholder="recover@mail.com" />
-                    <mat-error *ngIf="registerFormControl?.['recoveryMail']?.errors?.['invalidEmail']">
-                      Email address is invalid
-                    </mat-error>
-                  </mat-form-field>
-                   
-                </mat-expansion-panel>
-              </mat-accordion>
-            </div>
+          <div class="pb-8 length m-auto">
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header (click)="arrow2 = !arrow2">
+                  <mat-panel-title class="text-teal-500 text-lg font-medium">Personal Data</mat-panel-title>
+                  <mat-icon>queue</mat-icon>
+                  <mat-icon *ngIf="arrow2">arrow_drop_up</mat-icon>
+                  <mat-icon *ngIf="!arrow2">arrow_drop_down</mat-icon>
+                </mat-expansion-panel-header>
             
-            <div class="pb-8 length m-auto">
-              <mat-accordion>
-                <mat-expansion-panel>
-                  <mat-expansion-panel-header (click)="arrow1 = !arrow1">
-                    <mat-panel-title class="text-teal-500 text-lg font-medium">Security</mat-panel-title>
-                    <mat-icon>lock</mat-icon>
-                    <mat-icon *ngIf="arrow1">arrow_drop_up</mat-icon>
-                    <mat-icon *ngIf="!arrow1">arrow_drop_down</mat-icon>
-                  </mat-expansion-panel-header>
-  
-                  <mat-form-field class="length pb-4">
-                    <mat-label>Password</mat-label>
-                    <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" required placeholder="123@Aa" />
-                    <button mat-icon-button matSuffix (click)="hide = !hide">
-                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
-                    <mat-error *ngIf="registerForm.value.password == ''">
-                      Password required
-                    </mat-error>
-                    <mat-error *ngIf="registerFormControl?.['password']?.errors?.['invalidPassword']">
-                      Password should have minimum of 6 characters, at least 1 uppercase and lowercase letter, number and special character
-                    </mat-error>
-                  </mat-form-field>
+                <mat-form-field class="length pb-4">
+                  <mat-label>Address</mat-label>
+                  <input formControlName="address" matInput required placeholder="example layout" />
+                  <mat-error>
+                    Address required
+                  </mat-error>
+                </mat-form-field>
+            
+                <mat-form-field class="length pb-4" *ngIf="user == 'individual'">
+                  <mat-label>Profession</mat-label>
+                  <input formControlName="profession" matInput [required]="user == 'individual'" placeholder="Engineer" />
+                </mat-form-field>
+
+                <mat-form-field class="length pb-4" *ngIf="user == 'business'">
+                  <mat-label>Business Name</mat-label>
+                  <input formControlName="businessName" matInput [required]="user == 'business'" placeholder="CashMingle" />
+                  <mat-error>
+                    Business Name required
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="length pb-4" *ngIf="user == 'business'">
+                  <mat-label>Business Type</mat-label>
+                  <input formControlName="businessType" matInput [required]="user == 'business'" placeholder="FinTech" />
+                  <mat-error>
+                    Business Type required
+                  </mat-error>
+                </mat-form-field>
+                
+                <mat-form-field class="length pb-4" *ngIf="user !== 'business'">
+                  <mat-label>NIN</mat-label>
+                  <input formControlName="nin" matInput minlength="11" maxlength="11" [required]="user == 'admin'" [required]="user == 'individual'" placeholder="12345678900" />
+                  <mat-error *ngIf="registerForm.value.nin == ''">
+                    NIN required
+                  </mat-error>
+                  <mat-error *ngIf="registerForm.get('nin')?.hasError('minlength')">
+                    NIN invalid
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="length pb-4" *ngIf="user !== 'admin'">
+                  <mat-label>BVN</mat-label>
+                  <input formControlName="bvn" matInput minlength="11" maxlength="11" placeholder="12345678900" />
+                  <mat-error *ngIf="registerForm.get('bvn')?.hasError('minlength')">
+                    BVN invalid
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="length pb-4" *ngIf="user == 'business'">
+                  <mat-label>CAC</mat-label>
+                  <input formControlName="cac" matInput minlength="4" [required]="user == 'business'" placeholder="12345678900" />
+                  <mat-error *ngIf="registerForm.value.cac == ''">
+                    CAC required
+                  </mat-error>
+                  <mat-error *ngIf="registerForm.get('cac')?.hasError('minlength')">
+                    CAC invalid
+                  </mat-error>
+                </mat-form-field>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
         
-                  <mat-form-field class="length pb-4">
-                    <mat-label>Confirm Password</mat-label>
-                    <input formControlName="confirmPassword" matInput [type]="hide1 ? 'password' : 'text'" required placeholder="123@Aa" />
-                    <button mat-icon-button matSuffix (click)="hide1 = !hide1">
-                      <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
-                    <mat-error *ngIf="registerForm.value.password == ''">
-                      Confirm Password required
-                    </mat-error>
-                    <mat-error *ngIf="registerFormControl?.['confirmPassword']?.errors?.['passwordMatchError']">
-                      Password does not match
-                    </mat-error>
-                  </mat-form-field>
-        
-                </mat-expansion-panel>
-              </mat-accordion>
-            </div>      
-      
-            <div class="pb-8 length m-auto">
-              <mat-accordion>
-                <mat-expansion-panel>
-                  <mat-expansion-panel-header (click)="arrow2 = !arrow2">
-                    <mat-panel-title class="text-teal-500 text-lg font-medium">Personal Data</mat-panel-title>
-                    <mat-icon>queue</mat-icon>
-                    <mat-icon *ngIf="arrow2">arrow_drop_up</mat-icon>
-                    <mat-icon *ngIf="!arrow2">arrow_drop_down</mat-icon>
-                  </mat-expansion-panel-header>
-              
-                  <mat-form-field class="length pb-4">
-                    <mat-label>Address</mat-label>
-                    <input formControlName="address" matInput required placeholder="example layout" />
-                    <mat-error>
-                      Address required
-                    </mat-error>
-                  </mat-form-field>
-              
-                  <mat-form-field class="length pb-4" *ngIf="user == 'individual'">
-                    <mat-label>Profession</mat-label>
-                    <input formControlName="profession" matInput [required]="user == 'individual'" placeholder="Engineer" />
-                  </mat-form-field>
-  
-                  <mat-form-field class="length pb-4" *ngIf="user == 'business'">
-                    <mat-label>Business Name</mat-label>
-                    <input formControlName="businessName" matInput [required]="user == 'business'" placeholder="CashMingle" />
-                    <mat-error>
-                      Business Name required
-                    </mat-error>
-                  </mat-form-field>
-  
-                  <mat-form-field class="length pb-4" *ngIf="user == 'business'">
-                    <mat-label>Business Type</mat-label>
-                    <input formControlName="businessType" matInput [required]="user == 'business'" placeholder="FinTech" />
-                    <mat-error>
-                      Business Type required
-                    </mat-error>
-                  </mat-form-field>
-                  
-                  <mat-form-field class="length pb-4" *ngIf="user !== 'business'">
-                    <mat-label>NIN</mat-label>
-                    <input formControlName="nin" matInput minlength="11" maxlength="11" [required]="user == 'admin'" [required]="user == 'individual'" placeholder="12345678900" />
-                    <mat-error *ngIf="registerForm.value.nin == ''">
-                      NIN required
-                    </mat-error>
-                    <mat-error *ngIf="registerForm.get('nin')?.hasError('minlength')">
-                      NIN invalid
-                    </mat-error>
-                  </mat-form-field>
-  
-                  <mat-form-field class="length pb-4" *ngIf="user !== 'admin'">
-                    <mat-label>BVN</mat-label>
-                    <input formControlName="bvn" matInput minlength="11" maxlength="11" placeholder="12345678900" />
-                    <mat-error *ngIf="registerForm.get('bvn')?.hasError('minlength')">
-                      BVN invalid
-                    </mat-error>
-                  </mat-form-field>
-  
-                  <mat-form-field class="length pb-4" *ngIf="user == 'business'">
-                    <mat-label>CAC</mat-label>
-                    <input formControlName="cac" matInput minlength="4" [required]="user == 'business'" placeholder="12345678900" />
-                    <mat-error *ngIf="registerForm.value.cac == ''">
-                      CAC required
-                    </mat-error>
-                    <mat-error *ngIf="registerForm.get('cac')?.hasError('minlength')">
-                      CAC invalid
-                    </mat-error>
-                  </mat-form-field>
-                </mat-expansion-panel>
-              </mat-accordion>
-            </div>
-          
-            <div>
-              <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="registerForm.invalid" class="btn w-[90%] text-lg">
-                Register
-              </button>
-              <button *ngIf="loading" mat-flat-button color="accent" type="submit" class="btn w-[90%] text-lg">
-                <span>Loading...</span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner>
-              </button>
-            </div>
-          </form>
-        </mat-card-content>
-      </mat-card>
-    </div>
+          <div>
+            <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="registerForm.invalid" class="btn w-[90%] text-lg">
+              Register
+            </button>
+            <button *ngIf="loading" mat-flat-button color="accent" type="submit" class="btn w-[90%] text-lg">
+              <span>Loading...</span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner>
+            </button>
+          </div>
+        </form>
+
+        <div>
+          <ngb-alert *ngIf="registerUserResponse" [type]="'info'">{{registerUserResponse?.message}}</ngb-alert>
+          <ngb-alert *ngIf="errorMessage && errorMessage?.status > 0 && errorMessage?.status <= 499" [type]="'danger'">{{errorMessage?.error?.error}}</ngb-alert>
+          <ngb-alert *ngIf="errorMessage && errorMessage?.status >= 500 || errorMessage?.status == 0" [type]="'danger'">Registration Failed...please try again</ngb-alert>
+        </div>
+
+      </mat-card-content>
+    </mat-card>
   </div>
+</div>

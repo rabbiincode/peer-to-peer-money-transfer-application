@@ -1,0 +1,12 @@
+<div [class.toggle]="sidebarToggle" class="sidebar bg-blue-200 pl-6 pt-8">
+
+  <div class="flex items-center pb-4" *ngFor="let content of sidebarContent">
+    <mat-icon>{{content.icon}}</mat-icon>
+    <span [routerLink]="content.url" class="text-lg font-normal pl-4 cursor-pointer">{{content.service}}</span>
+  </div>
+
+  <div class="name text-blue-400 text-2xl mb-2 font-semibold">
+    <h2>CashMingle</h2>
+  </div>
+
+</div>

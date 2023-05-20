@@ -1,0 +1,7 @@
+<div>
+  <cashMingle-user-header [sidebar]="sidebar" (togglePageWidth)="togglePage($event)"></cashMingle-user-header>
+  
+  <div [class.width]="fullWidth" class="user">
+    <router-outlet></router-outlet>
+  </div>
+</div>

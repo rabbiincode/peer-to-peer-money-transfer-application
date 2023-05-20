@@ -1,0 +1,22 @@
+.mat-icon{
+  font-size: 35px;
+  width: 35px;
+  height: 35px;
+}
+
+.circle-icon {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 16px;
+  margin-right: 10px;
+  transition: 0.3s;
+}
+
+.circle-icon:hover {
+  background: #fff;
+}

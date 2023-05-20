@@ -1,7 +1,8 @@
 export interface Card {
   service: string,
   image: string,
-  background: string
+  background: string,
+  hover: string
 }
 
 export interface Slider {

@@ -27,6 +27,18 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgbAccordionModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
+import { UserComponent } from './users/customer/user/user.component';
+import { UserHeaderComponent } from './users/user-header/user-header.component';
+import { UserSidebarComponent } from './users/user-sidebar/user-sidebar.component';
+import { AdminComponent } from './users/admin/admin/admin.component';
+import { UserDashboardComponent } from './users/customer/user-dashboard/user-dashboard.component';
+import { AdminDashboardComponent } from './users/admin/admin-dashboard/admin-dashboard.component';
+import { DepositComponent } from './users/customer/deposit/deposit.component';
+import { WithdrawalComponent } from './users/customer/withdrawal/withdrawal.component';
+import { TransferComponent } from './users/customer/transfer/transfer.component';
+import { SavingsComponent } from './users/customer/savings/savings.component';
+import { CustomersComponent } from './users/admin/customers/customers.component';
+import { RoleComponent } from './users/admin/role/role.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +56,18 @@ import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
     FaqComponent,
     ScrollToTopComponent,
     ForgotPasswordComponent,
+    UserComponent,
+    AdminComponent,
+    UserHeaderComponent,
+    UserSidebarComponent,
+    UserDashboardComponent,
+    AdminDashboardComponent,
+    DepositComponent,
+    WithdrawalComponent,
+    TransferComponent,
+    SavingsComponent,
+    CustomersComponent,
+    RoleComponent,
   ],
   imports: [
     CommonModule,

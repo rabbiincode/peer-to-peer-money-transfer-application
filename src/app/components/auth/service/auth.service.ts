@@ -9,7 +9,6 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   url = "https://localhost:44340/CashMingle/Account"
-  // login: Login[] = []
 
   loginUser(login: Login){
     return this.http.post(`${this.url}/login`, login)

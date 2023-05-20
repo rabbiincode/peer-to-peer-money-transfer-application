@@ -10,7 +10,16 @@
         <div class="header text-blue-800">
           <h2>Login</h2>
         </div>
-  
+
+        <div>
+          <ngb-alert *ngIf="errorMessage && errorMessage?.status > 0 && errorMessage?.status <= 499" [type]="'danger'">
+            {{errorMessage?.error?.error}} {{errorMessage?.error?.message}}
+          </ngb-alert>
+          <ngb-alert *ngIf="errorMessage && errorMessage?.status >= 500 || errorMessage?.status == 0" [type]="'danger'">
+            Login Failed...please try again
+          </ngb-alert>
+        </div>
+
         <form [formGroup]="loginForm" (submit)="loginUser()" class="py-2">
           <div class="space">
             <mat-form-field class="length">
@@ -41,8 +50,8 @@
     
           <div>
             <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="loginForm.invalid" class="btn w-[90%] text-lg">Login</button>
-            <button *ngIf="loading" mat-flat-button color="accent" type="submit" class="btn w-[90%] text-lg">
-              <span>Loading...</span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner>
+            <button *ngIf="loading" mat-flat-button color="accent" class="btn w-[90%] text-lg">
+              Loading...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
             </button>
           </div>
         </form>

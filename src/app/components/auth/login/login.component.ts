@@ -1,7 +1,8 @@
- import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../service/auth.service';
 import { PasswordPatternValidator } from '../customValidation/custom-validation/custom-validation.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'cashMingle-login',
@@ -14,9 +15,9 @@ export class LoginComponent implements OnInit {
   hide = true
   open = false
   loading = false
-  loginUserResponse: any
-
-  constructor(private formBuilder: FormBuilder, private login: AuthService){}
+  errorMessage: any
+ 
+  constructor(private formBuilder: FormBuilder, private login: AuthService, private route: Router){}
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -26,17 +27,19 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser(){
-    if (this.loginForm.invalid) {
+    if (this.loginForm.invalid){
       // here potentially add some visual feedback for a user
       return;
     }
     this.loading = !this.loading
 
     this.login.loginUser(this.loginForm.value).subscribe((data) => {
-      this.loginUserResponse = data
-      this.loading = !this.loading
+      this.loginForm.reset()
+      this.route.navigate(['/user'])
+      }, (error) => {
+        this.errorMessage = error
+        this.loading = false
     })
-    this.loginForm.reset()
   }
   
   ChangePasswordOpen(){

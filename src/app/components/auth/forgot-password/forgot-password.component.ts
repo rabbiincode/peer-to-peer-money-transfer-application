@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder ,FormGroup } from '@angular/forms';
 import { EmailValidator, MatchPasswordValidator, PasswordPatternValidator } from '../customValidation/custom-validation/custom-validation.component';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'cashMingle-forgot-password',
@@ -19,6 +19,8 @@ export class ForgotPasswordComponent {
 
   resetForm!: FormGroup
   changePasswordForm!: FormGroup
+  getTokenErrorMessage: any
+  errorMessage: any
   
   @Output() closeChangePassword = new EventEmitter<boolean>()
 
@@ -56,6 +58,9 @@ export class ForgotPasswordComponent {
     
     this.forgotPassword.getToken(this.email).subscribe(data => {
       this.getTokenResponse = data
+      }, (error) => {
+        this.getTokenErrorMessage = error
+        this.loading = false
     })
   }
 
@@ -65,7 +70,11 @@ export class ForgotPasswordComponent {
     this.forgotPassword.resetPassword(this.changePasswordForm.getRawValue()).subscribe(data => {
       this.resetPasswordResponse = data
       this.resetPasswordProgress = !this.resetPasswordProgress
+      }, (error) => {
+        this.errorMessage = error
+        this.resetPasswordProgress = false
     })
+
     this.changePasswordForm.reset()
   }
 
