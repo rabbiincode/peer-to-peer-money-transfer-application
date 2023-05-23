@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { EmailValidator, PhoneNumberValidator } from '../../auth/customValidation/custom-validation/custom-validation.component';
-import { BodyService } from '../body/body.service';
+import { BodyService } from '../body-service/body.service';
 
 @Component({
   selector: 'cashMingle-contact',

@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder ,FormGroup } from '@angular/forms';
 import { EmailValidator, MatchPasswordValidator, PasswordPatternValidator } from '../customValidation/custom-validation/custom-validation.component';
 import { AuthService } from '../service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'cashMingle-forgot-password',
@@ -24,7 +25,7 @@ export class ForgotPasswordComponent {
   
   @Output() closeChangePassword = new EventEmitter<boolean>()
 
-  constructor(private formBuilder: FormBuilder, private forgotPassword: AuthService){}
+  constructor(private formBuilder: FormBuilder, private forgotPassword: AuthService, private route: Router){}
   
   ngOnInit(): void {
     this.resetForm = this.formBuilder.group({email: ['', {validators: EmailValidator}]})
@@ -69,7 +70,8 @@ export class ForgotPasswordComponent {
 
     this.forgotPassword.resetPassword(this.changePasswordForm.getRawValue()).subscribe(data => {
       this.resetPasswordResponse = data
-      this.resetPasswordProgress = !this.resetPasswordProgress
+      this.resetPasswordProgress = false
+      //this.route.navigate(['/login'])
       }, (error) => {
         this.errorMessage = error
         this.resetPasswordProgress = false

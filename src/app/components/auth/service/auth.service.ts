@@ -6,12 +6,17 @@ import { Login, ResetPassword } from '../auth';
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
-
+  isAuthenticated = false
   url = "https://localhost:44340/CashMingle/Account"
+
+  constructor(private http: HttpClient) {}
 
   loginUser(login: Login){
     return this.http.post(`${this.url}/login`, login)
+  }
+  
+  validateLogin(authenticate: boolean){
+    this.isAuthenticated = authenticate
   }
   
   registerUser(register: object, user: string){

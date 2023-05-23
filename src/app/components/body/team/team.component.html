@@ -1,13 +1,13 @@
-<div class="bg-[#cfd8dc] break-all">
+<div class="bg-[#cfd8dc]">
   <div class="container py-16">
 
     <div class="text-center pb-4">
-      <p class="text-2xl font-semibold">Our Team</p>
+      <p class="text-2xl font-semibold header-underline">Our Team</p>
       <p class="font-medium text-lg text-[#009688]">Meet our company executives</p>
     </div>
   
     <div class="row"> 
-      <div class="col-xl-3 col-md-6 d-flex m-auto" *ngFor="let members of team">
+      <div class="col-xl-3 col-md-6 flex m-auto" *ngFor="let members of team">
         <mat-card class="m-auto mb-4">
           <mat-card-content class="bg-[#eceff1]">
             <img src={{members.image}} class="img-fluid" alt="image">
@@ -16,9 +16,9 @@
               <span class="text-base font-medium">{{members.position}}</span>
             </div>
             <div class="flex justify-around pt-3">
-              <a href={{members.github}} target="_blank"><i class="bi bi-github circle-icon text-white text-xl"></i></a>
-              <a href={{members.twitter}} target="_blank"><i class="bi bi-twitter circle-icon text-white text-xl"></i></a>
-              <a href={{members.linkedIn}} target="_blank"><i class="bi bi-linkedin circle-icon text-white text-xl"></i></a>
+              <a href={{members.github}} target="_blank"><i class="bi bi-github circle-icon text-black text-xl"></i></a>
+              <a href={{members.twitter}} target="_blank"><i class="bi bi-twitter circle-icon text-black text-xl"></i></a>
+              <a href={{members.linkedIn}} target="_blank"><i class="bi bi-linkedin circle-icon text-black text-xl"></i></a>
             </div>
           </mat-card-content>
         </mat-card>

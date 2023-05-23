@@ -1,113 +1,110 @@
-<div class="bg-[#cfd8dc] break-all">
+<div class="bg-[#cfd8dc]">
   <div class="container py-16">
 
     <div class="text-center pb-4">
-      <p class="text-2xl font-semibold">Contact Us</p>
+      <p class="text-2xl font-semibold header-underline">Contact Us</p>
       <p class="font-medium text-lg text-[#009688]">Have anything to tell us? contact us below</p>
     </div>
 
-    <div class="row gx-lg-0 gy-4">
+    <div class="row gx-lg-0 gy-4 px-3">
 
-      <div class="col-lg-4">
-       <div class="flex flex-col items-center justify-center min-h-full p-4 rounded-l-2xl bg-gradient-to-r from-blue-400 from-20% via-blue-500 via-30% to-blue-950 to-80%">
-          
-         <div class="flex items-center bg-blue-400 w-[90%] rounded-2xl text-white p-2 py-3 mb-4 break-all">
-           <i class="bi bi-envelope circle-icon text-xl"></i>
-           <div class="flex flex-col text-base font-medium px-3">
-             <span class="text-lg">Email:</span>
-             <span>support@cashmingle.com</span>
-           </div>
-         </div>
+      <div class="col-lg-4 flex flex-col items-center justify-center min-h-full p-4 rounded-l-2xl bg-gradient-to-r from-blue-400 from-20% via-blue-500 via-30% to-blue-950 to-80%">
 
-         <div class="flex items-center bg-blue-500 w-[90%] rounded-2xl text-white p-2 py-3 mb-4 break-all">
-           <i class="bi bi-phone circle-icon text-xl"></i>
-           <div class="flex flex-col text-base font-medium px-3">
-             <span class="text-lg">Telephone:</span>
-             <span>+234-905-274-2291</span>
-           </div>
-         </div>
-
-         <div class="flex items-center bg-blue-950 w-[90%] rounded-2xl text-white p-2 py-3 mb-4 break-all">
-           <i class="bi bi-clock circle-icon text-xl"></i>
-           <div class="flex flex-col text-base font-medium px-3">
-             <span class="text-lg">Open Hours:</span>
-             <span>Mon-Sat: 9AM - 5PM</span>
-           </div>
-         </div>
-
+        <div class="flex items-center bg-blue-400 w-[90%] rounded-2xl text-white p-2 py-3 mb-4 break-all">
+          <i class="bi bi-envelope circle-icon text-xl"></i>
+          <div class="flex flex-col text-base font-medium px-3">
+            <span class="text-lg">Email:</span>
+            <span>support@cashmingle.com</span>
+          </div>
         </div>
+
+        <div class="flex items-center bg-blue-500 w-[90%] rounded-2xl text-white p-2 py-3 mb-4 break-all">
+          <i class="bi bi-phone circle-icon text-xl"></i>
+          <div class="flex flex-col text-base font-medium px-3">
+            <span class="text-lg">Telephone:</span>
+            <span>+234-905-274-2291</span>
+          </div>
+        </div>
+
+        <div class="flex items-center bg-blue-950 w-[90%] rounded-2xl text-white p-2 py-3 mb-4 break-all">
+          <i class="bi bi-clock circle-icon text-xl"></i>
+          <div class="flex flex-col text-base font-medium px-3">
+            <span class="text-lg">Open Hours:</span>
+            <span>Mon-Sat: 9AM - 5PM</span>
+          </div>
+        </div>
+        
       </div>
 
-      <div class="col-lg-8">
+      <div class="col-lg-8 bg-[#eceff1] text-center px-4 py-2 rounded-r-2xl">
+        
+        <form [formGroup]="contactForm" (submit)="contactUs()" class="m-auto py-6">
+          <div class="flex pb-2 max-sm:flex-col">
+            <mat-form-field class="w-full pr-4">
+              <mat-label>Name</mat-label>
+              <input formControlName="name" matInput required />
+              <mat-error>
+                Name required
+              </mat-error>
+            </mat-form-field>
+  
+            <mat-form-field class="w-full">
+              <mat-label>Email Address</mat-label>
+              <input formControlName="email" matInput required />
+              <mat-error *ngIf="contactForm.value.email == ''">
+                Email Address required
+              </mat-error>
+              <mat-error *ngIf="contactFormControl?.['email']?.errors?.['invalidEmail']">
+                Email address is invalid
+              </mat-error>
+            </mat-form-field>
+          </div>
 
-        <div class="bg-[#eceff1] text-center px-4 py-2 rounded-r-2xl">
-          <form [formGroup]="contactForm" (submit)="contactUs()" class="m-auto py-6">
-            <div class="flex pb-2 max-sm:flex-col">
-              <mat-form-field class="w-full pr-4">
-                <mat-label>Name</mat-label>
-                <input formControlName="name" matInput required />
-                <mat-error>
-                  Name required
-                </mat-error>
-              </mat-form-field>
-    
-              <mat-form-field class="w-full">
-                <mat-label>Email Address</mat-label>
-                <input formControlName="email" matInput required />
-                <mat-error *ngIf="contactForm.value.email == ''">
-                  Email Address required
-                </mat-error>
-                <mat-error *ngIf="contactFormControl?.['email']?.errors?.['invalidEmail']">
-                  Email address is invalid
-                </mat-error>
-              </mat-form-field>
-            </div>
+          <div class="flex pb-2 max-sm:flex-col">
+            <mat-form-field class="w-full pr-4">
+              <mat-label>PhoneNumber</mat-label>
+              <input formControlName="phoneNumber" matInput />
+              <mat-error *ngIf="contactFormControl?.['phoneNumber']?.errors?.['invalidPhoneNumber']">
+                PhoneNumber not valid
+              </mat-error>
+            </mat-form-field>
   
-            <div class="flex pb-2 max-sm:flex-col">
-              <mat-form-field class="w-full pr-4">
-                <mat-label>PhoneNumber</mat-label>
-                <input formControlName="phoneNumber" matInput />
-                <mat-error *ngIf="contactFormControl?.['phoneNumber']?.errors?.['invalidPhoneNumber']">
-                  PhoneNumber not valid
-                </mat-error>
-              </mat-form-field>
-    
-              <mat-form-field class="w-full">
-                <mat-label>Subject</mat-label>
-                <input formControlName="subject" matInput required />
-                <mat-error>
-                  Subject required
-                </mat-error>
-              </mat-form-field>
-            </div>
-  
-            <div class="pb-2">
-              <mat-form-field class="w-full">
-                <mat-label>Message</mat-label>
-                <textarea formControlName="message" matInput required cdkTextareaAutosize [cdkAutosizeMinRows]="7" [cdkAutosizeMaxRows]="7"></textarea>
-                <mat-error>
-                  Message required
-                </mat-error>
-              </mat-form-field>
-            </div>
-            <input formControlName="_template" type="hidden" name="_template" value="table">
-            <input formControlName="_captcha" type="hidden" name="_captcha" value="false">
-  
-            <div class="m-auto">
-              <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="contactForm.invalid" class="btn text-lg rounded-2xl p-4">
-                Send Message
-              </button>
-              <button *ngIf="loading" mat-flat-button color="accent" type="submit" class="btn text-lg rounded-2xl p-4">
-                <span>Loading...</span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner>
-              </button>
+            <mat-form-field class="w-full">
+              <mat-label>Subject</mat-label>
+              <input formControlName="subject" matInput required />
+              <mat-error>
+                Subject required
+              </mat-error>
+            </mat-form-field>
+          </div>
 
-              <div class="pt-2">
-                <ngb-alert *ngIf="sendMailResponse" [type]="'success'">Message sent successfully ✔️</ngb-alert>
-              </div>
-              
+          <div class="pb-2">
+            <mat-form-field class="w-full">
+              <mat-label>Message</mat-label>
+              <textarea formControlName="message" matInput required cdkTextareaAutosize [cdkAutosizeMinRows]="7" [cdkAutosizeMaxRows]="7"></textarea>
+              <mat-error>
+                Message required
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <input formControlName="_template" type="hidden" name="_template" value="table">
+          <input formControlName="_captcha" type="hidden" name="_captcha" value="false">
+
+          <div class="m-auto">
+            <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="contactForm.invalid" class="btn text-lg rounded-2xl p-4">
+              Send Message
+            </button>
+            <button *ngIf="loading" mat-flat-button color="accent" type="submit" class="btn text-lg rounded-2xl p-4">
+              <span>Loading...</span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner>
+            </button>
+
+            <div class="pt-2">
+              <ngb-alert *ngIf="sendMailResponse" [type]="'success'">Message sent successfully ✔️</ngb-alert>
             </div>
-          </form>
-        </div>
+            
+          </div>
+        </form>
+        
       </div>
       
     </div>

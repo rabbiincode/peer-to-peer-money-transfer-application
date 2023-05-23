@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'cashMingle-header',
@@ -12,6 +12,8 @@ export class HeaderComponent {
   color='color:#4338ca'
   
   @Input() changeBackground = false
+  @Input() styleLinkOnScroll = ""
+  @Output() navigateToSection = new EventEmitter<string>
 
   SidebarOpen(){
     this.open = !this.open
@@ -19,5 +21,9 @@ export class HeaderComponent {
 
   SidebarClose(){
     this.open = false
+  }
+
+  navigateSection(fragment: string){
+    this.navigateToSection.emit(fragment)
   }
 }

@@ -2,38 +2,32 @@
   <div class="container py-16">
 
     <div class="text-center pb-4">
-      <p class="text-2xl font-semibold">Frequently Asked Questions</p>
+      <p class="text-2xl font-semibold header-underline">Frequently Asked Questions</p>
     </div>
 
     <div class="row pt-4">
 
-      <div class="col-lg-4">
-        <div class="text-lg pb-4">
-          <p>
-            Here are our most frequently asked questions to give you more insight on our operations. 
-          </p>
-          <p>
-            Have any other question?, be sure to contact us through the contact form below and we'll
-            be sure to answer you as soon as possible.
-          </p>
-        </div>
+      <div class="col-lg-4 text-lg pb-4">
+        <p>
+          Here are our most frequently asked questions to give you more insight on our operations. 
+        </p>
+        <p>
+          Have any other question?, be sure to contact us through the contact form below and we'll
+          be sure to answer you as soon as possible.
+        </p>
       </div>
 
-      <div class="col-lg-8">
-
-        <div ngbAccordion [closeOthers]="true">
-	        <div ngbAccordionItem *ngFor="let question of questions" [collapsed]="question.position !== 'First'">
-		        <h2 ngbAccordionHeader>
-			        <button ngbAccordionButton>{{question.title}}</button>
-		        </h2>
-		        <div ngbAccordionCollapse>
-			        <div ngbAccordionBody>
-				        <ng-template><p class="text-lg">{{question.content}}</p></ng-template>
-			        </div>
-		        </div>
-	        </div>
+      <div class="col-lg-8" ngbAccordion [closeOthers]="true">
+        <div ngbAccordionItem *ngFor="let question of questions" [collapsed]="question.position !== 'First'">
+          <h2 ngbAccordionHeader>
+            <button ngbAccordionButton>{{question.title}}</button>
+          </h2>
+          <div ngbAccordionCollapse>
+            <div ngbAccordionBody>
+              <ng-template><p class="text-lg">{{question.content}}</p></ng-template>
+            </div>
+          </div>
         </div>
-        
       </div>
       
     </div>

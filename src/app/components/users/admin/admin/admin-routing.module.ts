@@ -4,6 +4,7 @@ import { AdminComponent } from './admin.component';
 import { AdminDashboardComponent } from '../admin-dashboard/admin-dashboard.component';
 import { CustomersComponent } from '../customers/customers.component';
 import { RoleComponent } from '../role/role.component';
+import { LoginGuard } from 'src/app/components/guards/login.guard';
 
 const routes: Routes = [
   { 
@@ -13,7 +14,8 @@ const routes: Routes = [
       { path: 'dashboard', component: AdminDashboardComponent },
       { path: 'customers', component: CustomersComponent },
       { path: 'role', component: RoleComponent },
-    ]
+    ],
+    canActivate: [LoginGuard]
   }
 ];
 

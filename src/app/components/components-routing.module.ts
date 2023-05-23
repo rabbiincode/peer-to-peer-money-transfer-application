@@ -8,9 +8,7 @@ import { DepositComponent } from './users/customer/deposit/deposit.component';
 import { WithdrawalComponent } from './users/customer/withdrawal/withdrawal.component';
 import { TransferComponent } from './users/customer/transfer/transfer.component';
 import { SavingsComponent } from './users/customer/savings/savings.component';
-import { AdminDashboardComponent } from './users/admin/admin-dashboard/admin-dashboard.component';
-import { CustomersComponent } from './users/admin/customers/customers.component';
-import { RoleComponent } from './users/admin/role/role.component';
+import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -25,7 +23,8 @@ const routes: Routes = [
       { path: 'withdrawal', component: WithdrawalComponent },
       { path: 'transfer', component: TransferComponent },
       { path: 'savings', component: SavingsComponent },
-    ]
+    ],
+    canActivate: [LoginGuard]
   },
   { path: 'register', loadChildren: () => import('./auth/register/register.module').then(m => m.RegisterModule) },
   { path: 'admin', loadChildren: () => import('./users/admin/admin/admin.module').then(m => m.AdminModule) }

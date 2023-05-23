@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Sidebar } from '../user';
+import { AuthService } from '../../auth/service/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,7 +15,7 @@ export class UserHeaderComponent {
   @Output() togglePageWidth = new EventEmitter<boolean>()
   @Input() sidebar!: Sidebar[]
 
-  constructor(private logout: Router){}
+  constructor(private logout: AuthService, private route: Router){}
 
   toggleSidebar(){
     this.open = !this.open
@@ -22,6 +23,7 @@ export class UserHeaderComponent {
   }
 
   logOut(){
-    this.logout.navigate(['/home'])
+    this.logout.validateLogin(false)
+    this.route.navigate(['/home'])
   }
 }
