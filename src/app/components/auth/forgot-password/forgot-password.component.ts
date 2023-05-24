@@ -2,7 +2,6 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder ,FormGroup } from '@angular/forms';
 import { EmailValidator, MatchPasswordValidator, PasswordPatternValidator } from '../customValidation/custom-validation/custom-validation.component';
 import { AuthService } from '../service/auth.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'cashMingle-forgot-password',
@@ -10,6 +9,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent {
+  resetForm!: FormGroup
+  changePasswordForm!: FormGroup
+
   hide = true
   hide1 = true
   email!: string
@@ -17,15 +19,12 @@ export class ForgotPasswordComponent {
   resetPasswordProgress = false
   getTokenResponse: any
   resetPasswordResponse: any
-
-  resetForm!: FormGroup
-  changePasswordForm!: FormGroup
   getTokenErrorMessage: any
-  errorMessage: any
+  resetPasswordErrorMessage: any
   
   @Output() closeChangePassword = new EventEmitter<boolean>()
 
-  constructor(private formBuilder: FormBuilder, private forgotPassword: AuthService, private route: Router){}
+  constructor(private formBuilder: FormBuilder, private forgotPassword: AuthService){}
   
   ngOnInit(): void {
     this.resetForm = this.formBuilder.group({email: ['', {validators: EmailValidator}]})
@@ -46,7 +45,7 @@ export class ForgotPasswordComponent {
   
   get changePasswordFormControl() {
     return this.changePasswordForm?.controls
-  }
+  }class="hover:line-through"
 
   CloseChangePassword(){
     this.closeChangePassword.emit(false)
@@ -71,13 +70,13 @@ export class ForgotPasswordComponent {
     this.forgotPassword.resetPassword(this.changePasswordForm.getRawValue()).subscribe(data => {
       this.resetPasswordResponse = data
       this.resetPasswordProgress = false
-      //this.route.navigate(['/login'])
+      this.changePasswordForm.reset()
+      setTimeout(() => {
+        this.CloseChangePassword()
+      }, 3000);
       }, (error) => {
-        this.errorMessage = error
+        this.resetPasswordErrorMessage = error
         this.resetPasswordProgress = false
     })
-
-    this.changePasswordForm.reset()
   }
-
 } 

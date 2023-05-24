@@ -1,30 +1,37 @@
-<div class="p-5">
-  
-  <div class="flex items-center justify-between">
-    <img src="/assets/images/image/cashmingle.png" alt="CashMingle" width="50rem" height=50rem class="rounded-md">
-       
-    <button (click)="CloseSidebar()" class="flex items-center px-3 py-2 border rounded text-black border-blue-700 hover:text-white hover:border-white">
-      <mat-icon>close</mat-icon>
-    </button>
+<div>
+  <div class="bg-slate-400">
+    <img src="/assets/images/image/header.png" alt="image" width="30rem" height="30rem" class="m-auto" />
   </div>
+
+  <button (click)="CloseSidebar()" class="absolute top-10 right-4 flex text-black mt-2">
+    <mat-icon>close</mat-icon>
+  </button>
     
-  <div class="text-black text-base font-medium flex flex-col items-center pt-[10rem]">
-    <span class="hover:text-teal-500"> 
+  <div class="flex flex-col px-8 py-16 text-black text-lg font-medium cursor-pointer">
+    <span (click)="navigateSection('')" class="hover:text-teal-500">
       Home
     </span>
-    <span class="hover:text-teal-500 pt-8">
+    <span (click)="navigateSection('about')" class="hover:text-teal-500 pt-8">
       About
     </span>
-    <span class="hover:text-teal-500 pt-8">
+    <span (click)="navigateSection('services')" class="hover:text-teal-500 pt-8">
       Services
     </span>
+    <span (click)="navigateSection('team')" class="hover:text-teal-500 pt-8">
+      Our Team
+    </span>
+    <span (click)="navigateSection('faq')" class="hover:text-teal-500 pt-8">
+      FAQs
+    </span>
     <span class="hover:text-teal-500 pt-8">
+      Finance
+    </span>
+    <span (click)="navigateSection('contact')" class="hover:text-teal-500 pt-8">
       Contact
     </span>
-    <button type="button" 
-     class="bg-gradient-to-l from-blue-400 to-blue-900 px-4 py-2 mt-8 text-lg font-medium rounded-md hover:from-blue-900 hover:to-blue-400 hover:font-semibold hover:text-black"
-   >
-      Book A Call
-   </button>
+  </div>
+
+  <div class="name text-blue-400 text-2xl mb-2 font-semibold">
+    <h2 class="hover:line-through">CashMingle</h2>
   </div>
 </div>

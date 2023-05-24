@@ -11,6 +11,7 @@ export const SpaceCheckValidator: ValidatorFn = (control: AbstractControl) : Val
   const valid = regex.test(control.value);
   return valid ? null : { invalidWord: true }
 }
+
 export const PasswordPatternValidator: ValidatorFn = (control: AbstractControl) : ValidationErrors | null => {
   let pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^(A-Za-z0-9)]).{6,32}$"
   const regex = new RegExp(pattern)
@@ -36,7 +37,7 @@ export const EmailValidator: ValidatorFn = (control: AbstractControl) : Validati
 }
 
 export const PhoneNumberValidator: ValidatorFn = (control: AbstractControl) : ValidationErrors | null => {
-  let pattern = "^(?=.*[0-9]$).{11,15}$"
+  let pattern = "^(?=.*[0-9])\\d{11,15}$"
   const regex = new RegExp(pattern)
   
   if (!control.value) {
@@ -48,7 +49,7 @@ export const PhoneNumberValidator: ValidatorFn = (control: AbstractControl) : Va
 }
 
 export const NumberValidator: ValidatorFn = (control: AbstractControl) : ValidationErrors | null => {
-  let pattern = "(/^[0-9]+$/).{11,11}$"
+  let pattern = "^(?=.*[0-9])\\d{11,11}$"
   const regex = new RegExp(pattern)
   
   if (!control.value) {

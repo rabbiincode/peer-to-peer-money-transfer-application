@@ -7,8 +7,14 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class SidebarComponent {    
   @Output() closeSidebar = new EventEmitter<boolean>()
+  @Output() navigateToSection = new EventEmitter<string>
 
   CloseSidebar(){
     this.closeSidebar.emit(false)
+  }
+
+  navigateSection(fragment: string){
+    this.closeSidebar.emit(false)
+    this.navigateToSection.emit(fragment)
   }
 }

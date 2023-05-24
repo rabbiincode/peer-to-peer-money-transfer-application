@@ -33,7 +33,7 @@ export class HomeComponent {
   }
 
   navigateSection(fragment: string){
-    this.route.navigateByUrl('#' + fragment) 
+    this.route.navigateByUrl('#' + fragment)
   }
   
   cards: Card[] = [

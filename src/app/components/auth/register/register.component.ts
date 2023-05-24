@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
       businessType: [''],
       nin: ['', {validators: NumberValidator}],
       bvn: ['', {validators: NumberValidator}],
-      cac: ['']
+      cac: ['', {validators: PhoneNumberValidator}]
      },
      {validators: MatchPasswordValidator}
     )
@@ -74,6 +74,7 @@ export class RegisterComponent implements OnInit {
     this.register.registerUser(formValue, this.user).subscribe((data) => {
       this.registerUserResponse = data
       this.loading = false
+      this.registerForm.reset()
       }, (error) => {
         this.errorMessage = error
         this.loading = false
