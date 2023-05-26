@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Accordion } from '../body';
 
 @Component({
@@ -6,7 +6,10 @@ import { Accordion } from '../body';
   templateUrl: './faq.component.html',
   styleUrls: ['./faq.component.scss']
 })
+
 export class FaqComponent {
+  @Input() scrollPagePosition!: string
+
   questions: Accordion[] = [
     {
       position: 'first',

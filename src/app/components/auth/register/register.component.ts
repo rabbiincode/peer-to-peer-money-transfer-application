@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { EmailValidator, MatchPasswordValidator, NumberValidator, PasswordPatternValidator, PhoneNumberValidator, SpaceCheckValidator } from '../customValidation/custom-validation/custom-validation.component';
 import { AuthService } from '../service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'cashMingle-register',
@@ -26,7 +27,7 @@ export class RegisterComponent implements OnInit {
     this.user = selectedUser
   }
 
-  constructor(private formBuilder: FormBuilder, private register: AuthService) {}
+  constructor(private formBuilder: FormBuilder, private register: AuthService, private route: Router) {}
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
@@ -74,6 +75,9 @@ export class RegisterComponent implements OnInit {
     this.register.registerUser(formValue, this.user).subscribe((data) => {
       this.registerUserResponse = data
       this.loading = false
+      setTimeout(() => {
+        this.route.navigate(['/login'])
+      }, 5000);
       this.registerForm.reset()
       }, (error) => {
         this.errorMessage = error

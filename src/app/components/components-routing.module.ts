@@ -12,8 +12,8 @@ import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'home', component: HomeComponent, data: { animation: 'isRight' } },
+  { path: 'login', component: LoginComponent, data: { animation: 'isLeft' } },
   { 
     path: 'user', component: UserComponent,
     children: [

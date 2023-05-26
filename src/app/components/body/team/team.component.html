@@ -2,13 +2,15 @@
   <div class="container py-16">
 
     <div class="text-center pb-4">
-      <p class="text-2xl font-semibold header-underline">Our Team</p>
+      <p [ngClass]="scrollPagePosition == 'team' ? 'animate__animated animate__pulse animate__infinite' : ''" class="text-2xl font-semibold header-underline">
+        Our Team
+      </p>
       <p class="font-medium text-lg text-[#009688]">Meet our company executives</p>
     </div>
   
     <div class="row"> 
-      <div class="col-xl-3 col-md-6 flex m-auto" *ngFor="let members of team">
-        <mat-card class="m-auto mb-4">
+      <div class="col-xl-3 col-md-6 flex m-auto" [ngClass]="scrollPagePosition == 'team' ? members.animation : ''" *ngFor="let members of team">
+        <mat-card class="m-auto mb-4" [ngClass]="scrollPagePosition == 'services' ? 'animate__animated animate__slideInLeft' : ''">
           <mat-card-content class="bg-[#eceff1]">
             <img src={{members.image}} class="img-fluid" alt="image">
             <div class="flex flex-col text-center">

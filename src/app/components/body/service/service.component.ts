@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Slider } from '../body';
 
 @Component({
@@ -6,7 +6,11 @@ import { Slider } from '../body';
   templateUrl: './service.component.html',
   styleUrls: ['./service.component.scss']
 })
+
 export class ServiceComponent {
+  @Input() scrollPagePosition!: string
+
+  
   slide: Slider[] = [
     {
       image: '/assets/images/service/s1.jpg',

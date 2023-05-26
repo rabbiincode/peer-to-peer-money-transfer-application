@@ -2,7 +2,8 @@ export interface Card {
   service: string,
   image: string,
   background: string,
-  hover: string
+  hover: string,
+  animation: string
 }
 
 export interface Slider {
@@ -24,5 +25,6 @@ export interface Team {
   image: string
   github: string
   twitter: string
-  linkedIn: string
+  linkedIn: string,
+  animation: string
 }
