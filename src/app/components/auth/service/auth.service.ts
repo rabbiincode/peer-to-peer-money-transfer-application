@@ -1,13 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Login, ResetPassword } from '../auth';
+import { Login, ResetPassword, TokenData } from '../auth';
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
   isAuthenticated = false
   url = "https://localhost:44340/CashMingle/Account"
+  helper = new JwtHelperService()
+  
+  tokenData: TokenData = {
+    name: '',
+    email: '',
+    role: []
+  }
 
   constructor(private http: HttpClient) {}
 
@@ -18,7 +27,25 @@ export class AuthService {
   validateLogin(authenticate: boolean){
     this.isAuthenticated = authenticate
   }
-  
+
+  logOut(){
+    this.validateLogin(false)
+    localStorage.clear()
+  }
+
+  storeJwtToken(token: string){
+    localStorage.setItem('token', token)
+    const data = this.helper.decodeToken(token)
+
+    this.tokenData.name = data["name"]
+    this.tokenData.email = data["email"]
+    this.tokenData.role = data["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
+  }
+
+  retrieveJwtToken(){
+    return localStorage.getItem('token')
+  }
+
   registerUser(register: object, user: string){
     return this.http.post(`${this.url}/register/${user}`, register)
   }
@@ -30,5 +57,4 @@ export class AuthService {
   resetPassword(reset: ResetPassword){
     return this.http.post(`${this.url}/reset-password`, reset)
   }
-
 }

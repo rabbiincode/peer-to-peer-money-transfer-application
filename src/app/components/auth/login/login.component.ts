@@ -9,12 +9,14 @@ import { AuthService } from '../service/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup
   hide = true
   open = false
   loading = false
   errorMessage: any
+  accessDenied = false
  
   constructor(private formBuilder: FormBuilder, private login: AuthService, private route: Router){}
 
@@ -32,14 +34,25 @@ export class LoginComponent implements OnInit {
     }
     this.loading = !this.loading
 
-    this.login.loginUser(this.loginForm.value).subscribe((data) => {
+    this.login.loginUser(this.loginForm.value).subscribe((data: any) => {
+      this.login.storeJwtToken(data.token)
       this.login.validateLogin(true)
-      this.loginForm.reset()
       this.loading = false
-      this.route.navigate(['/user'])
-      }, (error) => {
-        this.errorMessage = error
-        this.loading = false
+     
+      console.log(this.login.tokenData)
+      if (this.login.tokenData.role.includes('Admin') ){
+        this.route.navigate(['/admin'])
+      }
+      else if (this.login.tokenData.role.includes('User')){
+        this.route.navigate(['/user'])
+      }
+      else{
+        this.login.validateLogin(false)
+        this.accessDenied = true
+      }
+    }, (error) => {
+      this.errorMessage = error
+      this.loading = false
     })
   }
   

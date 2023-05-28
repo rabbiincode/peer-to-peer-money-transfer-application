@@ -23,7 +23,7 @@ export class UserHeaderComponent {
   }
 
   logOut(){
-    this.logout.validateLogin(false)
+    this.logout.logOut()
     this.route.navigate(['/home'])
   }
 }

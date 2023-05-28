@@ -9,3 +9,9 @@ export interface ResetPassword {
   confirmPassword: string,
   token: string
 }
+
+export interface TokenData {
+  name: string,
+  email: string,
+  role: Array<string>
+}
