@@ -15,7 +15,7 @@ const routes: Routes = [
       { path: 'customers', component: CustomersComponent },
       { path: 'role', component: RoleComponent },
     ],
-    canActivate: [LoginGuard]
+    // canActivate: [LoginGuard]
   }
 ];
 

@@ -1,16 +1,31 @@
+::-webkit-scrollbar-track{
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar {
+  height: 8px;
+}
+
 .sidebar{
+  position: fixed;
   width: 300px;
-  min-height: 100vh;
-  position: fixed; 
-  left: 0;
-  z-index: 999;
+  height: 100%;
+  left: -300px;
   display: flex;
   flex-direction: column;
   transition: all 1s ease;
-  box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
+  box-shadow: 0px 0px 20px #0129701a;
+}
+
+.side{
   overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: #aab7cf transparent;
+  visibility: hidden;
+  margin-bottom: 10rem;
+}
+
+.side:hover,
+.sidebar-content{
+  visibility: visible;
 }
 
 .name{
@@ -23,7 +38,7 @@
 }
 
 .toggle{
-  left: -300px;
+  left: 0;
 }
 
 .mat-icon{
@@ -32,12 +47,25 @@
   height: 26px;
 }
 
-@media (min-width: 768px){
+.active,
+.sidebar-content:hover{
+  background: #4338ca;
+  color: wheat;
+  border-radius: 5px;
+}
+
+@media (max-width: 768px){
   .sidebar {
-    left: -300px;
+    left: 0;
   }
 
-  .toggle{
-    left: 0;
+  .toggle, .hide{
+    left: -300px;
+  }
+}
+
+@media (max-width: 375px){
+  .sidebar {
+    width: 250px;
   }
 }

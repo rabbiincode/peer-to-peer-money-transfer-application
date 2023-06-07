@@ -22,6 +22,10 @@ export class UserHeaderComponent {
     this.togglePageWidth.emit(this.open)
   }
 
+  sidebarHideOnClick(){
+    this.open = true
+  }
+
   logOut(){
     this.logout.logOut()
     this.route.navigate(['/home'])

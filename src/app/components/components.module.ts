@@ -39,6 +39,8 @@ import { TransferComponent } from './users/customer/transfer/transfer.component'
 import { SavingsComponent } from './users/customer/savings/savings.component';
 import { CustomersComponent } from './users/admin/customers/customers.component';
 import { RoleComponent } from './users/admin/role/role.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -86,6 +88,8 @@ import { RoleComponent } from './users/admin/role/role.component';
     NgbAccordionModule,
     NgbAlertModule,
     MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ]
 })
 export class ComponentsModule { }

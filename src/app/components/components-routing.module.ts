@@ -24,7 +24,7 @@ const routes: Routes = [
       { path: 'transfer', component: TransferComponent },
       { path: 'savings', component: SavingsComponent },
     ],
-    canActivate: [LoginGuard]
+    // canActivate: [LoginGuard]
   },
   { path: 'register', loadChildren: () => import('./auth/register/register.module').then(m => m.RegisterModule) },
   { path: 'admin', loadChildren: () => import('./users/admin/admin/admin.module').then(m => m.AdminModule) }

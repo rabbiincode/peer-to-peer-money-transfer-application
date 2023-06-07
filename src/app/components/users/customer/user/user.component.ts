@@ -43,7 +43,7 @@ export class UserComponent {
     {
       service: 'Financial Services',
       icon: 'article',
-      url: '/user'
+      url: '/user/financial'
     }
   ]   
 }

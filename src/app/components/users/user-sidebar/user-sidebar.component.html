@@ -1,11 +1,13 @@
-<div [class.toggle]="sidebarToggle" class="sidebar bg-blue-200 pl-6 pt-8">
+<div [class.toggle]="sidebarToggle" [class.hide]="sidebarToggle" class="sidebar bg-blue-100 pt-8">
 
-  <div class="flex items-center pb-4" *ngFor="let content of sidebarContent">
-    <mat-icon>{{content.icon}}</mat-icon>
-    <span [routerLink]="content.url" class="text-lg font-normal pl-4 cursor-pointer">{{content.service}}</span>
+  <div class="side">
+    <div class="sidebar-content flex items-center pl-6 py-2 mb-3" *ngFor="let content of sidebarContent" routerLinkActive="active">
+      <mat-icon>{{content.icon}}</mat-icon>
+      <span [routerLink]="content.url" (click)="hideOnClick()" class="text-lg font-normal pl-4 cursor-pointer">{{content.service}}</span>
+    </div>
   </div>
 
-  <div class="name text-blue-400 text-2xl mb-2 font-semibold">
+  <div class="name text-blue-400 text-2xl mb-4 pt-8 font-semibold">
     <h2 class="hover:line-through">CashMingle</h2>
   </div>
 

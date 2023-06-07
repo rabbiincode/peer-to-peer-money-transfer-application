@@ -21,6 +21,11 @@ export class AdminComponent {
       url: '/admin/dashboard'
     },
     {
+      service: 'Register Customer',
+      icon: 'supervised_user_circle',
+      url: '/register'
+    },
+    {
       service: 'Get All Customers',
       icon: 'interpreter_mode',
       url: '/admin/customers'
@@ -28,32 +33,32 @@ export class AdminComponent {
     {
       service: 'Get All Customers',
       icon: 'contact_emergency',
-      url: '/admin/customers'
+      url: '/admin/customer'
     },
     {
       service: 'Get Transaction',
       icon: 'ballot',
-      url: '/admin'
+      url: '/admin/a'
     },
     {
       service: 'Edit Customers',
       icon: 'edit_off',
-      url: '/admin'
+      url: '/admin/a'
     },
     {
       service: 'Deactivate Customer',
       icon: 'person_add_disabled',
-      url: '/admin'
+      url: '/admin/a'
     },
     {
       service: 'Delete Customer',
       icon: 'delete_sweep',
-      url: '/admin'
+      url: '/admin/a'
     },
     {
       service: 'Delete Customer',
       icon: 'delete_forever',
-      url: '/admin'
+      url: '/admin/a'
     },
     {
       service: 'User Role',

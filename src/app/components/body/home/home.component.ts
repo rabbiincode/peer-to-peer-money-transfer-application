@@ -42,22 +42,22 @@ export class HomeComponent {
     {
       service: 'Deposit',
       image: '/assets/images/card/card1.png',
-      background: 'background:#42a5f5',
-      hover: 'background:#0d47a1',
+      background: 'background:#42a5f5; margin-right:1.5rem',
+      hover: 'background:#0d47a1; margin-right:1.5rem',
       animation: 'animate__animated animate__fadeInLeft animate__delay-5s'
     },
     {
       service: 'Withdrawal',
       image: '/assets/images/card/card2.png',
-      background: 'background:#1e88e5',
-      hover: 'background:#1565c0',
+      background: 'background:#1e88e5; margin-right:1.5rem',
+      hover: 'background:#1565c0; margin-right:1.5rem',
       animation: 'animate__animated animate__fadeInBottomRight animate__delay-5s'
     },
     {
       service: 'Transfer',
       image: '/assets/images/card/card3.png',
-      background: 'background:#1565c0',
-      hover: 'background:#1e88e5',
+      background: 'background:#1565c0; margin-right:1.5rem',
+      hover: 'background:#1e88e5; margin-right:1.5rem',
       animation: 'animate__animated animate__fadeInBottomLeft animate__delay-5s'
     },
     {

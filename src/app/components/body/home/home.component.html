@@ -21,9 +21,9 @@
       <div class="container">
         <div class="row flex items-center py-16 max-md:py-0">
   
-          <div class="col-md-8 text-white lg:text-2xl">
+          <div class="col-md-8 text-white text-xl lg:text-2xl">
             <h1 class="animate__animated animate__bounceInDown">Welcome to the Future</h1>
-            <span class="animate__animated animate__bounceInLeft animate__delay-2s">The No 1 peer-to-peer platform</span>
+            <p class="mb-0 animate__animated animate__bounceInLeft animate__delay-2s">The No 1 peer-to-peer platform</p>
             <h3 class="animate__animated animate__bounceInRight animate__delay-3s">Deposit, Save and Send Money Seamlessly</h3>
             <span @fade1>Faster than lightening with just the click of a button</span>
   
@@ -51,7 +51,7 @@
   
       <div class="max-md:hidden cards flex justify-center">
         <mat-card (mouseover)="hover=true" (mouseleave)="hover=false" [ngClass]="card.animation"
-          class="card mr-6 rounded-3xl" *ngFor="let card of cards" [style]="hover ? card.hover : card.background"
+          class="card rounded-3xl" *ngFor="let card of cards" [style]="hover ? card.hover : card.background"
         >
           <mat-card-content>
             <span>

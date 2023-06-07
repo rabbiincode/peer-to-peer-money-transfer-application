@@ -1,19 +1,21 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import '~animate.css/animate.min.css';
 
 html, body {
-  min-height: 100%;
+  height: 100%;
   font-size: clamp(10px, 16px, 20px);
 
+  @media only screen and (max-width: 1000px) {
+    font-size: clamp(8px, 14px, 18px);
+  }
+
   @media only screen and (max-width: 768px) {
-    font-size: clamp(8px, 14.5px, 18px);
+    font-size: clamp(7.5px, 13px, 16px);
   }
 
   @media only screen and (max-width: 500px) {
-    font-size: clamp(7px, 13px, 15px);
+    font-size: clamp(6.5px, 11.5px, 14px);
   }
 }
 
@@ -21,6 +23,10 @@ body {
   margin: 0;
   background: #afaffd;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+img {
+  max-width: 100%;
 }
 
 @layer components {
@@ -35,7 +41,7 @@ body {
     animation: change 60s infinite ease-in-out;
   }
 
-  @keyframes change{
+  @keyframes change {
     0% {
       background-image: url(/assets/images/home/b5.jpg);
     }
@@ -63,7 +69,7 @@ body {
   margin: auto;
   height: 70px;
   width: 70px;
-  border: 10px solid;
+  border: 5px solid;
   border-color: #172554 transparent #3b82f6 transparent;
   border-radius: 50%;
   animation: spin 1.3s linear infinite;

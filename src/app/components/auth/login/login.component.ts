@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { PasswordPatternValidator } from '../customValidation/custom-validation/custom-validation.component';
 import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
+import { UserService } from '../../users/service/user.service';
 
 @Component({
   selector: 'cashMingle-login',
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
   errorMessage: any
   accessDenied = false
  
-  constructor(private formBuilder: FormBuilder, private login: AuthService, private route: Router){}
+  constructor(private formBuilder: FormBuilder, private login: AuthService, private userData: UserService, private route: Router){}
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -33,13 +34,13 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.loading = !this.loading
+    this.userData.getUserData(this.loginForm.value.emailAddressOrUserName)
 
     this.login.loginUser(this.loginForm.value).subscribe((data: any) => {
       this.login.storeJwtToken(data.token)
       this.login.validateLogin(true)
       this.loading = false
      
-      console.log(this.login.tokenData)
       if (this.login.tokenData.role.includes('Admin') ){
         this.route.navigate(['/admin'])
       }

@@ -1,1 +1,132 @@
-<p>savings works!</p>
+<div class="bg-blue-200 min-h-screen">
+  <div class="bg-blue-300">
+    <span class="text-white text-2xl font-medium px-4 py-8 shadow-lg">Savings</span>
+  </div>  
+  <div class="flex justify-between text-black text-base">
+    <span></span>
+    <span class="px-2 py-1 shadow-lg">Balance: {{balance | currency}}</span>
+  </div>
+  
+  <div class="px-3 py-8">
+        
+    <div class="row">
+      <div class="col-xxl-6 col-md-6">
+        <div class="card mb-4">
+          <div class="card-body bg-[#e0f8e9]">
+            <span class="card-title text-xl text-[#012970] font-medium pl-2">Amount Saved</span>
+  
+            <div class="flex items-center py-3">
+              <div class="bg-[#f6f6fe] text-[#4154f1] text-3xl w-16 h-16 rounded-circle flex items-center justify-center hover:bg-gray-200">
+                <i class="bi bi-cash-stack"></i>
+              </div>
+              <span class="text-blue-900 text-2xl font-medium pl-3">{{balance | currency}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xxl-6 col-md-6">
+        <div class="card mb-4">
+          <div class="card-body bg-[#e0f8e9]">
+            <span class="card-title text-xl text-[#012970] font-medium">Due Date</span>
+  
+            <div class="flex items-center py-3">
+              <div class="bg-[#f6f6fe] text-[#4154f1] text-3xl w-16 h-16 rounded-circle flex items-center justify-center hover:bg-gray-200">
+                <i class="bi bi-calendar-check-fill"></i>
+              </div>
+              <span class="text-2xl text-[#012970] font-medium pl-3">{{balance | date}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body bg-slate-200">
+        <span class="card-title text-xl text-[#012970] flex items-center font-medium pb-6">
+          <i class="bi bi-plus-circle-fill pr-2"></i>
+          Save Money
+        </span>
+
+        <div class="row">
+          <div class="col-xxl-6 col-md-6">
+            <div class="card mb-4">
+              <div class="card-body bg-slate-200">
+                <h3 class="card-title text-xl text-blue-600 font-medium">Our Savings GuildLines</h3>
+      
+                <div>
+                  <p>To encourage saving habit in our community, we have some reward for you each time you complete one cycle of saving</p>
+                  <ul>
+                    <li><i class="bi bi-arrow-right-circle text-blue-800 text-xl pr-2"></i>Short Term: 1 - 2 months</li>
+                    <li><i class="bi bi-arrow-right-circle text-blue-800 text-xl pr-2"></i>Average Term: 2 - 4 months</li>
+                    <li><i class="bi bi-arrow-right-circle text-blue-800 text-xl pr-2"></i>Quarterly Term: 4 months</li>
+                    <li><i class="bi bi-arrow-right-circle text-blue-800 text-xl pr-2"></i>Medium Term: 4 months+</li>
+                    <li><i class="bi bi-arrow-right-circle text-blue-800 text-xl pr-2"></i>Annual: 1 Year</li>
+                    <li><i class="bi bi-arrow-right-circle text-blue-800 text-xl pr-2"></i>Long Term: 1 Year+</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+          <div class="col-xxl-6 col-md-6">
+            <div class="card mb-4">
+              <div class="card-body bg-slate-200">
+                <h3 class="card-title text-xl text-blue-700 font-medium">Save Now</h3>
+      
+                <form class="py-2">
+                  <div>
+                    <mat-form-field class="w-full">
+                      <mat-label>Title</mat-label>
+                      <input matInput required placeholder="Car Savings"/>
+                      <mat-error>
+                        Title required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+      
+                  <div>
+                    <mat-form-field class="w-full">
+                      <mat-label>Amount</mat-label>
+                      <input matInput required class="w-full"/>
+                      <mat-error>
+                        Amount required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+        
+                  <div>
+                    <mat-form-field class="w-full">
+                      <mat-label>Choose Start Date</mat-label>
+                      <input matInput [matDatepicker]="picker" required placeholder="MM/DD/YYYY">
+                      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+      
+                  <div>
+                    <mat-form-field class="w-full">
+                      <mat-label>Choose End Date</mat-label>
+                      <input matInput [matDatepicker]="picker" required placeholder="MM/DD/YYYY" class="w-[100%]">
+                      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+      
+                  <div *ngIf="">Save amount from startDate to endDate</div>
+      
+                  <div>
+                    <button mat-flat-button color="primary" type="submit" class="btn w-[100%] text-lg mt-2">Save Now</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+    
+</div>

@@ -1,10 +1,45 @@
-<div>
-  <div class="flex bg-red-500">
-    <div class="bg-blue-400 pr-4">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum, tempore eaque! Dignissimos nisi illum aperiam ratione quod, magni et architecto?
-    </div>
-    <div class="bg-yellow-500">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat explicabo alias magni architecto quae error, excepturi, blanditiis itaque aliquid fuga facilis earum. Perferendis soluta distinctio dolor impedit earum explicabo pariatur?
-    </div>
+<div class="bg-blue-200 min-h-screen">
+  <div class="bg-blue-300">
+    <span class="text-white text-2xl font-medium px-4 py-8 shadow-lg">Dashboard</span>
+  </div>  
+  <div class="flex justify-between text-black text-base">
+    <span></span>
+    <span class="px-2 py-1 shadow-lg">Account Type: {{accountType}}Individual</span>
   </div>
+
+  <div class="px-3 py-8">
+      
+    <div class="row">
+      <div class="col-xxl-6 col-md-6">
+        <div class="card mb-4">
+          <div class="card-body bg-[#e0f8e9]">
+            <span class="card-title text-xl text-[#012970] font-medium pl-2">Welcome Back,</span>
+  
+            <div class="flex items-center py-3">
+              <div class="bg-[#f6f6fe] text-[#4154f1] text-3xl w-16 h-16 rounded-circle flex items-center justify-center hover:bg-gray-200">
+                <i class="bi bi-person-fill"></i>
+              </div>
+              <span class="text-blue-900 text-2xl font-medium pl-3">{{name | uppercase}}SUCCESS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xxl-6 col-md-6">
+        <div class="card mb-4  ">
+          <div class="card-body bg-[#e0f8e9]">
+            <span class="card-title text-xl text-[#012970] font-medium">Balance</span>
+  
+            <div class="flex items-center py-3">
+              <div class="bg-[#f6f6fe] text-[#4154f1] text-3xl w-16 h-16 rounded-circle flex items-center justify-center hover:bg-gray-200">
+                <i class="bi bi-cash-coin"></i>
+              </div>
+              <span class="text-2xl text-[#012970] font-medium pl-3">{{balance | currency}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+  </div>
+  
 </div>
