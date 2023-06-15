@@ -12,7 +12,7 @@ export class AdminDashboardComponent {
   accountType = ''
 
   constructor(private admin: UserService){
-    this.name = admin.userData.firstName
-    this.accountType = admin.userData.AccountType
+    admin.userData.firstName ? this.name = admin.userData.firstName : this.name = 'Administrator'
+    admin.userData.AccountType ? this.accountType = admin.userData.AccountType : this.accountType = 'Admin'
   }
 }

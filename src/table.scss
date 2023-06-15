@@ -1,0 +1,59 @@
+::-webkit-scrollbar {
+  height: 8px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  color: #333;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  text-align: left;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+table th {
+  font-weight: bold;
+  padding: 10px;
+  letter-spacing: 1px;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #ccc;
+  text-overflow: ellipsis;
+}
+
+table tr:hover td {
+  background: #dcd2be;
+  color: #000;
+}
+
+table td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.even {
+  background: #e3ba7d;
+  color: #000;
+}
+
+.odd {
+  background: #716ddf;
+  color: #ffff;
+}
+
+.even1 {
+  background: #78afdc;
+  color: #000;
+}
+  
+.odd1 {
+  background: blue;
+  color: #fff;
+}

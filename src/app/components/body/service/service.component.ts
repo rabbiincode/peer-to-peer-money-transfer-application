@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Slider } from '../body';
+import { Slider } from '../../interfaces/body';
 
 @Component({
   selector: 'cashMingle-service',

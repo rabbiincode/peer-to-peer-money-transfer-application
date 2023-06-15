@@ -1,0 +1,52 @@
+<div class="bg-blue-200 min-h-screen">
+  <div class="bg-blue-300">
+    <span class="text-white text-2xl font-medium px-4 py-6 shadow-lg">Users</span>
+  </div>
+  
+  <div class="px-3 py-12">
+
+    <div class="card mb-4">
+      <div class="card-body bg-slate-200">
+        <span class="card-title text-xl text-[#012970] flex items-center font-medium pb-6">
+          <i class="bi bi-person-check-fill pr-2"></i>Get All Users
+        </span>
+        
+        <div>
+          <ngb-alert *ngIf="viewUsersError && viewUsersError?.status > 0 && viewUsersError?.status <= 499" [type]="'danger'" (closed)="viewUsersError = ''">
+            {{viewUsersError?.error?.error}} {{viewUsersError?.error?.message}}
+          </ngb-alert>
+          <ngb-alert *ngIf="viewUsersError && viewUsersError?.status >= 500 || viewUsersError?.status == 0" [type]="'danger'" (closed)="viewUsersError = ''">
+            Failed...please try again
+          </ngb-alert>
+        </div>
+
+        <div class="overflow-auto">
+          <table *ngIf="tableData">
+            <thead>
+              <tr>
+                <th *ngFor="let header of tableHeader; let e = even" [ngClass]="e ?'even' : 'odd'">{{header | uppercase}}</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let data of tableData; let e = even; let o = odd; let i = index" [ngClass]="e ?'even1' : 'odd1'">
+                <td>{{i + 1}}</td> <td>{{data.firstName}}</td> <td>{{data.middleName}}</td> <td>{{data.lastName}}</td>
+                <td>{{data.userName}}</td> <td>{{data.phoneNumber}}</td> <td>{{data.email}}</td> <td>{{data.accountNumber}}</td>
+                <td>{{data.birthday}}</td> <td>{{data.userTypeId}}</td> <td>{{data.balance}}</td> <td>{{data.deleted}}</td>
+                <td>{{data.active}}</td> <td>{{data.createdAt}}</td> <td>{{data.updatedAt}}</td>
+              </tr>
+            </tbody>     
+          </table>
+        </div>
+
+        <div class="flex justify-center">
+          <button *ngIf="show && !loading" mat-flat-button color="primary" type="button" (click)="viewUsers()" class="btn w-[50%] text-lg mt-4">Get All Users</button>
+          <button *ngIf="loading" mat-flat-button color="accent" class="btn w-[50%] text-lg mt-4">
+            Please wait...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
+          </button>
+        </div>
+      </div>
+      
+    </div>
+  </div>      
+</div>

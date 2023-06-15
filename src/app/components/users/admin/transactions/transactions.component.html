@@ -1,0 +1,72 @@
+<div class="bg-blue-200 min-h-screen">
+  <div class="bg-blue-300">
+    <span class="text-white text-2xl font-medium px-4 py-6 shadow-lg">Transactions</span>
+  </div>
+  
+  <div class="px-3 py-12">
+
+    <div class="card mb-4">
+      <div class="card-body bg-slate-200">
+        <span class="card-title text-xl text-[#012970] flex items-center font-medium pb-6">
+        <i class="bi bi-cash-coin pr-2"></i>Get Customers Transactions
+      </span>
+
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header (click)="arrow = !arrow">
+            <mat-panel-title class="text-teal-500 text-lg font-medium">Enter Transaction Id</mat-panel-title>
+            <mat-icon>perm_contact_calendar</mat-icon>
+            <mat-icon *ngIf="arrow">arrow_drop_up</mat-icon>
+            <mat-icon *ngIf="!arrow">arrow_drop_down</mat-icon>         
+          </mat-expansion-panel-header>
+
+          <div>
+            <ngb-alert *ngIf="getTransactionError && getTransactionError?.status > 0 && getTransactionError?.status <= 499" [type]="'danger'" (closed)="getTransactionError = ''">
+              {{getTransactionError?.error?.error}} {{getTransactionError?.error?.message}}
+            </ngb-alert>
+            <ngb-alert *ngIf="getTransactionError && getTransactionError?.status >= 500 || getTransactionError?.status == 0" [type]="'danger'" (closed)="getTransactionError = ''">
+              Failed...please try again
+            </ngb-alert>
+          </div>
+
+          <form [formGroup]="transactionForm" (submit)="getTransaction()" class="py-2">
+            <mat-form-field>
+              <mat-label>Transaction Id</mat-label>
+              <input formControlName="transactionId" matInput required />
+              <mat-error>
+                Transaction Id required
+              </mat-error>
+            </mat-form-field>
+            
+            <div>
+              <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="transactionForm.invalid" class="btn w-[50%] text-lg mt-1">
+                Get Transaction
+              </button>
+              <button *ngIf="loading" mat-flat-button color="accent" class="btn w-[50%] text-lg mt-1">
+                Please wait...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
+              </button>
+            </div>
+          </form>
+
+          <div>
+            <table *ngIf="tableData" class="flex overflow-auto">
+              <thead>
+                <tr class="flex flex-col">
+                  <th *ngFor="let header of tableHeader; let e = even" [ngClass]="e ?'even' : 'odd'">{{header | uppercase}}</th>
+                </tr>
+              </thead>
+  
+              <tbody>
+                <tr class="flex flex-col">
+                  <td>{{tableData.Id}}</td> <td>{{tableData.UserId}}</td> <td>{{tableData.DateStamp}}</td>
+                  <td>{{tableData.TransactionType}}</td> <td>{{tableData.Amount}}</td> <td>{{tableData.Description}}</td>
+                </tr>
+              </tbody>         
+            </table>
+          </div>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</div>

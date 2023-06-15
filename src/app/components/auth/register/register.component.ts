@@ -19,9 +19,12 @@ export class RegisterComponent implements OnInit {
   arrow2 = false
   loading = false
   
+  name!: string
   user!: string
-  registerUserResponse: any
+  background!: string
+  background1!: string
   errorMessage: any
+  registerUserResponse: any
 
   choiceUser(selectedUser: string){
     this.user = selectedUser
@@ -30,6 +33,11 @@ export class RegisterComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private register: AuthService, private route: Router) {}
 
   ngOnInit(): void {
+    this.register.isAuthenticated == true ? this.name = 'Register' : this.name = 'CashMingle'
+    this.register.isAuthenticated == true ? this.background = 'background:#bfdbfe' : this.background = 'background:#cbd5e1'
+    this.register.isAuthenticated == true ? this.background1 = 'background:#93c5fd;color:white;font-size:1.5rem;line-height:2rem;font-weight: 500'
+    : this.background1 = 'background:#94a3b8;color:#1d4ed8;font-size:1.25rem;line-height:1.75rem;font-weight: 600'
+
     this.registerForm = this.formBuilder.group({
       firstName: new FormControl('', {validators: SpaceCheckValidator}),
       lastName: ['', {validators: SpaceCheckValidator}],

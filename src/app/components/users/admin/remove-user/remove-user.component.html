@@ -1,0 +1,158 @@
+<div class="bg-blue-200 min-h-screen">
+  <div class="bg-blue-300">
+    <span class="text-white text-2xl font-medium px-4 py-6 shadow-lg">Remove</span>
+  </div>
+  
+  <div class="px-3 py-12">
+
+    <div class="card mb-4">
+      <div class="card-body bg-slate-200">
+        <span class="card-title text-xl text-[#012970] flex items-center font-medium pb-6">
+          <i class="bi bi-airplane-fill pr-2"></i>Remove User
+        </span>
+
+        <div class="card mb-4">
+          <div class="card-body bg-yellow-200">
+            <span class="card-title text-xl text-[#012970] flex items-center font-medium pb-6">
+              <mat-icon>edit</mat-icon>Deactivate
+            </span>
+
+            <div>
+              <ngb-alert *ngIf="deactivateUserResponse" [type]="'success'" (closed)="deactivateUserResponse = ''">{{deactivateUserResponse?.result}}</ngb-alert>
+              <ngb-alert *ngIf="deactivateUserErrorMessage && deactivateUserErrorMessage?.status > 0 && deactivateUserErrorMessage?.status <= 499" [type]="'danger'" (closed)="deactivateUserErrorMessage = ''">
+                {{deactivateUserErrorMessage?.error?.error}} {{deactivateUserErrorMessage?.error?.message}}
+              </ngb-alert>
+              <ngb-alert *ngIf="deactivateUserErrorMessage && deactivateUserErrorMessage?.status >= 500 || deactivateUserErrorMessage?.status == 0" [type]="'danger'" (closed)="deactivateUserErrorMessage = ''">
+                User Deactivation Failed...please try again
+              </ngb-alert>
+            </div>
+
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header (click)="arrow = !arrow">
+                  <mat-panel-title class="text-teal-500 text-lg font-medium">Enter user's username to deactivate</mat-panel-title>
+                  <mat-icon>account_circle</mat-icon>
+                  <mat-icon *ngIf="arrow">arrow_drop_up</mat-icon>
+                  <mat-icon *ngIf="!arrow">arrow_drop_down</mat-icon>
+                </mat-expansion-panel-header>
+
+                <form [formGroup]="removeUserForm" (submit)="deactivateUser()" class="py-2">
+                  <mat-form-field>
+                    <mat-label>UserName</mat-label>
+                    <input formControlName="userName" matInput required />
+                    <mat-error>
+                      UserName required
+                    </mat-error>
+                  </mat-form-field>
+
+                  <div>
+                    <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="removeUserForm.invalid" class="btn w-[50%] text-lg">Deactivate User</button>
+                    <button *ngIf="loading" mat-flat-button color="accent" class="btn w-[50%] text-lg">
+                      Please wait...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
+                    </button>
+                  </div>
+                </form>
+  
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-body bg-orange-200">
+            <span class="card-title text-xl text-[#012970] flex items-center font-medium pb-6">
+              <mat-icon>delete_sweep</mat-icon>Delete
+            </span>
+
+            <div>
+              <ngb-alert *ngIf="deleteResponse" [type]="'success'" (closed)="deleteResponse = ''">{{deleteResponse?.result}}</ngb-alert>
+              <ngb-alert *ngIf="deleteErrorMessage && deleteErrorMessage?.status > 0 && deleteErrorMessage?.status <= 499" [type]="'danger'" (closed)="deleteErrorMessage = ''">
+                {{deleteErrorMessage?.error?.error}} {{deleteErrorMessage?.error?.message}}
+              </ngb-alert>
+              <ngb-alert *ngIf="deleteErrorMessage && deleteErrorMessage?.status >= 500 || deleteErrorMessage?.status == 0" [type]="'danger'" (closed)="deleteErrorMessage = ''">
+                User Delete Failed...please try again
+              </ngb-alert>
+            </div>
+
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header (click)="arrow1 = !arrow1">
+                  <mat-panel-title class="text-teal-500 text-lg font-medium">Enter user's username to delete</mat-panel-title>
+                  <mat-icon>account_circle</mat-icon>
+                  <mat-icon *ngIf="arrow1">arrow_drop_up</mat-icon>
+                  <mat-icon *ngIf="!arrow1">arrow_drop_down</mat-icon>
+                </mat-expansion-panel-header>
+
+                <form [formGroup]="removeUserForm" (submit)="delete()" class="py-2">
+                  <mat-form-field>
+                    <mat-label>UserName</mat-label>
+                    <input formControlName="userName" matInput required />
+                    <mat-error>
+                      UserName required
+                    </mat-error>
+                  </mat-form-field>
+
+                  <div>
+                    <button *ngIf="!loading1" mat-flat-button color="primary" type="submit" [disabled]="removeUserForm.invalid" class="btn w-[50%] text-lg">Delete User</button>
+                    <button *ngIf="loading1" mat-flat-button color="accent" class="btn w-[50%] text-lg">
+                      Please wait...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
+                    </button>
+                  </div>
+                </form>
+  
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-body bg-red-200">
+            <span class="card-title text-xl text-[#012970] flex items-center font-medium pb-6">
+              <mat-icon>delete_forever</mat-icon>Delete
+            </span>
+            
+            <div>
+              <ngb-alert *ngIf="deleteUserResponse" [type]="'success'" (closed)="deleteUserResponse = ''">{{deleteUserResponse?.result}}</ngb-alert>
+              <ngb-alert *ngIf="deleteUserErrorMessage && deleteUserErrorMessage?.status > 0 && deleteUserErrorMessage?.status <= 499" [type]="'danger'" (closed)="deleteUserErrorMessage = ''">
+                {{deleteUserErrorMessage?.error?.error}} {{deleteUserErrorMessage?.error?.message}}
+              </ngb-alert>
+              <ngb-alert *ngIf="deleteUserErrorMessage && deleteUserErrorMessage?.status >= 500 || deleteUserErrorMessage?.status == 0" [type]="'danger'" (closed)="deleteUserErrorMessage = ''">
+                User Delete Failed...please try again
+              </ngb-alert>
+            </div>
+
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header (click)="arrow2 = !arrow2">
+                  <mat-panel-title class="text-teal-500 text-lg font-medium">Enter user's username to hard delete</mat-panel-title>
+                  <mat-icon>account_circle</mat-icon>
+                  <mat-icon *ngIf="arrow2">arrow_drop_up</mat-icon>
+                  <mat-icon *ngIf="!arrow2">arrow_drop_down</mat-icon>
+                </mat-expansion-panel-header>
+
+                <form [formGroup]="removeUserForm" (submit)="deleteUser()" class="py-2">
+                  <mat-form-field>
+                    <mat-label>UserName</mat-label>
+                    <input formControlName="userName" matInput required />
+                    <mat-error>
+                      UserName required
+                    </mat-error>
+                  </mat-form-field>
+
+                  <div>
+                    <button *ngIf="!loading2" mat-flat-button color="primary" type="submit" [disabled]="removeUserForm.invalid" class="btn w-[50%] text-lg">Delete User</button>
+                    <button *ngIf="loading2" mat-flat-button color="accent" class="btn w-[50%] text-lg">
+                      Please wait...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
+                    </button>
+                  </div>
+                </form>
+  
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>

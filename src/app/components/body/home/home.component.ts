@@ -1,5 +1,5 @@
 import { Component, HostListener } from '@angular/core';
-import { Card } from '../body';
+import { Card } from '../../interfaces/body';
 import { Router } from '@angular/router';
 import { TrackScrollPositionService } from '../body-service/track-scroll-position.service';
 import { fade, fade1 } from '../../animations/home-animations';

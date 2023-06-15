@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Login, ResetPassword, TokenData } from '../auth';
+import { Login, ResetPassword, TokenData } from '../../interfaces/auth';
 import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Injectable({

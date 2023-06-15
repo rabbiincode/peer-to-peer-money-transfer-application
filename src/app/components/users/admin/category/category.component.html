@@ -1,0 +1,37 @@
+<div *ngIf="show == 'first'" class="overflow-auto">
+  <table>
+    <thead>
+      <tr>
+        <th *ngFor="let header of tableHeader; let e = even" [ngClass]="e ?'even' : 'odd'">{{header | uppercase}}</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let data of tableData; let e = even; let i = index" [ngClass]="e ?'even1' : 'odd1'">
+        <td>{{i + 1}}</td> <td>{{data.firstName}}</td> <td>{{data.middleName}}</td> <td>{{data.lastName}}</td>
+        <td>{{data.userName}}</td> <td>{{data.phoneNumber}}</td> <td>{{data.email}}</td> <td>{{data.accountNumber}}</td>
+        <td>{{data.birthday}}</td> <td>{{data.userTypeId}}</td> <td>{{data.balance}}</td> <td>{{data.deleted}}</td>
+        <td>{{data.active}}</td> <td>{{data.createdAt}}</td> <td>{{data.updatedAt}}</td>
+      </tr>
+    </tbody>         
+  </table>
+</div>
+
+<div *ngIf="show == 'second'" class="overflow-auto">
+  <table class="flex">
+    <thead>
+      <tr class="flex flex-col">
+        <th *ngFor="let header of tableHeader; let e = even" [ngClass]="e ?'even' : 'odd'">{{header | uppercase}}</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr class="flex flex-col">
+        <td></td> <td>{{tableData1.firstName}}</td> <td>{{tableData1.middleName}}</td> <td>{{tableData1.lastName}}</td>
+        <td>{{tableData1.userName}}</td> <td>{{tableData1.phoneNumber}}</td> <td>{{tableData1.email}}</td> <td>{{tableData1.accountNumber}}</td>
+        <td>{{tableData1.birthday}}</td> <td>{{tableData1.userTypeId}}</td> <td>{{tableData1.balance}}</td> <td>{{tableData1.deleted}}</td>
+        <td>{{tableData1.active}}</td> <td>{{tableData1.createdAt}}</td> <td>{{tableData1.updatedAt}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

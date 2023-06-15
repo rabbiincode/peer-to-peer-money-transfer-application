@@ -8,6 +8,7 @@ import { AuthService } from '../service/auth.service';
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss']
 })
+
 export class ForgotPasswordComponent {
   resetForm!: FormGroup
   changePasswordForm!: FormGroup
@@ -45,7 +46,7 @@ export class ForgotPasswordComponent {
   
   get changePasswordFormControl() {
     return this.changePasswordForm?.controls
-  }class="hover:line-through"
+  }
 
   CloseChangePassword(){
     this.closeChangePassword.emit(false)

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Sidebar } from '../user';
+import { Sidebar } from '../../interfaces/user';
 import { AuthService } from '../../auth/service/auth.service';
 import { Router } from '@angular/router';
 

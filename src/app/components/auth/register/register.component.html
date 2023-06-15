@@ -1,15 +1,13 @@
-<div *ngIf="!user" class='fixed bg-slate-200 top-0 left-0 w-full h-full z-50'>
-  <div class="bg-slate-400">
-    <span class="text-blue-700 text-xl font-semibold px-4 py-6 shadow-lg">CashMingle</span>
+<div [style]="background" class="min-h-screen">
+  <div [style]="background1">
+    <span class="px-4 py-6 shadow-lg">{{name}}</span>
   </div>
-  <cashMingle-user-choice (selectedUser)="choiceUser($event)"></cashMingle-user-choice>
-</div>
   
-<div *ngIf="user" class="bg-slate-300 min-h-screen">
-  <div class="bg-slate-400">
-    <span class="text-blue-700 text-xl font-semibold px-4 py-6 shadow-lg">CashMingle</span>
+  <div *ngIf="!user">
+    <cashMingle-user-choice (selectedUser)="choiceUser($event)"></cashMingle-user-choice>
   </div>
-  <div class="register p-4">
+
+  <div *ngIf="user" class="register p-4">
     <img src="/assets/images/image/header.png" alt="image" [routerLink]="['/home']" width="35rem" height="35rem" class="m-auto pb-4" />
 
     <mat-card>

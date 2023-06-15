@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Sidebar } from '../../user';
+import { Sidebar } from '../../../interfaces/user';
 
 @Component({
   selector: 'cashMingle-admin',
@@ -21,44 +21,39 @@ export class AdminComponent {
       url: '/admin/dashboard'
     },
     {
-      service: 'Register Customer',
+      service: 'Register User',
       icon: 'supervised_user_circle',
-      url: '/register'
+      url: '/admin/register'
     },
     {
-      service: 'Get All Customers',
+      service: 'Search Users',
+      icon: 'search',
+      url: '/admin/search'
+    },
+    {
+      service: 'Get All Users',
       icon: 'interpreter_mode',
-      url: '/admin/customers'
+      url: '/admin/users'
     },
     {
-      service: 'Get All Customers',
+      service: 'View Database',
       icon: 'contact_emergency',
-      url: '/admin/customer'
+      url: '/admin/database'
     },
     {
       service: 'Get Transaction',
       icon: 'ballot',
-      url: '/admin/a'
+      url: '/admin/transactions'
     },
     {
-      service: 'Edit Customers',
+      service: 'Edit User',
       icon: 'edit_off',
-      url: '/admin/a'
+      url: '/admin/edit'
     },
     {
-      service: 'Deactivate Customer',
+      service: 'Remove User',
       icon: 'person_add_disabled',
-      url: '/admin/a'
-    },
-    {
-      service: 'Delete Customer',
-      icon: 'delete_sweep',
-      url: '/admin/a'
-    },
-    {
-      service: 'Delete Customer',
-      icon: 'delete_forever',
-      url: '/admin/a'
+      url: '/admin/remove-user'
     },
     {
       service: 'User Role',

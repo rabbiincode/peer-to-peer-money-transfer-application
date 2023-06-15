@@ -1,0 +1,140 @@
+<div class="bg-blue-300 min-h-screen">
+  <div class="bg-blue-200">
+    <span class="text-black text-2xl font-medium px-4 py-6 shadow-lg">DataBase</span>
+  </div>
+    
+  <div class="px-3 py-12">
+  
+    <div class="card mb-4">
+      <div class="card-body bg-slate-200">
+        <span class="card-title text-xl text-[#012970] flex items-center font-medium pb-6">
+          <i class="bi bi-eye-fill pr-2"></i>View DataBase
+        </span>
+
+        <div class="mb-4">
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header (click)="arrow = !arrow">
+                <mat-panel-title class="text-teal-500 text-lg font-medium">View Individual User Database</mat-panel-title>
+                <mat-icon>account_circle</mat-icon>
+                <mat-icon *ngIf="arrow">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="!arrow">arrow_drop_down</mat-icon>
+              </mat-expansion-panel-header>
+
+              <div>
+                <ngb-alert *ngIf="searchUserError && searchUserError?.status > 0 && searchUserError?.status <= 499" [type]="'danger'" (closed)="searchUserError = ''">
+                  {{searchUserError?.error?.error}} {{searchUserError?.error?.message}}
+                </ngb-alert>
+                <ngb-alert *ngIf="searchUserError && searchUserError?.status >= 500 || searchUserError?.status == 0" [type]="'danger'" (closed)="searchUserError = ''">
+                  Failed...please try again
+                </ngb-alert>
+              </div>
+
+              <form [formGroup]="userForm" (submit)="searchUser()" class="py-2">
+                <mat-form-field>
+                  <mat-label>UserName or Email</mat-label>
+                  <input formControlName="emailAddressOrUserName" matInput required />
+                  <mat-error>
+                    UserName or Email required
+                  </mat-error>
+                </mat-form-field>
+                
+                <div>
+                  <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="userForm.invalid" class="btn w-[50%] text-lg">
+                    Proceed
+                  </button>
+                  <button *ngIf="loading" mat-flat-button color="accent" class="btn w-[50%] text-lg">
+                    Please wait...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
+                  </button>
+                </div>
+              </form>
+
+              <div>
+                <table *ngIf="tableData1" class="flex overflow-auto">
+                  <thead>
+                    <tr class="flex flex-col">
+                      <th *ngFor="let header of tableHeader; let e = even" [ngClass]="e ?'even' : 'odd'">{{header | uppercase}}</th>
+                    </tr>
+                  </thead>
+      
+                  <tbody>
+                    <tr class="flex flex-col">
+                      <td></td> <td>{{tableData1.firstName}}</td> <td>{{tableData1.lastName}}</td> <td>{{tableData1.middleName}}</td>
+                      <td>{{tableData1.accountNumber}}</td> <td>{{tableData1.balance}}</td> <td>{{tableData1.recoveryMail}}</td> <td>{{tableData1.dateOfBirth}}</td>
+                      <td>{{tableData1.userTypeId}}</td> <td>{{tableData1.businessName}}</td> <td>{{tableData1.nin}}</td> <td>{{tableData1.cac}}</td>
+                      <td>{{tableData1.businessType}}</td> <td>{{tableData1.profession}}</td> <td>{{tableData1.bvn}}</td> <td>{{tableData1.address}}</td>
+                      <td>{{tableData1.verified}}</td> <td>{{tableData1.activated}}</td> <td>{{tableData1.deleted}}</td> <td>{{tableData1.lien}}</td>
+                      <td>{{tableData1.complains}}</td> <td>{{tableData1.createdAt}}</td> <td>{{tableData1.updatedAt}}</td> <td>{{tableData1.transactionHistory}}</td>
+                      <td>{{tableData1.claims}}</td> <td>{{tableData1.logins}}</td> <td>{{tableData1.tokens}}</td> <td>{{tableData1.userRoles}}</td>
+                      <td>{{tableData1.id}}</td> <td>{{tableData1.userName}}</td> <td>{{tableData1.normalizedUserName}}</td> <td>{{tableData1.email}}</td>
+                      <td>{{tableData1.normalizedEmail}}</td> <td>{{tableData1.emailConfirmed}}</td> <td>{{tableData1.passwordHash}}</td> <td>{{tableData1.securityStamp}}</td>
+                      <td>{{tableData1.concurrencyStamp}}</td> <td>{{tableData1.phoneNumber}}</td> <td>{{tableData1.phoneNumberConfirmed}}</td> <td>{{tableData1.twoFactorEnabled}}</td>
+                      <td>{{tableData1.lockoutEnd}}</td> <td>{{tableData1.lockoutEnabled}}</td> <td>{{tableData1.accessFailedCount}}</td>
+                    </tr>
+                  </tbody>         
+                </table>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+
+        <div>
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header (click)="arrow1= !arrow1">
+                <mat-panel-title class="text-teal-500 text-lg font-medium">View All Database</mat-panel-title>
+                <mat-icon>account_circle</mat-icon>
+                <mat-icon *ngIf="arrow1">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="!arrow1">arrow_drop_down</mat-icon>
+              </mat-expansion-panel-header>
+
+              <div>
+                <ngb-alert *ngIf="viewDataError && viewDataError?.status > 0 && viewDataError?.status <= 499" [type]="'danger'" (closed)="viewDataError = ''">
+                  {{viewDataError?.error?.error}} {{viewDataError?.error?.message}}
+                </ngb-alert>
+                <ngb-alert *ngIf="viewDataError && viewDataError?.status >= 500 || viewDataError?.status == 0" [type]="'danger'" (closed)="viewDataError = ''">
+                  Failed...please try again
+                </ngb-alert>
+              </div>
+
+              <div class="overflow-auto">
+                <table *ngIf="tableData">
+                  <thead>
+                    <tr>
+                      <th *ngFor="let header of tableHeader; let e = even" [ngClass]="e ?'even' : 'odd'">{{header | uppercase}}</th>
+                    </tr>
+                  </thead>
+      
+                  <tbody>
+                    <tr *ngFor="let data of tableData; let e = even; let o = odd; let i = index"  [ngClass]="e ?'even1' : 'odd1'">
+                      <td>{{i + 1}}</td> <td>{{data.firstName}}</td> <td>{{data.lastName}}</td> <td>{{data.middleName}}</td>
+                      <td>{{data.accountNumber}}</td> <td>{{data.balance}}</td> <td>{{data.recoveryMail}}</td> <td>{{data.dateOfBirth}}</td>
+                      <td>{{data.userTypeId}}</td> <td>{{data.businessName}}</td> <td>{{data.nin}}</td> <td>{{data.cac}}</td>
+                      <td>{{data.businessType}}</td> <td>{{data.profession}}</td> <td>{{data.bvn}}</td> <td>{{data.address}}</td>
+                      <td>{{data.verified}}</td> <td>{{data.activated}}</td> <td>{{data.deleted}}</td> <td>{{data.lien}}</td>
+                      <td>{{data.complains}}</td> <td>{{data.createdAt}}</td> <td>{{data.updatedAt}}</td> <td>{{data.transactionHistory}}</td>
+                      <td>{{data.claims}}</td> <td>{{data.logins}}</td> <td>{{data.tokens}}</td> <td>{{data.userRoles}}</td>
+                      <td>{{data.id}}</td> <td>{{data.userName}}</td> <td>{{data.normalizedUserName}}</td> <td>{{data.email}}</td>
+                      <td>{{data.normalizedEmail}}</td> <td>{{data.emailConfirmed}}</td> <td>{{data.passwordHash}}</td> <td>{{data.securityStamp}}</td>
+                      <td>{{data.concurrencyStamp}}</td> <td>{{data.phoneNumber}}</td> <td>{{data.phoneNumberConfirmed}}</td> <td>{{data.twoFactorEnabled}}</td>
+                      <td>{{data.lockoutEnd}}</td> <td>{{data.lockoutEnabled}}</td> <td>{{data.accessFailedCount}}</td>
+                    </tr>
+                  </tbody>         
+                </table>
+              </div>
+
+              <div class="flex justify-center">
+                <button *ngIf="show && !loading1" mat-flat-button color="primary" type="button" (click)="viewData()" class="btn w-[50%] text-lg mt-4">View Database</button>
+                <button *ngIf="loading1" mat-flat-button color="accent" class="btn w-[50%] text-lg mt-4">
+                  Please wait...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
+                </button>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+
+      </div>
+
+    </div>  
+  </div>
+</div>

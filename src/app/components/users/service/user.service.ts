@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserData } from '../user';
+import { UserData } from '../../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -57,5 +57,9 @@ export class UserService {
         this.userData.AccountType = 'SuperAdmin'
       }
     })
+  }
+
+  editUserDetails(userName: string, edit: any){
+    return this.http.patch(`${this.url}/edit-customer-details?userName=${userName}`, edit)
   }
 }

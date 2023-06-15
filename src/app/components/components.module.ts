@@ -37,10 +37,16 @@ import { DepositComponent } from './users/customer/deposit/deposit.component';
 import { WithdrawalComponent } from './users/customer/withdrawal/withdrawal.component';
 import { TransferComponent } from './users/customer/transfer/transfer.component';
 import { SavingsComponent } from './users/customer/savings/savings.component';
-import { CustomersComponent } from './users/admin/customers/customers.component';
 import { RoleComponent } from './users/admin/role/role.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { SearchComponent } from './users/admin/search/search.component';
+import { DatabaseComponent } from './users/admin/database/database.component';
+import { TransactionsComponent } from './users/admin/transactions/transactions.component';
+import { CategoryComponent } from './users/admin/category/category.component';
+import { EditComponent } from './users/admin/edit/edit.component';
+import { RemoveUserComponent } from './users/admin/remove-user/remove-user.component';
+import { AllUsersComponent } from './users/admin/all-users/all-users.component';
 
 @NgModule({
   declarations: [
@@ -68,8 +74,14 @@ import { MatNativeDateModule } from '@angular/material/core';
     WithdrawalComponent,
     TransferComponent,
     SavingsComponent,
-    CustomersComponent,
     RoleComponent,
+    SearchComponent,
+    DatabaseComponent,
+    TransactionsComponent,
+    CategoryComponent,
+    EditComponent,
+    RemoveUserComponent,
+    AllUsersComponent,
   ],
   imports: [
     CommonModule,

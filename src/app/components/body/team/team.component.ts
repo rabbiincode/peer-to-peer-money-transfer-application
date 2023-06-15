@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Team } from '../body';
+import { Team } from '../../interfaces/body';
 
 @Component({
   selector: 'cashMingle-team',
