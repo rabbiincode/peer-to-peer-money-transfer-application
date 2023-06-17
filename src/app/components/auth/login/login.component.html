@@ -12,13 +12,13 @@
         </div>
 
         <div>
-          <ngb-alert *ngIf="errorMessage && errorMessage?.status > 0 && errorMessage?.status <= 499" [type]="'danger'">
+          <ngb-alert *ngIf="errorMessage && errorMessage?.status > 0 && errorMessage?.status <= 499" [type]="'danger'" (closed)="errorMessage = ''">
             {{errorMessage?.error?.error}} {{errorMessage?.error?.message}}
           </ngb-alert>
-          <ngb-alert *ngIf="errorMessage && errorMessage?.status >= 500 || errorMessage?.status == 0" [type]="'danger'">
+          <ngb-alert *ngIf="errorMessage && errorMessage?.status >= 500 || errorMessage?.status == 0" [type]="'danger'" (closed)="errorMessage = ''">
             Login Failed...please try again
           </ngb-alert>
-          <ngb-alert *ngIf="accessDenied" [type]="'danger'">Access Denied</ngb-alert>
+          <ngb-alert *ngIf="accessDenied" [type]="'danger'" (closed)="accessDenied = false">Access Denied</ngb-alert>
         </div>
 
         <form [formGroup]="loginForm" (submit)="loginUser()" class="py-2">

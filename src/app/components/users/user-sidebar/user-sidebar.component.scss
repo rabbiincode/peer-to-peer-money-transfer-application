@@ -54,7 +54,7 @@
   border-radius: 5px;
 }
 
-@media (max-width: 768px){
+@media (max-width: 767px){
   .sidebar {
     left: 0;
   }
@@ -64,7 +64,7 @@
   }
 }
 
-@media (max-width: 375px){
+@media (max-width: 374px){
   .sidebar {
     width: 250px;
   }

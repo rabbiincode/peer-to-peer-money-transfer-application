@@ -12,6 +12,7 @@ import { BodyService } from '../body-service/body.service';
 export class ContactComponent {
   loading = false
   sendMailResponse = false
+  sendMailError!: any
   contactForm!: FormGroup
   
   @Input() scrollPagePosition!: string
@@ -46,6 +47,7 @@ export class ContactComponent {
     }
     this.loading = !this.loading
 
+    // Remove empty fields in form on submission
     let formValue = { ...this.contactForm.value }
 
     for(let data in formValue) {
@@ -53,10 +55,14 @@ export class ContactComponent {
         delete formValue[data]
       }
     }
-    this.mail.sendMail(formValue).subscribe()
-
-    this.sendMailResponse = !this.sendMailResponse
-    this.loading = false
-    this.contactForm.reset()
+    
+    this.mail.sendMail(formValue).subscribe(() => {
+      this.sendMailResponse = !this.sendMailResponse
+      this.loading = false
+      this.contactForm.reset()
+    }, (error) => {
+      this.sendMailError = error
+      this.loading = false
+    })
   }
 }

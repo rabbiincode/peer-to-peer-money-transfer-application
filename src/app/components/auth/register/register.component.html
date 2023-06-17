@@ -232,9 +232,9 @@
         </form>
 
         <div>
-          <ngb-alert *ngIf="registerUserResponse" [type]="'info'">{{registerUserResponse?.message}}</ngb-alert>
-          <ngb-alert *ngIf="errorMessage && errorMessage?.status > 0 && errorMessage?.status <= 499" [type]="'danger'">{{errorMessage?.error?.error}}</ngb-alert>
-          <ngb-alert *ngIf="errorMessage && errorMessage?.status >= 500 || errorMessage?.status == 0" [type]="'danger'">Registration Failed...please try again</ngb-alert>
+          <ngb-alert *ngIf="registerUserResponse" [type]="'success'" (closed)="registerUserResponse = ''">{{registerUserResponse?.message}}</ngb-alert>
+          <ngb-alert *ngIf="errorMessage && errorMessage?.status > 0 && errorMessage?.status <= 499" [type]="'danger'" (closed)="errorMessage = ''">{{errorMessage?.error?.error}}</ngb-alert>
+          <ngb-alert *ngIf="errorMessage && errorMessage?.status >= 500 || errorMessage?.status == 0" [type]="'danger'" (closed)="errorMessage = ''">Registration Failed...please try again</ngb-alert>
         </div>
 
       </mat-card-content>
