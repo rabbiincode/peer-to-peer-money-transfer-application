@@ -1,0 +1,90 @@
+<div class="bg-blue-200 min-h-screen">
+  <div class="bg-blue-300">
+    <span class="text-white text-2xl font-medium px-4 py-8 shadow-lg">Contact</span>
+  </div>
+  <div class="flex justify-between text-black text-base">
+    <span></span>
+    <span class="px-2 py-1 shadow-lg">+234-806-537-3835</span>
+  </div>
+      
+  <div class="px-3 py-8">
+    <div class="max-w-[800px] bg-slate-200 m-auto rounded-md px-2 py-4 mb-3">
+      <h2>Speak to our customer care representative</h2>
+      <a href="tel:+2348065373835">
+        <button class="bg-gradient-to-l from-purple-300 to-purple-500 px-4 py-1 ml-2 text-white text-lg font-medium rounded-md hover:from-purple-500 hover:to-purple-300 hover:font-semibold">
+          Click Here
+        </button>
+      </a>
+    </div>
+    
+    <div class="max-w-[800px] bg-slate-200  m-auto px-2 rounded-md">
+      <form [formGroup]="contactUsForm" (submit)="contactUs()" class="m-auto py-6">
+        <h2>Send us a mail</h2>
+        <div class="flex pb-2 max-sm:flex-col">
+          <mat-form-field class="w-full pr-4">
+            <mat-label>UserName</mat-label>
+            <input formControlName="userName" matInput required />
+            <mat-error>
+              UserName required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="w-full">
+            <mat-label>Email Address</mat-label>
+            <input formControlName="email" matInput required />
+            <mat-error *ngIf="contactUsForm.value.email == ''">
+              Email Address required
+            </mat-error>
+            <mat-error *ngIf="contactFormControl?.['email']?.errors?.['invalidEmail']">
+              Email address is invalid
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="flex pb-2 max-sm:flex-col">
+          <mat-form-field class="w-full pr-4">
+            <mat-label>PhoneNumber</mat-label>
+            <input formControlName="phoneNumber" matInput />
+            <mat-error *ngIf="contactFormControl?.['phoneNumber']?.errors?.['invalidPhoneNumber']">
+              PhoneNumber not valid
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="w-full">
+            <mat-label>Subject</mat-label>
+            <input formControlName="subject" matInput required />
+            <mat-error>
+              Subject required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="pb-2">
+          <mat-form-field class="w-full">
+            <mat-label>Message</mat-label>
+            <textarea formControlName="message" matInput required cdkTextareaAutosize [cdkAutosizeMinRows]="7" [cdkAutosizeMaxRows]="7"></textarea>
+            <mat-error>
+              Message required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <input formControlName="_template" type="hidden" name="_template" value="table">
+        <input formControlName="_captcha" type="hidden" name="_captcha" value="false">
+
+        <div class="text-center">
+          <div class="pt-2">
+            <ngb-alert *ngIf="sendMailResponse" [type]="'success'" (closed)="sendMailResponse = false">Message sent successfully ✔️</ngb-alert>
+            <ngb-alert *ngIf="sendMailError" [type]="'danger'" (closed)="sendMailError = ''">Message could not send...please try again</ngb-alert>
+          </div>
+          
+          <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="contactUsForm.invalid" class="btn text-lg rounded-2xl p-4">
+            Send Message
+          </button>
+          <button *ngIf="loading" mat-flat-button color="accent" type="submit" class="btn text-lg rounded-2xl p-4">
+            <span>Loading...</span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner>
+          </button>
+        </div>
+      </form>
+    </div>   
+  </div>
+</div>

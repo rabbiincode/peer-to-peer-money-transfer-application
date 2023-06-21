@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { Sidebar } from '../../../interfaces/user';
+import { Sidebar } from 'src/app/components/interfaces/user';
 
 @Component({
-  selector: 'cashMingle-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+  selector: 'cashMingle-customer',
+  templateUrl: './customer.component.html',
+  styleUrls: ['./customer.component.scss']
 })
 
-export class UserComponent {
+export class CustomerComponent {
   fullWidth = true
 
   togglePage(pageWidth: boolean){
@@ -41,9 +41,19 @@ export class UserComponent {
       url: '/user/savings'
     },
     {
+      service: 'Transaction History',
+      icon: 'history',
+      url: '/user/transactions'
+    },
+    {
+      service: 'Contact Us',
+      icon: 'phone',
+      url: '/user/contact'
+    },
+    {
       service: 'Financial Services',
       icon: 'article',
       url: '/user/financial'
     }
-  ]   
+  ]
 }

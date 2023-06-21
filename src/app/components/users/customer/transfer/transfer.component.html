@@ -8,10 +8,84 @@
   </div>
   
   <div class="px-3 py-8">
-        
-    <div class="row">
-      Transfer
-    </div>  
-  </div>
-    
+  
+    <div class="max-w-[600px] m-auto">
+      <span class="flex justify-center pb-4"><mat-icon>flight_takeoff</mat-icon></span>
+      <div class="bg-[#e0f8e9] px-2 rounded-md">
+        <form [formGroup]="transferForm" (submit)="transferNow()" class="m-auto py-6">
+          <div>
+            <mat-form-field class="w-full mb-4">
+              <mat-label>Account Number</mat-label>
+              <input formControlName="accountNumber" matInput minlength="10" maxlength="10" required />
+              <mat-hint>CashMingle account number</mat-hint>
+              <mat-error *ngIf="transferForm.value.accountNumber == ''">
+                Account Number required
+              </mat-error>
+              <mat-error *ngIf="transferForm.get('accountNumber')?.hasError('pattern') || transferForm.get('accountNumber')?.hasError('minlength')">
+                Account Number Invalid
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="w-full mb-4">
+              <mat-label>Amount</mat-label>
+              <input formControlName="amount" matInput required />
+              <mat-hint>How much do you want to transfer?</mat-hint>
+              <mat-error *ngIf="transferForm.value.amount == ''">
+                Amount required
+              </mat-error>
+              <mat-error *ngIf="transferForm.get('amount')?.hasError('pattern')">
+                Amount Invalid
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="w-full mb-4">
+              <mat-label>Password</mat-label>
+              <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" required />
+              <mat-hint>Enter your password</mat-hint>
+              <button mat-icon-button matSuffix (click)="hide = !hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              <mat-error *ngIf="transferForm.value.password == ''">
+                Password required
+              </mat-error>
+              <mat-error *ngIf="transferForm.get('password')?.hasError('invalidPassword')">
+                Password Invalid
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="pb-2">
+            <mat-form-field class="w-full mb-4">
+              <mat-label>Description</mat-label>
+              <textarea formControlName="description" matInput required cdkTextareaAutosize [cdkAutosizeMinRows]="7" [cdkAutosizeMaxRows]="7"></textarea>
+              <mat-hint>Enter transaction description</mat-hint>
+              <mat-error>
+                Description required
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="text-center">
+            <div class="pt-2">
+              <ngb-alert *ngIf="transferResponse" [type]="'success'" (closed)="transferResponse = ''">Transfer successful <mat-icon>flight_landing</mat-icon></ngb-alert>
+              <ngb-alert *ngIf="transferError && transferError?.status > 0 && transferError?.status <= 499" [type]="'danger'" (closed)="transferError = ''">
+                {{transferError?.error?.error}} {{transferError?.error?.message}}
+              </ngb-alert>
+              <ngb-alert *ngIf="transferError && transferError?.status >= 500 || transferError?.status == 0" [type]="'danger'" (closed)="transferError = ''">
+                Failed...please try again
+              </ngb-alert>
+            </div>
+
+            <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="transferForm.invalid  || transferForm.value.amount <= 0" class="btn text-lg rounded-2xl p-4">
+              Transfer <mat-icon>flight_landing</mat-icon>
+            </button>
+            <button *ngIf="loading" mat-flat-button color="accent" type="submit" class="btn text-lg rounded-2xl p-4">
+              <span>Please wait...</span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>  
 </div>

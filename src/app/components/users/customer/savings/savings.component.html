@@ -74,11 +74,21 @@
               <div class="card-body bg-slate-200">
                 <h3 class="card-title text-xl text-blue-700 font-medium">Save Now</h3>
       
-                <form class="py-2">
+                <form [formGroup]="savingsForm" class="py-2">
+                  <div class="pt-2">
+                    <ngb-alert *ngIf="savingsResponse" [type]="'success'" (closed)="savingsResponse = ''">{{amount | currency}} is saved successfully ✔️</ngb-alert>
+                    <ngb-alert *ngIf="savingsError && savingsError?.status > 0 && savingsError?.status <= 499" [type]="'danger'" (closed)="savingsError = ''">
+                      {{savingsError?.error?.error}} {{savingsError?.error?.message}}
+                    </ngb-alert>
+                    <ngb-alert *ngIf="savingsError && savingsError?.status >= 500 || savingsError?.status == 0" [type]="'danger'" (closed)="savingsError = ''">
+                      Failed...please try again
+                    </ngb-alert>
+                  </div>
+
                   <div>
-                    <mat-form-field class="w-full">
+                    <mat-form-field class="w-full  pb-4">
                       <mat-label>Title</mat-label>
-                      <input matInput required placeholder="Car Savings"/>
+                      <input formControlName="title" matInput required placeholder="Car Savings" />
                       <mat-error>
                         Title required
                       </mat-error>
@@ -86,37 +96,41 @@
                   </div>
       
                   <div>
-                    <mat-form-field class="w-full">
+                    <mat-form-field class="w-full  pb-4">
                       <mat-label>Amount</mat-label>
-                      <input matInput required class="w-full"/>
-                      <mat-error>
+                      <input formControlName="amount" matInput required [(ngModel)]="amount" />
+                      <mat-error *ngIf="savingsForm.value.amount == ''">
                         Amount required
+                      </mat-error>
+                      <mat-error *ngIf="savingsForm.get('amount')?.hasError('pattern')">
+                        Amount Invalid
                       </mat-error>
                     </mat-form-field>
                   </div>
         
                   <div>
-                    <mat-form-field class="w-full">
-                      <mat-label>Choose Start Date</mat-label>
-                      <input matInput [matDatepicker]="picker" required placeholder="MM/DD/YYYY">
-                      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                      <mat-datepicker #picker></mat-datepicker>
+                    <mat-form-field class="w-full  pb-4">
+                      <mat-label>Enter your savings timeframe</mat-label>
+                      <mat-date-range-input required [rangePicker]="picker"[(ngModel)]="startDate">
+                        <input formControlName="start" matStartDate required placeholder="Start date" [(ngModel)]="startDate" />
+                        <input formControlName="end" matEndDate required placeholder="End date" [(ngModel)]="endDate" />
+                      </mat-date-range-input>
+                      <mat-hint>MM/DD/YYYY - MM/DD/YYYY</mat-hint>
+                      <mat-datepicker-toggle matIconSuffix [for]="picker" color="accent"></mat-datepicker-toggle>
+                      <mat-date-range-picker #picker></mat-date-range-picker>
+                      <mat-error>
+                        Timeframe required
+                      </mat-error>
                     </mat-form-field>
                   </div>
       
-                  <div>
-                    <mat-form-field class="w-full">
-                      <mat-label>Choose End Date</mat-label>
-                      <input matInput [matDatepicker]="picker" required placeholder="MM/DD/YYYY" class="w-[100%]">
-                      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                      <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field>
-                  </div>
-      
-                  <div *ngIf="">Save amount from startDate to endDate</div>
+                  <div *ngIf="savingsForm.value.amount > 0 && startDate && !savingsResponse" class="text-green-600 text-center font-medium">Save {{amount | currency}} from {{startDate | date:'fullDate'}} <span *ngIf="endDate">to {{endDate | date:'fullDate'}}</span></div>
       
                   <div>
-                    <button mat-flat-button color="primary" type="submit" class="btn w-[100%] text-lg mt-2">Save Now</button>
+                    <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="savingsForm.invalid || savingsForm.value.amount <= 0" class="btn w-[100%] text-lg mt-2">Save Now</button>
+                    <button *ngIf="loading" mat-flat-button color="accent" type="submit" class="btn w-full text-lg rounded-2xl p-4">
+                      <span>Please wait...</span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner>
+                    </button>
                   </div>
                 </form>
               </div>

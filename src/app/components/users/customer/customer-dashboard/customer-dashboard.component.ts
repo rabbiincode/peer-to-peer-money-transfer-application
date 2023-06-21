@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { UserService } from '../../service/user.service';
 
 @Component({
-  selector: 'cashMingle-user-dashboard',
-  templateUrl: './user-dashboard.component.html',
-  styleUrls: ['./user-dashboard.component.scss']
+  selector: 'cashMingle-customer-dashboard',
+  templateUrl: './customer-dashboard.component.html',
+  styleUrls: ['./customer-dashboard.component.scss']
 })
 
-export class UserDashboardComponent {
+export class CustomerDashboardComponent {
   name = ''
   accountType = ''
   balance: number

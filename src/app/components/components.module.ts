@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { HttpClientModule } from '@angular/common/http';
@@ -27,11 +28,9 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgbAccordionModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
-import { UserComponent } from './users/customer/user/user.component';
 import { UserHeaderComponent } from './users/user-header/user-header.component';
 import { UserSidebarComponent } from './users/user-sidebar/user-sidebar.component';
 import { AdminComponent } from './users/admin/admin/admin.component';
-import { UserDashboardComponent } from './users/customer/user-dashboard/user-dashboard.component';
 import { AdminDashboardComponent } from './users/admin/admin-dashboard/admin-dashboard.component';
 import { DepositComponent } from './users/customer/deposit/deposit.component';
 import { WithdrawalComponent } from './users/customer/withdrawal/withdrawal.component';
@@ -47,6 +46,10 @@ import { CategoryComponent } from './users/admin/category/category.component';
 import { EditComponent } from './users/admin/edit/edit.component';
 import { RemoveUserComponent } from './users/admin/remove-user/remove-user.component';
 import { AllUsersComponent } from './users/admin/all-users/all-users.component';
+import { CustomerComponent } from './users/customer/customer/customer.component';
+import { CustomerDashboardComponent } from './users/customer/customer-dashboard/customer-dashboard.component';
+import { CustomerTransactionsComponent } from './users/customer/customer-transactions/customer-transactions.component';
+import { ContactUsComponent } from './users/customer/contact-us/contact-us.component';
 
 @NgModule({
   declarations: [
@@ -64,11 +67,9 @@ import { AllUsersComponent } from './users/admin/all-users/all-users.component';
     FaqComponent,
     ScrollToTopComponent,
     ForgotPasswordComponent,
-    UserComponent,
     AdminComponent,
     UserHeaderComponent,
     UserSidebarComponent,
-    UserDashboardComponent,
     AdminDashboardComponent,
     DepositComponent,
     WithdrawalComponent,
@@ -82,6 +83,10 @@ import { AllUsersComponent } from './users/admin/all-users/all-users.component';
     EditComponent,
     RemoveUserComponent,
     AllUsersComponent,
+    CustomerComponent,
+    CustomerDashboardComponent,
+    CustomerTransactionsComponent,
+    ContactUsComponent,
   ],
   imports: [
     CommonModule,
@@ -93,6 +98,7 @@ import { AllUsersComponent } from './users/admin/all-users/all-users.component';
     MatCardModule,
     MatButtonModule,
     MatRadioModule,
+    MatSelectModule,
     MatExpansionModule,
     MatFormFieldModule,
     HttpClientModule,

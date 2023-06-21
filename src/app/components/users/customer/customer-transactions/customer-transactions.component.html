@@ -1,0 +1,34 @@
+<div class="bg-blue-300 min-h-screen">
+  <div class="bg-blue-200">
+    <span class="text-black text-2xl font-medium px-4 py-8 shadow-lg">Transaction History</span>
+  </div>  
+  <div class="flex justify-between text-black text-base">
+    <span></span>
+    <span class="px-2 py-1 shadow-lg">No of Transaction(s): {{transactions}}</span>
+  </div>
+    
+  <div class="px-3 py-8">
+    <div *ngIf="transactions == 0" class="text-red-500 text-xl text-center font-semibold">No Transaction Yet</div>
+    <div *ngIf="transactions > 0 && !tableData" class="text-center">
+      <button>
+        Please wait...<mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner>
+      </button>
+    </div>
+    <div class="overflow-auto">
+      <table *ngIf="tableData">
+        <thead>
+          <tr>
+            <th *ngFor="let header of tableHeader; let e = even" [ngClass]="e ?'even' : 'odd'">{{header | uppercase}}</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let data of tableData; let e = even; let o = odd; let i = index"  [ngClass]="e ?'even1' : 'odd1'">
+            <td>{{i + 1}}</td> <td>{{data.Id}}</td> <td>{{data.TransactionType}}</td> 
+            <td>{{data.Amount}}</td> <td>{{data.DateStamp}}</td> <td>{{data.Description}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

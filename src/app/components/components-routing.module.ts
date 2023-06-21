@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './body/home/home.component';
 import { LoginComponent } from './auth/login/login.component';
-import { UserComponent } from './users/customer/user/user.component';
-import { UserDashboardComponent } from './users/customer/user-dashboard/user-dashboard.component';
+import { CustomerComponent } from './users/customer/customer/customer.component';
+import { CustomerDashboardComponent } from './users/customer/customer-dashboard/customer-dashboard.component';
 import { DepositComponent } from './users/customer/deposit/deposit.component';
 import { WithdrawalComponent } from './users/customer/withdrawal/withdrawal.component';
 import { TransferComponent } from './users/customer/transfer/transfer.component';
 import { SavingsComponent } from './users/customer/savings/savings.component';
+import { CustomerTransactionsComponent } from './users/customer/customer-transactions/customer-transactions.component';
+import { ContactUsComponent } from './users/customer/contact-us/contact-us.component';
 import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
@@ -15,14 +17,16 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, data: { animation: 'isRight' } },
   { path: 'login', component: LoginComponent, data: { animation: 'isLeft' } },
   { 
-    path: 'user', component: UserComponent,
+    path: 'user', component: CustomerComponent,
     children: [
       { path: '', redirectTo:'/user/dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: UserDashboardComponent },
+      { path: 'dashboard', component: CustomerDashboardComponent },
       { path: 'deposit', component: DepositComponent },
       { path: 'withdrawal', component: WithdrawalComponent },
       { path: 'transfer', component: TransferComponent },
       { path: 'savings', component: SavingsComponent },
+      { path: 'transactions', component: CustomerTransactionsComponent },
+      { path: 'contact', component: ContactUsComponent }
     ],
     // canActivate: [LoginGuard]
   },

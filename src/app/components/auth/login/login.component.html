@@ -39,10 +39,14 @@
               <button mat-icon-button matSuffix (click)="hide = !hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
               </button>
-              <mat-error>
+              <mat-error *ngIf="loginForm.value.password == ''">
                 Password required
               </mat-error>
+              <mat-error *ngIf="loginForm.get('password')?.hasError('invalidPassword')">
+                Password Invalid
+              </mat-error>
             </mat-form-field>
+            
             <div class="flex items-center justify-between w-[90%] text-teal-500 text-base font-medium m-auto pb-4">
               <span class="flex items-center"><input type="checkbox" />Remember Me</span>
               <span (click)="ChangePasswordOpen()" class="cursor-pointer hover:text-red-300">Forgot Password?</span>
