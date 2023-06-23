@@ -14,7 +14,7 @@
       <div class="bg-[#e0f8e9] px-2 rounded-md">
         <form [formGroup]="withdrawalForm" (submit)="withdrawNow()" class="m-auto py-6">
           <div>
-            <mat-form-field class="w-full mb-4">
+            <mat-form-field class="w-full">
               <mat-label>Amount</mat-label>
               <input formControlName="amount" matInput required />
               <mat-hint>How much do you want to withdraw?</mat-hint>
@@ -27,7 +27,7 @@
             </mat-form-field>
           </div>
           <div>
-            <mat-form-field class="w-full mb-4">
+            <mat-form-field class="w-full">
               <mat-label>Account Number</mat-label>
               <input formControlName="accountNumber" matInput minlength="8" maxlength="15" required />
               <mat-hint>Enter destination account number</mat-hint>
@@ -43,7 +43,7 @@
             </mat-form-field>
           </div>
           <div>
-            <mat-form-field class="w-full mb-4">
+            <mat-form-field class="w-full">
               <mat-label>Bank Name</mat-label>
               <mat-select formControlName="bank" required>
                 <mat-option *ngFor="let bank of banks" [value]="bank">
@@ -57,7 +57,7 @@
             </mat-form-field>
           </div>
           <div class="pb-2">
-            <mat-form-field class="w-full mb-4">
+            <mat-form-field class="w-full">
               <mat-label>Password</mat-label>
               <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" required />
               <mat-hint>Enter your password</mat-hint>

@@ -24,7 +24,7 @@
           </div>
 
           <div>
-            <mat-form-field class="w-full mb-2">
+            <mat-form-field class="w-full">
               <mat-label>Amount</mat-label>
               <input formControlName="amount" [(ngModel)]="amount" matInput required />
               <mat-hint>How much do you want to deposit?</mat-hint>
@@ -54,7 +54,7 @@
 
           <div *ngIf="card" class="mt-8">
             <div>
-              <mat-form-field class="w-full mb-2">
+              <mat-form-field class="w-full">
                 <mat-label>Card Number</mat-label>
                 <input formControlName="cardNumber" matInput required placeholder="**** **** **** ****" minlength="16" maxlength="16" />
                 <mat-hint>Enter your card number</mat-hint>
@@ -70,7 +70,7 @@
               </mat-form-field>
             </div>
             <div>
-              <mat-form-field class="w-full mb-2">
+              <mat-form-field class="w-full">
                 <mat-label>Card Name</mat-label>
                 <input formControlName="cardName" matInput required />
                 <mat-hint>Enter your card name</mat-hint>
@@ -88,7 +88,7 @@
                   Card Expiry required
                 </mat-error>
               </mat-form-field>
-              <mat-form-field class="w-full mb-2">
+              <mat-form-field class="w-full">
                 <mat-label>CVC</mat-label>
                 <input formControlName="cvc" matInput required placeholder="***" minlength="3" maxlength="3" />
                 <mat-hint>Enter your card cvc number</mat-hint>

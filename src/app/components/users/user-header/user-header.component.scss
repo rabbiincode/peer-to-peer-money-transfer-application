@@ -20,3 +20,12 @@
 .circle-icon:hover {
   background: #b3c5c7;
 }
+
+.dropdown:hover>.dropdown-menu {
+  display: block;
+  background: #b0bec5;
+}
+
+.dropdown>.dropdown-toggle:active {
+  pointer-events: none; // Without this, clicking will make it sticky
+}

@@ -12,12 +12,12 @@ import { UserService } from '../../users/service/user.service';
 })
 
 export class LoginComponent implements OnInit {
-  loginForm!: FormGroup
   hide = true
   open = false
   loading = false
-  errorMessage: any
   accessDenied = false
+  errorMessage: any
+  loginForm!: FormGroup
  
   constructor(private formBuilder: FormBuilder, private login: AuthService, private userData: UserService, private route: Router){}
 

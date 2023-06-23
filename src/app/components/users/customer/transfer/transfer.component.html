@@ -14,7 +14,7 @@
       <div class="bg-[#e0f8e9] px-2 rounded-md">
         <form [formGroup]="transferForm" (submit)="transferNow()" class="m-auto py-6">
           <div>
-            <mat-form-field class="w-full mb-4">
+            <mat-form-field class="w-full">
               <mat-label>Account Number</mat-label>
               <input formControlName="accountNumber" matInput minlength="10" maxlength="10" required />
               <mat-hint>CashMingle account number</mat-hint>
@@ -27,7 +27,7 @@
             </mat-form-field>
           </div>
           <div>
-            <mat-form-field class="w-full mb-4">
+            <mat-form-field class="w-full">
               <mat-label>Amount</mat-label>
               <input formControlName="amount" matInput required />
               <mat-hint>How much do you want to transfer?</mat-hint>
@@ -40,7 +40,7 @@
             </mat-form-field>
           </div>
           <div>
-            <mat-form-field class="w-full mb-4">
+            <mat-form-field class="w-full">
               <mat-label>Password</mat-label>
               <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" required />
               <mat-hint>Enter your password</mat-hint>
@@ -56,7 +56,7 @@
             </mat-form-field>
           </div>
           <div class="pb-2">
-            <mat-form-field class="w-full mb-4">
+            <mat-form-field class="w-full">
               <mat-label>Description</mat-label>
               <textarea formControlName="description" matInput required cdkTextareaAutosize [cdkAutosizeMinRows]="7" [cdkAutosizeMaxRows]="7"></textarea>
               <mat-hint>Enter transaction description</mat-hint>

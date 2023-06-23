@@ -1,0 +1,184 @@
+<div [ngClass]="editPassword ? 'bg-slate-200' : 'bg-purple-100'" class="min-h-screen">
+  <div [ngClass]="editPassword ? 'bg-slate-300' : 'bg-purple-200'" class="flex justify-between">
+    <span></span>  
+    <span class="text-black text-xl font-medium px-3 py-1 shadow-lg">My Profile</span>
+  </div>
+
+  <div class="flex justify-between text-black text-base">
+    <span class="text-lg font-normal px-3 py-1 shadow-lg">Edit Profile</span>
+    <span></span>
+  </div>
+
+  <div *ngIf="!editPassword" class="px-3 py-8">
+    
+    <h2>My Data</h2>
+    <div class="overflow-auto mb-4">
+      <table class="mt-0">
+        <thead>
+          <tr>
+            <th>FullName</th>
+            <th>Business Name</th>
+            <th>UserName</th>
+            <th>Email Address</th>
+            <th>Account Number</th>
+            <th>Address</th>
+            <th>PhoneNumber</th>
+            <th>Account Type</th>
+            <th>Account State</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{tableData.firstName}} {{tableData.firstName}}, {{tableData.firstName}}</td>
+            <td>-----</td>
+            <td>{{tableData.userName}}</td>
+            <td>{{tableData.email}}</td>
+            <td>-----</td>
+            <td>{{tableData.firstName}}</td>
+            <td>{{tableData.phoneNumber}}</td>
+            <td>{{tableData.AccountType}}</td>
+            <td>-----</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="max-w-[500px] mb-4">
+      <hr>
+      <h2>Edit</h2>
+      <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="editDataValue">
+        <div class="text-yellow-600 text-lg font-medium">Select Field you want to Edit</div>
+        <mat-radio-button class="example-radio-button" *ngFor="let edit of editData" [value]="edit">
+          Change {{edit | titlecase}}
+        </mat-radio-button>
+      </mat-radio-group>
+
+      <form [formGroup]="editForm" class="py-2">
+        <div>
+          <ngb-alert *ngIf="editUserResponse" [type]="'success'" (closed)="editUserResponse = ''">{{editUserResponse?.result}}</ngb-alert>
+          <ngb-alert *ngIf="editUserError && editUserError?.status > 0 && editUserError?.status <= 499" [type]="'danger'" (closed)="editUserError = ''">
+            {{editUserError?.error?.error}} {{editUserError?.error?.message}}
+          </ngb-alert>
+          <ngb-alert *ngIf="editUserError && editUserError?.status >= 500 || editUserError?.status == 0" [type]="'danger'" (closed)="editUserError = ''">
+            Failed...please try again
+          </ngb-alert>
+        </div>
+
+        <div>
+          <mat-form-field>
+            <mat-label>Edit</mat-label>
+            <input formControlName="path" [value]="editDataValue" matInput required />
+          </mat-form-field>
+        </div>
+        <div *ngIf="editDataValue && editDataValue != 'password'">
+          <mat-form-field>
+            <mat-label>Value</mat-label>
+            <input formControlName="value" matInput [required]="editDataValue != 'password'" />
+            <mat-error>
+              Value required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </form>
+
+      <div>
+        <button *ngIf="!loading" mat-flat-button color="primary" type="button" (click)="selected()" [disabled]="!editDataValue || editForm.invalid && editDataValue != 'password'" class="btn w-[50%] text-lg">
+          Edit
+        </button>
+        <button *ngIf="loading" mat-flat-button color="accent" class="btn w-[50%] text-lg">
+          Please wait...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
+        </button>
+        <p class="mt-2">Contact customer support for any other update you want to make</p>
+      </div>
+      
+    </div>
+
+    <div class="max-w-[500px] mb-4">
+      <hr>
+      <h2>Two Factor Authentication - <span class="text-base">[{{twoFactorAuth ? 'ON✔️' : 'OFF❌'}}]</span></h2>
+      <p>Enable 2FA to increase your security and make your account more secured</p>
+      
+      <form [formGroup]="twoFactorAuthForm" (ngSubmit)="toggleTwoFactorAuth()" ngNativeValidate>
+        <div>
+          <ngb-alert *ngIf="toggleTwoFactorAuthResponse" [type]="'success'" (closed)="toggleTwoFactorAuthResponse = ''">{{toggleTwoFactorAuthResponse?.result}}</ngb-alert>
+          <ngb-alert *ngIf="toggleTwoFactorAuthError && toggleTwoFactorAuthError?.status > 0 && toggleTwoFactorAuthError?.status <= 499" [type]="'danger'" (closed)="toggleTwoFactorAuthError = ''">
+            {{toggleTwoFactorAuthError?.error?.error}} {{toggleTwoFactorAuthError?.error?.message}}
+          </ngb-alert>
+          <ngb-alert *ngIf="toggleTwoFactorAuthError && toggleTwoFactorAuthError?.status >= 500 || toggleTwoFactorAuthError?.status == 0" [type]="'danger'" (closed)="toggleTwoFactorAuthError = ''">
+            Failed...please try again
+          </ngb-alert>
+        </div>
+
+        <div class="flex items-center">
+          <span class="text-xl font-medium mr-3">2-FA :</span>
+          <mat-slide-toggle formControlName="value" [(ngModel)]="twoFactorAuth" [checked]="twoFactorAuth">
+            <span class="text-xl font-medium">{{!twoFactorAuth ? 'Enable' : 'Disable'}}</span>
+          </mat-slide-toggle>
+  
+          <button mat-raised-button color="primary" type="submit" class="ml-3">{{!loading1 ? 'Save' : 'Please wait'}}</button>
+        </div>
+      </form>
+      <hr>
+    </div>
+
+    <div class="mb-4">
+      <mat-accordion>
+        <mat-expansion-panel class="bg-red-100">
+          <mat-expansion-panel-header (click)="arrow = !arrow">
+            <mat-panel-title class="text-teal-500 text-lg font-medium">Delete My Account</mat-panel-title>
+            <mat-icon>delete_sweep</mat-icon>
+            <mat-icon *ngIf="arrow">arrow_drop_up</mat-icon>
+            <mat-icon *ngIf="!arrow">arrow_drop_down</mat-icon>
+          </mat-expansion-panel-header>
+  
+          <div class="max-w-[600px] mb-4">
+            <mat-checkbox [(ngModel)]="deleteChecked"><span class="text-red-500 text-2xl">Delete Account</span></mat-checkbox>
+      
+            <div *ngIf="deleteChecked" class="pb-3">
+              <p class="text-yellow-500 text-lg mt-2 mb-0">Why do you want to delete your account?</p>
+              <p class="text-green-500 text-lg mt-0 mb-3">please let us know so we can improve our services to serve you better</p>
+      
+              <form [formGroup]="deleteForm">
+                <mat-form-field class="w-full">
+                  <mat-label>Message</mat-label>
+                  <textarea formControlName="message" matInput required cdkTextareaAutosize [cdkAutosizeMinRows]="2" [cdkAutosizeMaxRows]="2"></textarea>
+                  <mat-error>
+                    Message required
+                  </mat-error>
+                </mat-form-field>
+              </form>
+              <p><mat-checkbox [color]="'warn'" [disabled]="deleteForm.invalid" [(ngModel)]="checked">Delete My Account</mat-checkbox></p>
+              <span *ngIf="checked">We are sad to see you go. We give you a window of 14 days after you delete to retrieve your account, after which it is permanently deleted</span>
+            </div>
+      
+            <div>
+              <div>
+                <ngb-alert *ngIf="deleteAccountResponse" [type]="'success'" (closed)="deleteAccountResponse = ''">{{deleteAccountResponse?.result}}</ngb-alert>
+                <ngb-alert *ngIf="deleteAccountError && deleteAccountError?.status > 0 && deleteAccountError?.status <= 499" [type]="'danger'" (closed)="deleteAccountError = ''">
+                  {{deleteAccountError?.error?.error}} {{deleteAccountError?.error?.message}}
+                </ngb-alert>
+                <ngb-alert *ngIf="deleteAccountError && deleteAccountError?.status >= 500 || deleteAccountError?.status == 0" [type]="'danger'" (closed)="deleteAccountError = ''">
+                  Failed...please try again
+                </ngb-alert>
+              </div>
+      
+              <button *ngIf="deleteChecked && checked && !loading2" mat-flat-button color="primary" type="button"(click)="deleteAccount()" [disabled]="deleteForm.invalid" class="btn w-[100%] text-lg">
+                Delete
+              </button>
+              <button *ngIf="loading2" mat-flat-button color="accent" class="btn w-[100%] text-lg">
+                Please wait...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
+              </button>
+            </div>
+          </div>
+      
+  
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    
+  </div>
+
+  <div *ngIf="editPassword">
+    <cashMingle-forgot-password (closeChangePassword1)="changePasswordClose()"></cashMingle-forgot-password>
+  </div>
+</div>

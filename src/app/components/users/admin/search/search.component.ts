@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AdminService } from '../../service/admin.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'cashMingle-search',
@@ -18,7 +18,8 @@ export class SearchComponent {
   category!: string;
   categoryNumber!: number;
   search!: string;
-  searchForm!: FormGroup
+  userNameOrEmailForm!: FormGroup
+  accountNumberForm!: FormGroup
   getCustomersByCategoryResponse!: any
   searchCustomerResponse!: any
   getCustomersByCategoryError!: any
@@ -29,9 +30,11 @@ export class SearchComponent {
   constructor(private formBuilder: FormBuilder, private query: AdminService){}
 
   ngOnInit(): void {
-    this.searchForm = this.formBuilder.group({
+    this.userNameOrEmailForm = this.formBuilder.group({
       emailAddressOrUserName: [''],
-      accountNumber: ['']
+    })
+    this.accountNumberForm = this.formBuilder.group({
+      accountNumber: ['', Validators.pattern('^[0-9]*$')]
     })
   }
 
@@ -67,7 +70,7 @@ export class SearchComponent {
     this.selected = 'second'
 
     if (this.search == 'Email/ UserName') {
-      this.query.getCustomersByEmailOrUserName(this.searchForm.value.emailAddressOrUserName).subscribe((data: any) => {
+      this.query.getCustomersByEmailOrUserName(this.userNameOrEmailForm.value.emailAddressOrUserName).subscribe((data: any) => {
         this.searchCustomerResponse = data
         this.loading1 = false
         this.show = true
@@ -78,7 +81,7 @@ export class SearchComponent {
     }
 
     if (this.search == 'Account Number') {
-      this.query.getCustomersByAccountNumber(this.searchForm.value.accountNumber).subscribe((data: any) => {
+      this.query.getCustomersByAccountNumber(this.accountNumberForm.value.accountNumber).subscribe((data: any) => {
         this.searchCustomerResponse = data
         this.loading1 = false
         this.show = true

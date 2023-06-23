@@ -17,6 +17,7 @@ export interface UserData {
   balance: number,
   deleted: false,
   active: false,
+  twoFactorEnabled: boolean,
   createdAt: Date,
   updatedAt: Date
 }

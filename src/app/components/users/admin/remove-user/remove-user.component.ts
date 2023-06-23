@@ -15,7 +15,9 @@ export class RemoveUserComponent {
   loading = false
   loading1 = false
   loading2 = false
-  removeUserForm!: FormGroup
+  deactivateUserForm!: FormGroup
+  deleteForm!: FormGroup
+  deleteUserForm!: FormGroup
   deactivateUserResponse!: any
   deleteResponse!: any
   deleteUserResponse!: any
@@ -26,14 +28,20 @@ export class RemoveUserComponent {
   constructor(private formBuilder: FormBuilder, private removeUser: AdminService){}
 
   ngOnInit(): void {
-    this.removeUserForm = this.formBuilder.group({
+    this.deactivateUserForm = this.formBuilder.group({
+      userName: ['']
+    })
+    this.deleteForm = this.formBuilder.group({
+      userName: ['']
+    })
+    this.deleteUserForm = this.formBuilder.group({
       userName: ['']
     })
   }
 
   deactivateUser(){
     this.loading = true
-    this.removeUser.deactivateUser(this.removeUserForm.value.userName).subscribe((data) => {
+    this.removeUser.deactivateUser(this.deactivateUserForm.value.userName).subscribe((data) => {
       this.deactivateUserResponse = data
       this.loading = false
     }, (error) => {
@@ -44,7 +52,7 @@ export class RemoveUserComponent {
 
   delete(){
     this.loading1 = true
-    this.removeUser.delete(this.removeUserForm.value.userName).subscribe((data) => {
+    this.removeUser.delete(this.deleteForm.value.userName).subscribe((data) => {
       this.deleteResponse = data
       this.loading1 = false
     }, (error) => {
@@ -55,7 +63,7 @@ export class RemoveUserComponent {
   
   deleteUser(){
     this.loading2 = true
-    this.removeUser.deleteUser(this.removeUserForm.value.userName).subscribe((data) => {
+    this.removeUser.deleteUser(this.deleteUserForm.value.userName).subscribe((data) => {
       this.deleteUserResponse = data
       this.loading2 = false
     }, (error) => {

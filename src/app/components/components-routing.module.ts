@@ -10,6 +10,8 @@ import { TransferComponent } from './users/customer/transfer/transfer.component'
 import { SavingsComponent } from './users/customer/savings/savings.component';
 import { CustomerTransactionsComponent } from './users/customer/customer-transactions/customer-transactions.component';
 import { ContactUsComponent } from './users/customer/contact-us/contact-us.component';
+import { ProfileComponent } from './users/customer/profile/profile.component';
+import { FinanceComponent } from './body/finance/finance.component';
 import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
@@ -26,10 +28,13 @@ const routes: Routes = [
       { path: 'transfer', component: TransferComponent },
       { path: 'savings', component: SavingsComponent },
       { path: 'transactions', component: CustomerTransactionsComponent },
-      { path: 'contact', component: ContactUsComponent }
+      { path: 'contact', component: ContactUsComponent },
+      { path: 'finance', component: FinanceComponent },
+      { path: 'profile', component: ProfileComponent }
     ],
     // canActivate: [LoginGuard]
   },
+  { path: 'finance', component: FinanceComponent},
   { path: 'register', loadChildren: () => import('./auth/register/register.module').then(m => m.RegisterModule) },
   { path: 'admin', loadChildren: () => import('./users/admin/admin/admin.module').then(m => m.AdminModule) }
 ];

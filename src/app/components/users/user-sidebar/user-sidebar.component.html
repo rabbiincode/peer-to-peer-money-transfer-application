@@ -5,6 +5,17 @@
       <mat-icon>{{content.icon}}</mat-icon>
       <span [routerLink]="content.url" (click)="hideOnClick()" class="text-lg font-normal pl-4 cursor-pointer">{{content.service}}</span>
     </div>
+
+    <div class="xs:hidden">
+      <div *ngIf="showSettings" class="sidebar-content flex items-center pl-6 py-2 mb-3" routerLinkActive="active">
+        <mat-icon>settings</mat-icon>
+        <span routerLink="/user/profile" (click)="hideOnClick()" class="text-lg font-normal pl-4 cursor-pointer">Settings</span>
+      </div>
+      <div class="sidebar-content flex items-center pl-6 py-2 mb-3">
+        <mat-icon>logout</mat-icon>
+        <span (click)="logOut()" class="text-lg font-normal pl-4 cursor-pointer">LogOut</span>
+      </div>
+    </div>
   </div>
 
   <div class="name text-blue-400 text-2xl mb-4 pt-8 font-semibold">

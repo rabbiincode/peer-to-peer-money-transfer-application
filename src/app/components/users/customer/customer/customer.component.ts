@@ -53,7 +53,7 @@ export class CustomerComponent {
     {
       service: 'Financial Services',
       icon: 'article',
-      url: '/user/financial'
+      url: '/user/finance'
     }
   ]
 }

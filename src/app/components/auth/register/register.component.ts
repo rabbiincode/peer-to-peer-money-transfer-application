@@ -9,34 +9,27 @@ import { Router } from '@angular/router';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
-  registerForm!: FormGroup
 
+export class RegisterComponent implements OnInit {
   hide = true
   hide1 = true
   arrow = false
   arrow1 = false
   arrow2 = false
   loading = false
-  
+  checked = false
   name!: string
   user!: string
-  background!: string
-  background1!: string
+  authenticate!: boolean
   errorMessage: any
   registerUserResponse: any
-
-  choiceUser(selectedUser: string){
-    this.user = selectedUser
-  }
+  registerForm!: FormGroup
 
   constructor(private formBuilder: FormBuilder, private register: AuthService, private route: Router) {}
 
   ngOnInit(): void {
+    this.authenticate = this.register.isAuthenticated
     this.register.isAuthenticated == true ? this.name = 'Register' : this.name = 'CashMingle'
-    this.register.isAuthenticated == true ? this.background = 'background:#bfdbfe' : this.background = 'background:#cbd5e1'
-    this.register.isAuthenticated == true ? this.background1 = 'background:#93c5fd;color:white;font-size:1.5rem;line-height:2rem;font-weight: 500'
-    : this.background1 = 'background:#94a3b8;color:#1d4ed8;font-size:1.25rem;line-height:1.75rem;font-weight: 600'
 
     this.registerForm = this.formBuilder.group({
       firstName: new FormControl('', {validators: SpaceCheckValidator}),
@@ -60,8 +53,16 @@ export class RegisterComponent implements OnInit {
     )
   }
 
+  choiceUser(selectedUser: string){
+    this.user = selectedUser
+  }
+
   get registerFormControl() {
     return this.registerForm?.controls
+  }
+
+  accept(){
+    this.checked = !this.checked
   }
 
   registerUser(){

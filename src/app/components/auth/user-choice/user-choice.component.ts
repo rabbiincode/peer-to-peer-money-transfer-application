@@ -6,6 +6,7 @@ import { AuthService } from '../service/auth.service';
   templateUrl: './user-choice.component.html',
   styleUrls: ['./user-choice.component.scss']
 })
+
 export class UserChoiceComponent {
   show = false
   user!: string

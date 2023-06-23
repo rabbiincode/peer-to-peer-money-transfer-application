@@ -11,11 +11,14 @@ import { Router } from '@angular/router';
 
 export class UserHeaderComponent {
   open = true
+  showSettings!: boolean
 
   @Output() togglePageWidth = new EventEmitter<boolean>()
   @Input() sidebar!: Sidebar[]
 
-  constructor(private logout: AuthService, private route: Router){}
+  constructor(private header: AuthService, private route: Router){
+    this.showSettings = header.tokenData.role.includes('User')
+  }
 
   toggleSidebar(){
     this.open = !this.open
@@ -27,7 +30,7 @@ export class UserHeaderComponent {
   }
 
   logOut(){
-    this.logout.logOut()
+    this.header.logOut()
     this.route.navigate(['/home'])
   }
 }

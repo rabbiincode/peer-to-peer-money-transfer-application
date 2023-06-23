@@ -8,6 +8,7 @@ import { UserData } from '../../interfaces/user';
 
 export class UserService {
   url = "https://localhost:44340/CashMingle/Admin"
+  url1 = "https://localhost:44340/CashMingle/Account"
   userData: UserData = {
     firstName: '',
     middleName: '',
@@ -21,6 +22,7 @@ export class UserService {
     balance: 0,
     deleted: false,
     active: false,
+    twoFactorEnabled: false,
     createdAt: new Date,
     updatedAt: new Date
   }
@@ -41,6 +43,7 @@ export class UserService {
       this.userData.balance = data.balance
       this.userData.deleted = data.deleted
       this.userData.active = data.active
+      this.userData.twoFactorEnabled = data.twoFactorEnabled
       this.userData.createdAt = data.createdAt
       this.userData.updatedAt = data.updatedAt
 
@@ -61,5 +64,9 @@ export class UserService {
 
   editUserDetails(userName: string, edit: any){
     return this.http.patch(`${this.url}/edit-customer-details?userName=${userName}`, edit)
+  }
+
+  sendMail(email: string, subject: string, message: string){
+    return this.http.post(`${this.url1}/send-email?recipientEmailAddress=${email}&subject=${subject}&message=${message}`, message)
   }
 }

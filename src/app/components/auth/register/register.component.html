@@ -1,5 +1,5 @@
-<div [style]="background" class="min-h-screen">
-  <div [style]="background1">
+<div [ngClass]="authenticate ? 'bg-blue-200' : 'bg-slate-300'" class="min-h-screen">
+  <div [ngClass]="authenticate ? 'bg-blue-300 text-white text-2xl font-medium' : 'bg-slate-400 text-blue-700 text-xl font-semibold'">
     <span class="px-4 py-6 shadow-lg">{{name}}</span>
   </div>
   
@@ -219,10 +219,15 @@
                 </mat-form-field>
               </mat-expansion-panel>
             </mat-accordion>
+
+            <div class="mt-2">
+              <a href="#" class="text-red-400 text-sm font-normal">Terms and conditions</a>
+              <span class="flex items-center text-blue-500"><input type="checkbox" (change)="accept();" />I have read and accepted the term and conditions of services.</span>
+            </div>
           </div>
         
           <div>
-            <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="registerForm.invalid" class="btn w-[90%] text-lg">
+            <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="registerForm.invalid || !checked" class="btn w-[90%] text-lg">
               Register
             </button>
             <button *ngIf="loading" mat-flat-button color="accent" type="submit" class="btn w-[90%] text-lg">
@@ -231,7 +236,7 @@
           </div>
         </form>
 
-        <div>
+        <div class="w-[90%] m-auto">
           <ngb-alert *ngIf="registerUserResponse" [type]="'success'" (closed)="registerUserResponse = ''">{{registerUserResponse?.message}}</ngb-alert>
           <ngb-alert *ngIf="errorMessage && errorMessage?.status > 0 && errorMessage?.status <= 499" [type]="'danger'" (closed)="errorMessage = ''">{{errorMessage?.error?.error}}</ngb-alert>
           <ngb-alert *ngIf="errorMessage && errorMessage?.status >= 500 || errorMessage?.status == 0" [type]="'danger'" (closed)="errorMessage = ''">Registration Failed...please try again</ngb-alert>

@@ -12,6 +12,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { HttpClientModule } from '@angular/common/http';
@@ -50,6 +52,8 @@ import { CustomerComponent } from './users/customer/customer/customer.component'
 import { CustomerDashboardComponent } from './users/customer/customer-dashboard/customer-dashboard.component';
 import { CustomerTransactionsComponent } from './users/customer/customer-transactions/customer-transactions.component';
 import { ContactUsComponent } from './users/customer/contact-us/contact-us.component';
+import { ProfileComponent } from './users/customer/profile/profile.component';
+import { FinanceComponent } from './body/finance/finance.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +91,8 @@ import { ContactUsComponent } from './users/customer/contact-us/contact-us.compo
     CustomerDashboardComponent,
     CustomerTransactionsComponent,
     ContactUsComponent,
+    ProfileComponent,
+    FinanceComponent,
   ],
   imports: [
     CommonModule,
@@ -99,7 +105,9 @@ import { ContactUsComponent } from './users/customer/contact-us/contact-us.compo
     MatButtonModule,
     MatRadioModule,
     MatSelectModule,
+    MatCheckboxModule,
     MatExpansionModule,
+    MatSlideToggleModule,
     MatFormFieldModule,
     HttpClientModule,
     MdbCarouselModule,

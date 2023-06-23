@@ -86,25 +86,34 @@
                         </mat-radio-button>
                       </mat-radio-group>
 
-                      <form [formGroup]="searchForm" *ngIf="search" (submit)="searchCustomer()" class="py-2">
+                      <form [formGroup]="userNameOrEmailForm" *ngIf="search" (submit)="searchCustomer()" class="py-2">
                         <mat-form-field *ngIf="search == 'Email/ UserName'">
                           <mat-label>UserName or Email</mat-label>
                           <input formControlName="emailAddressOrUserName" matInput required />
+                          <mat-hint>Enter userName</mat-hint>
                           <mat-error>
                             UserName or Email required
                           </mat-error>
                         </mat-form-field>
-
+                      </form>
+                      
+                      <form [formGroup]="accountNumberForm" *ngIf="search" (submit)="searchCustomer()" class="py-2">
                         <mat-form-field *ngIf="search == 'Account Number'">
                           <mat-label>Account Number</mat-label>
-                          <input formControlName="accountNumber" matInput required />
-                          <mat-error>
+                          <input formControlName="accountNumber" matInput minlength="10" maxlength="10" required />
+                          <mat-hint>Enter account number</mat-hint>
+                          <mat-error *ngIf="accountNumberForm.value.accountNumber == ''">
                             Account Number required
+                          </mat-error>
+                          <mat-error *ngIf="accountNumberForm.get('accountNumber')?.hasError('pattern') || accountNumberForm.get('accountNumber')?.hasError('minlength')">
+                            Account Number Invalid
                           </mat-error>
                         </mat-form-field>
                       </form>
            
-                      <button *ngIf="!loading1" mat-flat-button color="primary" type="submit" [disabled]="!search || searchForm.invalid" (click)="searchCustomer()" class="btn w-[50%] text-lg">
+                      <button *ngIf="!loading1" mat-flat-button color="primary" type="submit" (click)="searchCustomer()" class="btn w-[50%] text-lg"
+                        [disabled]="!search || userNameOrEmailForm.invalid && search == 'Email/ UserName' || accountNumberForm.invalid && search == 'Account Number'"
+                      >
                         Proceed
                       </button>
                       <button *ngIf="loading1" mat-flat-button color="accent" class="btn w-[50%] text-lg">

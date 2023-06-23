@@ -36,7 +36,7 @@
                   <mat-icon *ngIf="!arrow">arrow_drop_down</mat-icon>
                 </mat-expansion-panel-header>
 
-                <form [formGroup]="removeUserForm" (submit)="deactivateUser()" class="py-2">
+                <form [formGroup]="deactivateUserForm" (submit)="deactivateUser()" class="py-2">
                   <mat-form-field>
                     <mat-label>UserName</mat-label>
                     <input formControlName="userName" matInput required />
@@ -46,7 +46,7 @@
                   </mat-form-field>
 
                   <div>
-                    <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="removeUserForm.invalid" class="btn w-[50%] text-lg">Deactivate User</button>
+                    <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="deactivateUserForm.invalid" class="btn w-[50%] text-lg">Deactivate User</button>
                     <button *ngIf="loading" mat-flat-button color="accent" class="btn w-[50%] text-lg">
                       Please wait...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
                     </button>
@@ -83,7 +83,7 @@
                   <mat-icon *ngIf="!arrow1">arrow_drop_down</mat-icon>
                 </mat-expansion-panel-header>
 
-                <form [formGroup]="removeUserForm" (submit)="delete()" class="py-2">
+                <form [formGroup]="deleteForm" (submit)="delete()" class="py-2">
                   <mat-form-field>
                     <mat-label>UserName</mat-label>
                     <input formControlName="userName" matInput required />
@@ -93,7 +93,7 @@
                   </mat-form-field>
 
                   <div>
-                    <button *ngIf="!loading1" mat-flat-button color="primary" type="submit" [disabled]="removeUserForm.invalid" class="btn w-[50%] text-lg">Delete User</button>
+                    <button *ngIf="!loading1" mat-flat-button color="primary" type="submit" [disabled]="deleteForm.invalid" class="btn w-[50%] text-lg">Delete User</button>
                     <button *ngIf="loading1" mat-flat-button color="accent" class="btn w-[50%] text-lg">
                       Please wait...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
                     </button>
@@ -130,7 +130,7 @@
                   <mat-icon *ngIf="!arrow2">arrow_drop_down</mat-icon>
                 </mat-expansion-panel-header>
 
-                <form [formGroup]="removeUserForm" (submit)="deleteUser()" class="py-2">
+                <form [formGroup]="deleteUserForm" (submit)="deleteUser()" class="py-2">
                   <mat-form-field>
                     <mat-label>UserName</mat-label>
                     <input formControlName="userName" matInput required />
@@ -140,7 +140,7 @@
                   </mat-form-field>
 
                   <div>
-                    <button *ngIf="!loading2" mat-flat-button color="primary" type="submit" [disabled]="removeUserForm.invalid" class="btn w-[50%] text-lg">Delete User</button>
+                    <button *ngIf="!loading2" mat-flat-button color="primary" type="submit" [disabled]="deleteUserForm.invalid" class="btn w-[50%] text-lg">Delete User</button>
                     <button *ngIf="loading2" mat-flat-button color="accent" class="btn w-[50%] text-lg">
                       Please wait...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
                     </button>

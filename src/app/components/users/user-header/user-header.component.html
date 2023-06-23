@@ -9,19 +9,24 @@
       <mat-icon class="pl-2" (click)="toggleSidebar()">menu</mat-icon>
     </div>
   
-    <div class="flex">
+    <div class="flex items-center">
       <div class="circle-icon">
         <img src="/assets/images/image/person.png" alt="image" width="25rem" height="25rem">
       </div>
-  
-      <button type="button" (click)="logOut()"
-       class="bg-gradient-to-l from-blue-300 to-blue-500 px-4 py-1 ml-2 text-lg font-medium rounded-md hover:from-blue-500 hover:to-blue-300 hover:font-semibold hover:text-black"
-      >
-        LogOut
-      </button>
+
+      <div class="dropdown max-xs:hidden bg-gradient-to-l from-blue-300 to-blue-500 ml-2 text-lg font-medium rounded-md cursor-pointer hover:from-blue-500 hover:to-blue-300 hover:font-semibold hover:text-black">
+        <button type="button" id="dropdownMenuButton" data-mdb-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle text-teal-200">
+          Settings
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin-left: -40px;">
+          <li *ngIf="showSettings"routerLink="/user/profile" class="dropdown-item">User Profile</li>
+          <li class="dropdown-item">Dark Mode</li>
+          <li (click)="logOut()" class="dropdown-item">LogOut</li>
+        </ul>
+      </div>
+      
     </div>
   </div>
   
   <cashMingle-user-sidebar [sidebarToggle]="open" [sidebarContent]="sidebar" (sidebarHideOnClick)="sidebarHideOnClick()"></cashMingle-user-sidebar>
-
 </div>
