@@ -23,6 +23,10 @@ export class AuthService {
   loginUser(login: Login){
     return this.http.post(`${this.url}/login`, login)
   }
+
+  twoFactorAuthLogin(token: string){
+    return this.http.post(`${this.url}/verify-otp`, token)
+  }
   
   validateLogin(authenticate: boolean){
     this.isAuthenticated = authenticate

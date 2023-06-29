@@ -7,8 +7,8 @@ import { Component, Input } from '@angular/core';
 })
 
 export class CategoryComponent {
-  tableHeader: string[] = ['#', 'firstName', 'middleName', 'lastName', 'userName', 'phoneNumber', 'email',
-   'accountNumber', 'birthday', 'userTypeId', 'balance', 'deleted', 'active', 'createdAt', 'updatedAt'
+  tableHeader: string[] = ['#', 'first name', 'last name', 'middle name', 'username', 'email', 'phone number',
+   'account number', 'balance', 'birthday', 'userType id', 'deleted', 'active', 'created at', 'updated at'
   ]
   @Input() show!: string
   @Input() tableData!: any

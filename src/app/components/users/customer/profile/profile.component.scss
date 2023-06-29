@@ -1,9 +1,9 @@
-td {
+th {
   background: #dcd2be;
 }
 
-td:hover {
-  background: #e7d5b0;
+table tr:hover td, td {
+  background: #9f998d;
 }
 
 .example-radio-group {

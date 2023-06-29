@@ -15,8 +15,6 @@ export class ForgotPasswordComponent {
   loading = false
   email!: string
   title!: string
-  background!: string
-  background1!: string
   authenticated!: boolean
   getTokenResponse: any
   resetPasswordResponse: any
@@ -31,12 +29,8 @@ export class ForgotPasswordComponent {
   ngOnInit(): void {
     this.authenticated = this.forgotPassword.isAuthenticated
     this.forgotPassword.isAuthenticated == true ? this.title = 'Change Password' : this.title = 'Forgot Password'
-    this.forgotPassword.isAuthenticated == true ? this.background = 'background:#bfdbfe' : this.background = 'background:#cbd5e1'
-    this.forgotPassword.isAuthenticated == true ? this.background1 = 'background:#93c5fd;color:white;font-size:1.5rem;line-height:2rem;font-weight: 500'
-    : this.background1 = 'background:#94a3b8;color:#1d4ed8;font-size:1.25rem;line-height:1.75rem;font-weight: 600'
 
     this.resetForm = this.formBuilder.group({email: ['', {validators: EmailValidator}]})
-
     this.changePasswordForm = this.formBuilder.group({
       email: [{value: '', disabled: true}],
       password: ['', {validators: PasswordPatternValidator}],

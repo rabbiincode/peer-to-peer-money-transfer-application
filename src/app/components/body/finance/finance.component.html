@@ -1,20 +1,75 @@
 <div class="bg-sky-200 min-h-screen">
-  <div class="bg-sky-300">
-    <span class="text-green-700 text-2xl font-medium px-3 shadow-lg">Pay Yourself First</span>
-  </div>
-  
-  <div class="flex justify-between text-black text-base">
-    <span *ngIf="!authenticated" routerLink="/home" class="flex justify-center text-lg font-normal px-3 py-1 cursor-pointer shadow-lg hover:bg-sky-100">
-      <i class="bi bi-arrow-left text-2xl pr-2"></i> Back
-    </span>
-    <span *ngIf="authenticated" routerLink="/user" class="flex justify-center text-lg font-normal px-3 py-1 cursor-pointer shadow-lg hover:bg-sky-100">
-      <i class="bi bi-arrow-left text-2xl pr-2"></i> Back
-    </span>
-    <span class="text-lg font-normal px-3 py-1 shadow-lg">Financial Freedom</span>
-  </div>
-          
-  <div class="px-3 py-8">
-    About Finance
+  <div [ngClass]="!authenticated ? 'sticky-top' : ''">
+    <div class="bg-sky-300">
+      <span class="text-green-700 text-2xl font-medium px-3 shadow-lg">Pay Yourself First</span>
+    </div>
+    
+    <div class="flex justify-between text-black text-base">
+      <span *ngIf="!authenticated" routerLink="/home" class="flex justify-center text-lg font-normal px-3 py-1 cursor-pointer shadow-lg hover:bg-sky-100">
+        <i class="bi bi-arrow-left text-2xl pr-2"></i> Back
+      </span>
+      <span *ngIf="authenticated" routerLink="/user" class="flex justify-center text-lg font-normal px-3 py-1 cursor-pointer shadow-lg hover:bg-sky-100">
+        <i class="bi bi-arrow-left text-2xl pr-2"></i> Back
+      </span>
+      <span class="text-lg font-normal px-3 py-1 shadow-lg">Financial Freedom</span>
+    </div>
+  </div> 
+
+  <div class="text-lg px-3 py-8">
+    <div class="mb-4">
+      <h2 class="text-green-600">Financial Consultation</h2>
+      <p>
+        Remember that your financial situation is unique. You should always discuss your financial and investment opportunities with experienced professionals before making significant financial decisions.
+      </p>
+      <span>Our team of experts are here to assist you and /or your business make sound decisions and reach your desired financial goals.</span>
+      <p>Book a call with us now @ 📞<span class="text-xl">+2348000000000</span> or contact us via 📧 @ <span class="text-xl">finance@cashmingle.com</span></p>
+    </div>
+
+    <article>
+      <h2 class="text-green-600">Money Management Tips</h2>
+      <p>
+        Most people talk about earning more money, however, not many people talk about how to effectively manage it. While creating wealth is essential, it is equally important to protect your funds and use them prudently.
+        Your hard-earned money needs to be saved, invested, and spent judiciously in a systematic manner in order to ensure long-term stability and liquidity. This can be done through effective money management.
+      </p>
+      <p>
+        An important aspect of money management is keeping a track of your expenses and reviewing them periodically. This helps you stay in control of your finances. It helps identify and reduce unnecessary expenses and spend on things that are necessary.
+      </p>
+      <span class="text-xl text-orange-600 pb-2">Here are some ways to manage your money wisely:</span>
+      <p>
+        1. Create a budget: Making a budget is the first and the most important step of money management. It is a fairly simple measure and has been used for centuries. In order to make a budget, estimate the amount of money you will ideally need to spend each month based on your income, lifestyle,
+        and wants. Having such an estimate will help you gain more control over your finances, and accordingly organize your spending and savings. With a better control and awareness over your spending habits, you will be able to track and achieve your financial goals in an effective manner without compromising on your lifestyle.
+      </p>
+      <p>
+        2. Save first, spend later: As a rule of thumb, it helps to first save some part of your monthly income and then start spending your money on regular essentials like groceries, rent, electricity,
+        loan repayments, insurance premiums, etc. This ensures that you are prepared for a future contingency and eliminates the chances of overspending or exceeding your budget.
+      </p>
+      <p>
+        3. Set financial goals: Having a financial goal allows you to stay focused and avoid overspending. So, plan what you want to do with your money in the short as well as long term. In order to achieve your long-term financial goals like your dream house,
+        your child's education, retirement and much more you must start investing in financial products. Remember to always set realistic goals with set timelines. This will help you stay motivated and ensure that your money is well-spent.
+      </p>
+      <p>
+        4. Start investing early: It is advisable to start saving money as early in life as you can. This gives you more time to grow your wealth, and get back higher returns in the longer run. Therefore, aim to start saving and investing from your first paycheck. ICICI Pru LifeTime Classic1 is an ideal wealth creation plan for long-term savings.
+        This unit linked plan2 offers two major benefits - Financial protection to your loved ones in the form of a life cover^ as well as the opportunity to create significant funds for your financial goals. The plan offers 4 portfolio strategies, and you can choose any of these as per your goals and risk appetite. You can choose between equity,
+        balance, and debt funds, and switch between these funds at any point in time, without any additional charges. In addition to this, the plan rewards you with loyalty additions3 and wealth boosters4 for staying invested for a longer period and paying all your premiums without any defaults. This considerably adds to your overall earnings.
+        You can also choose to pay the premium monthly, half-yearly, yearly, or stick to a one-time payment. Lastly, you get tax benefits5 of up to ₹ 46,800/- on the premiums paid, under Section 80C of the Income Tax Act, 1961.
+      </p>
+      <p>
+        5. Avoid debt: While taking loans to achieve your life goals is a common way, they do come with a fair share of problems. The high interest can eat into your savings. Taking on multiple loans also affects your credit score, hereby making it harder
+        for you to avail credit when absolutely necessary or in some cases, even a job. So, try to limit your debt as much as possible. Being dependent on credit cards or taking on too much debt can hamper your budget and become a financial burden.
+      </p>
+      <p>6. Save Early: It is important that you start saving as early as possible. Let us understand this with an example...<a target="_blank" href="https://www.iciciprulife.com/investments/money-management-tips.html">read more</a></p>
+    </article>
+
+    <div class="mt-4">
+      <h2 class="text-green-600">Reference</h2>
+      <p class="mb-0">Want to learn more about personal finance, management and savings?</p>
+      <span>Here is a list of resources for your consultation.</span>
+      <ul>
+        <li class="flex"><i class="bi bi-arrow-right-circle-fill text-blue-800 text-xl pr-2"></i><a target="_blank" href="https://www.managementstudyguide.com/personal-finance-importance.htm">Personal Finance</a></li>
+        <li class="flex"><i class="bi bi-arrow-right-circle-fill text-blue-800 text-xl pr-2"></i><a target="_blank" href="https://www.managementstudyguide.com/advantages-and-limitations-of-a-budget.htm">Budget</a></li>
+        <li class="flex"><i class="bi bi-arrow-right-circle-fill text-blue-800 text-xl pr-2"></i><a target="_blank" href="https://www.managementstudyguide.com/pay-yourself-first-principle.htm">Pay Yourself First</a></li>
+      </ul>
+    </div>
   </div>
       
 </div>

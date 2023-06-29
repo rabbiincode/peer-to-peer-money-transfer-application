@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { EmailValidator, PhoneNumberValidator } from 'src/app/components/auth/customValidation/custom-validation/custom-validation.component';
 import { BodyService } from 'src/app/components/body/body-service/body.service';
+import { UserService } from '../../service/user.service';
 
 @Component({
   selector: 'cashMingle-contact-us',
@@ -11,11 +12,11 @@ import { BodyService } from 'src/app/components/body/body-service/body.service';
 
 export class ContactUsComponent {
   loading = false
-  contactUsForm!: FormGroup
   sendMailResponse = false
   sendMailError!: any
+  contactUsForm!: FormGroup
 
-  constructor(private formBuilder: FormBuilder, private mail: BodyService){}
+  constructor(private formBuilder: FormBuilder, private mail: BodyService, private userData: UserService){}
 
   ngOnInit(): void {
     this.contactUsForm = this.formBuilder.group({
@@ -27,10 +28,12 @@ export class ContactUsComponent {
       _template: [''],
       _captcha: ['']
     })
+    this.setValue()
   }
 
   setValue(){
-    this.contactUsForm.patchValue({_template: 'table', _captcha: 'false'})
+    this.contactUsForm.patchValue({ userName: this.userData.userData.userName, email: this.userData.userData.email,
+    phoneNumber: this.userData.userData.phoneNumber, _template: 'table', _captcha: 'false'})
   }
 
   get contactFormControl() {

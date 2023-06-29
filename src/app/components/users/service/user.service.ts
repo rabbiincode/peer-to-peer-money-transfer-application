@@ -14,11 +14,14 @@ export class UserService {
     middleName: '',
     lastName: '',
     userName: '',
-    phoneNumber: '',
     email: '',
+    phoneNumber: '',
+    accountNumber: 0,
+    address: '',  
     birthday: new Date,
+    businessName: '',
     userTypeId: 0,
-    AccountType: '',
+    accountType: '',
     balance: 0,
     deleted: false,
     active: false,
@@ -36,9 +39,12 @@ export class UserService {
       this.userData.middleName = data.middleName
       this.userData.lastName = data.lastName
       this.userData.userName = data.userName
-      this.userData.phoneNumber = data.phoneNumber
       this.userData.email = data.email
+      this.userData.phoneNumber = data.phoneNumber
+      this.userData.accountNumber = data.accountNumber
+      this.userData.address = data.address
       this.userData.birthday = data.birthday
+      this.userData.businessName = data.businessName
       this.userData.userTypeId = data.userTypeId
       this.userData.balance = data.balance
       this.userData.deleted = data.deleted
@@ -48,16 +54,16 @@ export class UserService {
       this.userData.updatedAt = data.updatedAt
 
       if (data.userTypeId == 1){
-        this.userData.AccountType = 'Individual'
+        this.userData.accountType = 'Individual'
       }
       if (data.userTypeId == 2){ 
-        this.userData.AccountType = 'Corporate'
+        this.userData.accountType = 'Corporate'
       }
       if (data.userTypeId == 3){
-        this.userData.AccountType = 'Admin'
+        this.userData.accountType = 'Admin'
       }
       if (data.userTypeId == 4){
-        this.userData.AccountType = 'SuperAdmin'
+        this.userData.accountType = 'SuperAdmin'
       }
     })
   }

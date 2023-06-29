@@ -7,9 +7,12 @@
   
     <div class="card mb-4">
       <div class="card-body bg-slate-200">
-        <span class="card-title text-xl text-[#012970] flex items-center font-medium pb-6">
-          <i class="bi bi-search pr-2"></i>Search
-        </span>
+        <div class="card-title flex justify-between items-center pb-6">
+          <span class=" text-xl text-[#012970] flex items-center font-medium"><i class="bi bi-search pr-2"></i>Search</span>
+          <button *ngIf="show" (click)="back()" class="flex justify-center text-lg font-normal hover:bg-sky-100">
+            <i class="bi bi-arrow-left text-2xl pr-2"></i> Back
+          </button>        
+        </div>
   
         <div *ngIf="!show" class="row">
           <div class="col-xxl-6 col-md-6">

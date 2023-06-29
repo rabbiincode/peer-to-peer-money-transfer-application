@@ -32,7 +32,7 @@ const routes: Routes = [
       { path: 'finance', component: FinanceComponent },
       { path: 'profile', component: ProfileComponent }
     ],
-    // canActivate: [LoginGuard]
+    canActivate: [LoginGuard]
   },
   { path: 'finance', component: FinanceComponent},
   { path: 'register', loadChildren: () => import('./auth/register/register.module').then(m => m.RegisterModule) },

@@ -14,7 +14,7 @@ export class CustomerDashboardComponent {
 
   constructor(private user: UserService){
     user.userData.firstName ? this.name = user.userData.firstName : this.name = 'Awesome Person'
-    user.userData.AccountType ? this.accountType = user.userData.AccountType : this.accountType = 'Customer'
+    user.userData.accountType ? this.accountType = user.userData.accountType : this.accountType = 'Customer'
     this.balance = user.userData.balance
   }
 }

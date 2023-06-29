@@ -6,65 +6,95 @@
     <img src="/assets/images/image/header.png" alt="image" [routerLink]="['/home']" width="35rem" height="35rem" class="m-auto pb-4" />
 
     <mat-card>
-      <mat-card-content>
-        <div class="header text-blue-800">
-          <h2>Login</h2>
-        </div>
+      <mat-card-content class="bg-gray-200">
 
-        <div>
-          <ngb-alert *ngIf="errorMessage && errorMessage?.status > 0 && errorMessage?.status <= 499" [type]="'danger'" (closed)="errorMessage = ''">
-            {{errorMessage?.error?.error}} {{errorMessage?.error?.message}}
-          </ngb-alert>
-          <ngb-alert *ngIf="errorMessage && errorMessage?.status >= 500 || errorMessage?.status == 0" [type]="'danger'" (closed)="errorMessage = ''">
-            Login Failed...please try again
-          </ngb-alert>
-          <ngb-alert *ngIf="accessDenied" [type]="'danger'" (closed)="accessDenied = false">Access Denied</ngb-alert>
-        </div>
-
-        <form [formGroup]="loginForm" (submit)="loginUser()" class="py-2">
-          <div class="space">
-            <mat-form-field class="length">
-              <mat-label>UserName or Email</mat-label>
-              <input formControlName="emailAddressOrUserName" matInput required />
-              <mat-error>
-                UserName or Email required
-              </mat-error>
-            </mat-form-field>
+        <div *ngIf="!twoFactorAuth">
+          <div class="header text-blue-800">
+            <h2>Login</h2>
           </div>
-    
-          <div class="space">
-            <mat-form-field class="length">
-              <mat-label>Password</mat-label>
-              <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" required />
-              <button mat-icon-button matSuffix (click)="hide = !hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-              </button>
-              <mat-error *ngIf="loginForm.value.password == ''">
-                Password required
-              </mat-error>
-              <mat-error *ngIf="loginForm.get('password')?.hasError('invalidPassword')">
-                Password Invalid
-              </mat-error>
-            </mat-form-field>
-            
-            <div class="flex items-center justify-between w-[90%] text-teal-500 text-base font-medium m-auto pb-4">
-              <span class="flex items-center"><input type="checkbox" />Remember Me</span>
-              <span (click)="ChangePasswordOpen()" class="cursor-pointer hover:text-red-300">Forgot Password?</span>
-            </div>
-          </div>
-    
-          <div>
-            <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="loginForm.invalid" class="btn w-[90%] text-lg">Login</button>
-            <button *ngIf="loading" mat-flat-button color="accent" class="btn w-[90%] text-lg">
-              Loading...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
-            </button>
-          </div>
-        </form>
   
-        <div class="text-center w-[80%] text-base font-medium m-auto pt-2">
-          Don't have an account? 
-          <span [routerLink]="['/register']" class=" text-blue-700 cursor-pointer hover:text-teal-500">Create an Account</span>
+          <div>
+            <ngb-alert *ngIf="errorMessage && errorMessage?.status > 0 && errorMessage?.status <= 499" [type]="'danger'" (closed)="errorMessage = ''">
+              {{errorMessage?.error?.error}} {{errorMessage?.error?.message}}
+            </ngb-alert>
+            <ngb-alert *ngIf="errorMessage && errorMessage?.status >= 500 || errorMessage?.status == 0" [type]="'danger'" (closed)="errorMessage = ''">
+              Login Failed...please try again
+            </ngb-alert>
+            <ngb-alert *ngIf="accessDenied" [type]="'danger'" (closed)="accessDenied = false">Access Denied</ngb-alert>
+          </div>
+  
+          <form [formGroup]="loginForm" (submit)="loginUser()" class="py-2">
+            <div class="space">
+              <mat-form-field class="length">
+                <mat-label>UserName or Email</mat-label>
+                <input formControlName="emailAddressOrUserName" matInput required />
+                <mat-error>
+                  UserName or Email required
+                </mat-error>
+              </mat-form-field>
+            </div>
+      
+            <div class="space">
+              <mat-form-field class="length">
+                <mat-label>Password</mat-label>
+                <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" required />
+                <button mat-icon-button matSuffix (click)="hide = !hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="loginForm.value.password == ''">
+                  Password required
+                </mat-error>
+                <mat-error *ngIf="loginForm.get('password')?.hasError('invalidPassword')">
+                  Password Invalid
+                </mat-error>
+              </mat-form-field>
+              
+              <div class="flex items-center justify-between w-[90%] text-teal-500 text-base font-medium m-auto pb-4">
+                <span class="flex items-center"><input type="checkbox" />Remember Me</span>
+                <span (click)="ChangePasswordOpen()" class="cursor-pointer hover:text-red-300">Forgot Password?</span>
+              </div>
+            </div>
+      
+            <div>
+              <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="loginForm.invalid" class="btn w-[90%] text-lg">Login</button>
+              <button *ngIf="loading" mat-flat-button color="accent" class="btn w-[90%] text-lg">
+                Loading...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
+              </button>
+            </div>
+          </form>
+    
+          <div class="text-center w-[80%] text-base font-medium m-auto pt-2">
+            Don't have an account? 
+            <span [routerLink]="['/register']" class=" text-blue-700 cursor-pointer hover:text-teal-500">Create an Account</span>
+          </div>
         </div>
+
+        <div *ngIf="twoFactorAuth">
+          <div class="header text-blue-800">
+            <h2>Two Factor Authentication</h2>
+          </div>
+          
+          <form [formGroup]="twoFactorAuthForm" (submit)="twoFactorAuthLogin()" class="py-2">
+            <div class="space">
+              <mat-form-field class="length">
+                <mat-label>OTP</mat-label>
+                <input formControlName="token" matInput required />
+                <mat-hint>Enter the One Time Password sent to {{number}}</mat-hint>
+                <mat-error>
+                  OTP required
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <button *ngIf="!loading1" mat-flat-button color="primary" type="submit" [disabled]="twoFactorAuthForm.invalid" class="btn w-[90%] text-lg">Login</button>
+              <button *ngIf="loading1" mat-flat-button color="accent" class="btn w-[90%] text-lg">
+                Loading...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
+              </button>
+            </div>
+          </form>
+        </div>
+
       </mat-card-content>
     </mat-card>
   </div>

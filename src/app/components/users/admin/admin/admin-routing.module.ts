@@ -27,7 +27,7 @@ const routes: Routes = [
       { path: 'remove-user', component: RemoveUserComponent },
       { path: 'role', component: RoleComponent },
     ],
-    // canActivate: [LoginGuard]
+    canActivate: [LoginGuard]
   }
 ];
 

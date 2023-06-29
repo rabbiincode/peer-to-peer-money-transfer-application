@@ -38,6 +38,10 @@ export class SearchComponent {
     })
   }
 
+  back(){
+    this.show = false
+  }
+
   selectCategory(){
     this.selected = 'first'
     this.loading = true

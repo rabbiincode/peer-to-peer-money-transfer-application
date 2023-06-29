@@ -57,6 +57,10 @@ export class RegisterComponent implements OnInit {
     this.user = selectedUser
   }
 
+  back(){
+    this.user = ''
+  }
+
   get registerFormControl() {
     return this.registerForm?.controls
   }

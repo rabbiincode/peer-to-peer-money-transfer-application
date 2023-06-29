@@ -15,9 +15,13 @@ export class LoginComponent implements OnInit {
   hide = true
   open = false
   loading = false
+  loading1 = false
   accessDenied = false
+  twoFactorAuth = false
   errorMessage: any
+  number = '****'
   loginForm!: FormGroup
+  twoFactorAuthForm!: FormGroup
  
   constructor(private formBuilder: FormBuilder, private login: AuthService, private userData: UserService, private route: Router){}
 
@@ -25,6 +29,9 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       emailAddressOrUserName: [''],
       password: ['', {validators: PasswordPatternValidator}]
+    })
+    this.twoFactorAuthForm = this.formBuilder.group({
+      token: ['']
     })
   }
 
@@ -37,24 +44,38 @@ export class LoginComponent implements OnInit {
     this.userData.getUserData(this.loginForm.value.emailAddressOrUserName)
 
     this.login.loginUser(this.loginForm.value).subscribe((data: any) => {
-      this.login.storeJwtToken(data.token)
-      this.login.validateLogin(true)
-      this.loading = false
-     
-      if (this.login.tokenData.role.includes('Admin') ){
-        this.route.navigate(['/admin'])
-      }
-      else if (this.login.tokenData.role.includes('User')){
-        this.route.navigate(['/user'])
+      if (this.userData.userData.twoFactorEnabled){
+        this.number = this.userData.userData.phoneNumber
+        this.twoFactorAuth = true
       }
       else{
-        this.login.validateLogin(false)
-        this.accessDenied = true
+        this.directLogin(data)
       }
     }, (error) => {
       this.errorMessage = error
       this.loading = false
     })
+  }
+
+  directLogin(data: any){
+    this.login.storeJwtToken(data.token)
+    this.login.validateLogin(true)
+    this.loading = false
+   
+    if (this.login.tokenData.role.includes('Admin')){
+      this.route.navigate(['/admin'])
+    }
+    else if (this.login.tokenData.role.includes('User')){
+      this.route.navigate(['/user'])
+    }
+    else{
+      this.login.validateLogin(false)
+      this.accessDenied = true
+    }
+  }
+
+  twoFactorAuthLogin(){
+    this.loading1 = true
   }
   
   ChangePasswordOpen(){

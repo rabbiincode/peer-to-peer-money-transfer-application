@@ -10,14 +10,14 @@
   </div>
 
   <div *ngIf="!editPassword" class="px-3 py-8">
-    
-    <h2>My Data</h2>
+
+    <h2 class="text-teal-500">My Data</h2>
     <div class="overflow-auto mb-4">
       <table class="mt-0">
         <thead>
           <tr>
             <th>FullName</th>
-            <th>Business Name</th>
+            <th *ngIf="tableData.userTypeId == 2">Business Name</th>
             <th>UserName</th>
             <th>Email Address</th>
             <th>Account Number</th>
@@ -29,15 +29,15 @@
         </thead>
         <tbody>
           <tr>
-            <td>{{tableData.firstName}} {{tableData.firstName}}, {{tableData.firstName}}</td>
-            <td>-----</td>
+            <td>{{tableData.firstName}} {{tableData.lastName}}, {{tableData.middleName}}</td>
+            <td *ngIf="tableData.userTypeId == 2">{{tableData.businessName}}</td>
             <td>{{tableData.userName}}</td>
             <td>{{tableData.email}}</td>
-            <td>-----</td>
-            <td>{{tableData.firstName}}</td>
+            <td>{{tableData.accountNumber}}</td>
+            <td>{{tableData.address}}</td>
             <td>{{tableData.phoneNumber}}</td>
-            <td>{{tableData.AccountType}}</td>
-            <td>-----</td>
+            <td>{{tableData.accountType}}</td>
+            <td>{{tableData.active == true ? 'Active' : 'Disabled'}}</td>
           </tr>
         </tbody>
       </table>
@@ -45,7 +45,7 @@
 
     <div class="max-w-[500px] mb-4">
       <hr>
-      <h2>Edit</h2>
+      <h2 class="text-teal-500">Edit</h2>
       <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="editDataValue">
         <div class="text-yellow-600 text-lg font-medium">Select Field you want to Edit</div>
         <mat-radio-button class="example-radio-button" *ngFor="let edit of editData" [value]="edit">
@@ -88,16 +88,18 @@
         <button *ngIf="loading" mat-flat-button color="accent" class="btn w-[50%] text-lg">
           Please wait...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
         </button>
-        <p class="mt-2">Contact customer support for any other update you want to make</p>
+        <p class="mt-2">📞 Contact customer support for any other update you want to make.</p>
       </div>
       
     </div>
 
     <div class="max-w-[500px] mb-4">
       <hr>
-      <h2>Two Factor Authentication - <span class="text-base">[{{twoFactorAuth ? 'ON✔️' : 'OFF❌'}}]</span></h2>
-      <p>Enable 2FA to increase your security and make your account more secured</p>
-      
+      <h2 class="text-teal-500">
+        Two Factor Authentication - <span [ngClass]="twoFactorAuth ? 'text-green-700' : 'text-red-700'" class="text-base">[{{twoFactorAuth ? 'ON✔️' : 'OFF❌'}}]</span>
+      </h2>
+      <p>Enable 2FA to increase your security and make your account more secured.</p>
+
       <form [formGroup]="twoFactorAuthForm" (ngSubmit)="toggleTwoFactorAuth()" ngNativeValidate>
         <div>
           <ngb-alert *ngIf="toggleTwoFactorAuthResponse" [type]="'success'" (closed)="toggleTwoFactorAuthResponse = ''">{{toggleTwoFactorAuthResponse?.result}}</ngb-alert>
@@ -136,7 +138,7 @@
       
             <div *ngIf="deleteChecked" class="pb-3">
               <p class="text-yellow-500 text-lg mt-2 mb-0">Why do you want to delete your account?</p>
-              <p class="text-green-500 text-lg mt-0 mb-3">please let us know so we can improve our services to serve you better</p>
+              <p class="text-green-500 text-lg mt-0 mb-3">Please let us know so we can improve our services to serve you better.</p>
       
               <form [formGroup]="deleteForm">
                 <mat-form-field class="w-full">
@@ -148,7 +150,7 @@
                 </mat-form-field>
               </form>
               <p><mat-checkbox [color]="'warn'" [disabled]="deleteForm.invalid" [(ngModel)]="checked">Delete My Account</mat-checkbox></p>
-              <span *ngIf="checked">We are sad to see you go. We give you a window of 14 days after you delete to retrieve your account, after which it is permanently deleted</span>
+              <span *ngIf="checked">We are sad to see you go. We give you a window of 14 days after you delete to retrieve your account, after which it is permanently deleted.</span>
             </div>
       
             <div>
@@ -162,7 +164,7 @@
                 </ngb-alert>
               </div>
       
-              <button *ngIf="deleteChecked && checked && !loading2" mat-flat-button color="primary" type="button"(click)="deleteAccount()" [disabled]="deleteForm.invalid" class="btn w-[100%] text-lg">
+              <button *ngIf="deleteChecked && checked && !loading2" mat-flat-button color="warn" type="button"(click)="deleteAccount()" [disabled]="deleteForm.invalid" class="btn w-[100%] text-lg">
                 Delete
               </button>
               <button *ngIf="loading2" mat-flat-button color="accent" class="btn w-[100%] text-lg">
@@ -170,12 +172,10 @@
               </button>
             </div>
           </div>
-      
-  
         </mat-expansion-panel>
       </mat-accordion>
     </div>
-    
+
   </div>
 
   <div *ngIf="editPassword">
