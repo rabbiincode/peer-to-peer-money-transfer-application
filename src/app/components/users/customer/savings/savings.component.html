@@ -1,14 +1,16 @@
 <div class="bg-blue-200 min-h-screen">
-  <div class="bg-blue-300">
-    <span class="text-white text-2xl font-medium px-4 py-8 shadow-lg">Savings</span>
-  </div>  
-  <div class="flex justify-between text-black text-base">
-    <span></span>
-    <span class="px-2 py-1 shadow-lg">Balance: {{balance | currency}}</span>
+  <div class="sticky top-[65px] z-[5]">
+    <div class="bg-blue-300">
+      <span class="text-white text-2xl font-medium px-4 py-8 shadow-lg">Savings</span>
+    </div>  
+    <div class="flex justify-between text-black text-base">
+      <span></span>
+      <span class="font-medium px-2 py-1 shadow-lg">Balance: {{balance | currency}}</span>
+    </div>
   </div>
-  
+
   <div class="px-3 py-8">
-        
+
     <div class="row">
       <div class="col-xxl-6 col-md-6">
         <div class="card mb-4">
@@ -19,7 +21,7 @@
               <div class="bg-[#f6f6fe] text-[#4154f1] text-3xl w-16 h-16 rounded-circle flex items-center justify-center hover:bg-gray-200">
                 <i class="bi bi-cash-stack"></i>
               </div>
-              <span class="text-blue-900 text-2xl font-medium pl-3">{{balance | currency}}</span>
+              <span class="text-blue-900 text-2xl font-medium pl-3">{{amountSaved | currency}}</span>
             </div>
           </div>
         </div>
@@ -34,7 +36,7 @@
               <div class="bg-[#f6f6fe] text-[#4154f1] text-3xl w-16 h-16 rounded-circle flex items-center justify-center hover:bg-gray-200">
                 <i class="bi bi-calendar-check-fill"></i>
               </div>
-              <span class="text-2xl text-[#012970] font-medium pl-3">{{balance | date}}</span>
+              <span class="text-2xl text-[#012970] font-medium pl-3">{{timeDuration | date}}</span>
             </div>
           </div>
         </div>
@@ -52,9 +54,13 @@
           <div class="col-xxl-6 col-md-6">
             <div class="card mb-4">
               <div class="card-body bg-slate-200">
-                <h3 class="card-title text-xl text-blue-600 font-medium">Our Savings GuildLines</h3>
-      
-                <div>
+                <h3 class="card-title text-xl text-blue-600 font-semibold">Our Savings GuildLines...
+                  <span (click)="read = !read" class="text-red-600 text-base cursor-pointer hover:text-green-500">
+                    {{read ? 'about cycle' : 'read more'}}
+                  </span>
+                </h3>
+
+                <div *ngIf="!read">
                   <p>To encourage saving habit in our community, we have some reward for you each time you complete one cycle of saving</p>
                   <ul>
                     <li><i class="bi bi-arrow-right-circle text-blue-800 text-xl pr-2"></i>Short Term: 1 - 2 months</li>
@@ -65,15 +71,28 @@
                     <li><i class="bi bi-arrow-right-circle text-blue-800 text-xl pr-2"></i>Long Term: 1 Year+</li>
                   </ul>
                 </div>
+                <div *ngIf="read" class="text-base">
+                  <p class="text-green-800 text-lg">About Our Savings Plan</p>
+                  <p>
+                    This service allows you to save money for a specified duration of time. During this time, you cannot have access to
+                    the money until the time elapses. This instills the discipline to save in order to achieve your desired financial goals.
+                  </p>
+                  <p>
+                    You can save your desired amount once i.e. save $5000 once and wait for the savings duration to elapse or you can save little amounts
+                    at specified intervals to meet the end goal i.e. save $200 weekly for 6 months 1 week to reach your desired goal of $5000.
+                  </p>
+                  <p>You can also have multiple savings plan i.e. School Fees Savings, Car Savings e.t.c.</p>
+                </div>
+
               </div>
             </div>
           </div>
-    
+
           <div class="col-xxl-6 col-md-6">
             <div class="card mb-4">
               <div class="card-body bg-slate-200">
-                <h3 class="card-title text-xl text-blue-700 font-medium">Save Now</h3>
-      
+                <h3 class="card-title text-xl text-blue-700 font-semibold">Save Now</h3>
+
                 <form [formGroup]="savingsForm" class="py-2">
                   <div class="pt-2">
                     <ngb-alert *ngIf="savingsResponse" [type]="'success'" (closed)="savingsResponse = ''">{{amount | currency}} is saved successfully ✔️</ngb-alert>
@@ -85,51 +104,48 @@
                     </ngb-alert>
                   </div>
 
-                  <div>
-                    <mat-form-field class="w-full  pb-4">
-                      <mat-label>Title</mat-label>
-                      <input formControlName="title" matInput required placeholder="Car Savings" />
-                      <mat-error>
-                        Title required
-                      </mat-error>
-                    </mat-form-field>
+                  <mat-form-field class="w-full pb-4">
+                    <mat-label>Title</mat-label>
+                    <input formControlName="title" matInput required placeholder="Car Savings" />
+                    <mat-error>
+                      Title required
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field class="w-full pb-4">
+                    <mat-label>Amount</mat-label>
+                    <input formControlName="amount" matInput required [(ngModel)]="amount" />
+                    <mat-error *ngIf="savingsForm.value.amount == ''">
+                      Amount required
+                    </mat-error>
+                    <mat-error *ngIf="savingsForm.get('amount')?.hasError('pattern')">
+                      Amount Invalid
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field class="w-full pb-4">
+                    <mat-label>Enter your savings timeframe</mat-label>
+                    <mat-date-range-input required [rangePicker]="picker"[(ngModel)]="startDate">
+                      <input formControlName="start" matStartDate required placeholder="Start date" [(ngModel)]="startDate" />
+                      <input formControlName="end" matEndDate required placeholder="End date" [(ngModel)]="endDate" />
+                    </mat-date-range-input>
+                    <mat-hint>MM/DD/YYYY - MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker" color="accent"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                    <mat-error>
+                      Timeframe required
+                    </mat-error>
+                  </mat-form-field>
+
+                  <div *ngIf="savingsForm.value.amount > 0 && startDate && !savingsResponse" class="text-green-600 text-center font-medium">
+                    Save {{amount | currency}} from {{startDate | date:'fullDate'}} <span *ngIf="endDate">to {{endDate | date:'fullDate'}}</span>
                   </div>
-      
+                  <ngb-alert *ngIf="plan" [type]="'danger'" (closed)="plan = false" class="text-center mt-3">Savings plan not available at the moment...Available Shortly</ngb-alert>
+
                   <div>
-                    <mat-form-field class="w-full  pb-4">
-                      <mat-label>Amount</mat-label>
-                      <input formControlName="amount" matInput required [(ngModel)]="amount" />
-                      <mat-error *ngIf="savingsForm.value.amount == ''">
-                        Amount required
-                      </mat-error>
-                      <mat-error *ngIf="savingsForm.get('amount')?.hasError('pattern')">
-                        Amount Invalid
-                      </mat-error>
-                    </mat-form-field>
-                  </div>
-        
-                  <div>
-                    <mat-form-field class="w-full  pb-4">
-                      <mat-label>Enter your savings timeframe</mat-label>
-                      <mat-date-range-input required [rangePicker]="picker"[(ngModel)]="startDate">
-                        <input formControlName="start" matStartDate required placeholder="Start date" [(ngModel)]="startDate" />
-                        <input formControlName="end" matEndDate required placeholder="End date" [(ngModel)]="endDate" />
-                      </mat-date-range-input>
-                      <mat-hint>MM/DD/YYYY - MM/DD/YYYY</mat-hint>
-                      <mat-datepicker-toggle matIconSuffix [for]="picker" color="accent"></mat-datepicker-toggle>
-                      <mat-date-range-picker #picker></mat-date-range-picker>
-                      <mat-error>
-                        Timeframe required
-                      </mat-error>
-                    </mat-form-field>
-                  </div>
-      
-                  <div *ngIf="savingsForm.value.amount > 0 && startDate && !savingsResponse" class="text-green-600 text-center font-medium">Save {{amount | currency}} from {{startDate | date:'fullDate'}} <span *ngIf="endDate">to {{endDate | date:'fullDate'}}</span></div>
-      
-                  <div>
-                    <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="savingsForm.invalid || savingsForm.value.amount <= 0" class="btn w-[100%] text-lg mt-2">Save Now</button>
-                    <button *ngIf="loading" mat-flat-button color="accent" type="submit" class="btn w-full text-lg rounded-2xl p-4">
-                      <span>Please wait...</span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner>
+                    <button *ngIf="!loading" mat-flat-button color="primary" type="button" (click)="saveNow()" [disabled]="savingsForm.invalid || savingsForm.value.amount <= 0" class="btn w-[100%] text-lg mt-2">Save Now</button>
+                    <button *ngIf="loading" mat-flat-button color="accent" class="btn w-full text-lg rounded-2xl p-4">
+                      <span class="flex items-center m-auto">Please wait...<mat-spinner [diameter]="25"></mat-spinner></span>
                     </button>
                   </div>
                 </form>
@@ -141,6 +157,5 @@
       </div>
     </div>
 
-  </div>
-    
+  </div> 
 </div>

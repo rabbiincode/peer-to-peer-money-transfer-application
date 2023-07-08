@@ -1,12 +1,14 @@
-<div class="bg-blue-200 min-h-screen">
-  <div class="bg-blue-300">
-    <span class="text-white text-2xl font-medium px-4 py-8 shadow-lg">Contact</span>
+<div class="bg-blue-300 min-h-screen">
+  <div class="sticky top-[65px] z-[5]">
+    <div class="bg-blue-200">
+      <span class="text-white text-2xl font-medium px-4 py-8 shadow-lg">Contact</span>
+    </div>
+    <div class="flex justify-between text-black text-base">
+      <span></span>
+      <span class="font-medium px-2 py-1 shadow-lg">📞 +234-806-537-3835</span>
+    </div>
   </div>
-  <div class="flex justify-between text-black text-base">
-    <span></span>
-    <span class="px-2 py-1 shadow-lg">📞 +234-806-537-3835</span>
-  </div>
-      
+
   <div class="px-3 py-8">
     <div class="max-w-[800px] bg-slate-200 m-auto rounded-md px-2 py-4 mb-3">
       <h2>Speak to our customer care representative</h2>
@@ -16,7 +18,7 @@
         </button>
       </a>
     </div>
-    
+
     <div class="max-w-[800px] bg-slate-200  m-auto px-2 rounded-md">
       <form [formGroup]="contactUsForm" (submit)="contactUs()" class="m-auto py-6">
         <h2>Send us a mail</h2>
@@ -80,8 +82,8 @@
           <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="contactUsForm.invalid" class="btn text-lg rounded-2xl p-4">
             Send Message
           </button>
-          <button *ngIf="loading" mat-flat-button color="accent" type="submit" class="btn text-lg rounded-2xl p-4">
-            <span>Loading...</span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner>
+          <button *ngIf="loading" mat-flat-button color="accent" class="btn text-lg rounded-2xl p-4">
+            <span class="flex items-center m-auto">Please wait...<mat-spinner [diameter]="25"></mat-spinner></span>
           </button>
         </div>
       </form>

@@ -46,6 +46,11 @@ export class CustomerComponent {
       url: '/user/transactions'
     },
     {
+      service: 'Utilities',
+      icon: 'assistant',
+      url: '/user/utilities'
+    },
+    {
       service: 'Contact Us',
       icon: 'phone',
       url: '/user/contact'

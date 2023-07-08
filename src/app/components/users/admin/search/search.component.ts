@@ -15,9 +15,8 @@ export class SearchComponent {
   loading = false
   loading1 = false
   selected!: string 
-  category!: string;
-  categoryNumber!: number;
-  search!: string;
+  customerCategoryValue!: string;
+  searchByValue!: string;
   userNameOrEmailForm!: FormGroup
   accountNumberForm!: FormGroup
   getCustomersByCategoryResponse!: any
@@ -42,24 +41,8 @@ export class SearchComponent {
     this.show = false
   }
 
-  selectCategory(){
-    this.selected = 'first'
-    this.loading = true
-    switch (this.category) {
-      case 'Individual':
-        this.categoryNumber = 1
-      break
-      case 'Business':
-        this.categoryNumber = 2
-      break
-      case 'Admin':
-        this.categoryNumber = 3
-      break
-      case 'Super Admin':
-        this.categoryNumber = 4
-      break
-    }
-    this.query.getCustomersByCategory(this.categoryNumber).subscribe((data: any) => {
+  searchByCategory(){
+    this.query.getCustomersByCategory(this.customerCategoryValue).subscribe((data: any) => {
       this.getCustomersByCategoryResponse = data
       this.loading = false
       this.show = true
@@ -73,7 +56,7 @@ export class SearchComponent {
     this.loading1 = true
     this.selected = 'second'
 
-    if (this.search == 'Email/ UserName') {
+    if (this.searchByValue == 'Email/ UserName') {
       this.query.getCustomersByEmailOrUserName(this.userNameOrEmailForm.value.emailAddressOrUserName).subscribe((data: any) => {
         this.searchCustomerResponse = data
         this.loading1 = false
@@ -84,7 +67,7 @@ export class SearchComponent {
       })
     }
 
-    if (this.search == 'Account Number') {
+    if (this.searchByValue == 'Account Number') {
       this.query.getCustomersByAccountNumber(this.accountNumberForm.value.accountNumber).subscribe((data: any) => {
         this.searchCustomerResponse = data
         this.loading1 = false

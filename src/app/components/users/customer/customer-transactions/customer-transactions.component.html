@@ -1,21 +1,29 @@
 <div class="bg-blue-300 min-h-screen">
-  <div class="bg-blue-200">
-    <span class="text-black text-2xl font-medium px-4 py-8 shadow-lg">Transaction History</span>
-  </div>  
-  <div class="flex justify-between text-black text-base">
-    <span></span>
-    <span class="px-2 py-1 shadow-lg">No of Transaction(s): {{transactions}}</span>
+  <div class="sticky top-[65px] z-[5]">
+    <div class="bg-blue-200">
+      <span class="text-black text-2xl font-medium px-4 py-8 shadow-lg">Transaction History</span>
+    </div>  
+    <div class="flex justify-between text-black text-base">
+      <span></span>
+      <span class="font-medium px-2 py-1 shadow-lg">No of Transaction(s): {{transactions}}</span>
+    </div>
   </div>
-    
+
   <div class="px-3 py-8">
-    <div *ngIf="transactions == 0" class="text-red-500 text-xl text-center font-semibold">No Transaction Yet</div>
+    <div *ngIf="!transactionHistoryError && transactions == 0" class="text-red-500 text-xl text-center font-semibold">No Transaction Yet</div>
+    <div *ngIf="transactionHistoryError" class="flex flex-col text-red-500 text-xl text-center font-semibold">
+      <span *ngIf="!loading">Could not get your transaction(s) history at the moment. Please try again.</span>
+      <span (click)="getTransactionHistory()" class="flex items-center justify-center text-yellow-600 text-base w-[80px] mt-3 m-auto cursor-pointer shadow hover:text-green-700">
+        Refresh<span *ngIf="loading" class="loader"></span>
+      </span>
+    </div>
     <div *ngIf="transactions > 0 && !tableData" class="text-center">
       <button>
-        Please wait...<mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner>
+        <span class="flex items-center m-auto">Please wait...<mat-spinner [diameter]="25"></mat-spinner></span>
       </button>
     </div>
     <div class="overflow-auto">
-      <table *ngIf="tableData">
+      <table *ngIf="tableData"> 
         <thead>
           <tr>
             <th *ngFor="let header of tableHeader; let e = even" [ngClass]="e ?'even' : 'odd'">{{header | uppercase}}</th>
@@ -24,8 +32,8 @@
 
         <tbody>
           <tr *ngFor="let data of tableData; let e = even; let o = odd; let i = index"  [ngClass]="e ?'even1' : 'odd1'">
-            <td>{{i + 1}}</td> <td>{{data.Id}}</td> <td>{{data.TransactionType}}</td> 
-            <td>{{data.Amount}}</td> <td>{{data.DateStamp}}</td> <td>{{data.Description}}</td>
+            <td>{{i + 1}}</td> <td>{{data.id}}</td> <td>{{data.transactionType}}</td> 
+            <td>{{data.amount}}</td> <td>{{data.dateStamp}}</td> <td>{{data.description}}</td>
           </tr>
         </tbody>
       </table>

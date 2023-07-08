@@ -1,10 +1,12 @@
 <div class="bg-blue-200 min-h-screen">
-  <div class="bg-blue-300">
-    <span class="text-white text-2xl font-medium px-4 py-8 shadow-lg">Withdrawal</span>
-  </div>
-  <div class="flex justify-between text-black text-base">
-    <span></span>
-    <span class="px-2 py-1 shadow-lg">Balance: {{balance | currency}}</span>
+  <div class="sticky top-[65px] z-[5]">
+    <div class="bg-blue-300">
+      <span class="text-white text-2xl font-medium px-4 py-8 shadow-lg">Withdrawal</span>
+    </div>
+    <div class="flex justify-between text-black text-base">
+      <span></span>
+      <span class="font-medium px-2 py-1 shadow-lg">Balance: {{balance | currency}}</span>
+    </div>
   </div>
 
   <div class="px-3 py-8">
@@ -13,65 +15,57 @@
       <span class="flex justify-center pb-4"><mat-icon>payment</mat-icon></span>
       <div class="bg-[#e0f8e9] px-2 rounded-md">
         <form [formGroup]="withdrawalForm" (submit)="withdrawNow()" class="m-auto py-6">
-          <div>
-            <mat-form-field class="w-full">
-              <mat-label>Amount</mat-label>
-              <input formControlName="amount" matInput required />
-              <mat-hint>How much do you want to withdraw?</mat-hint>
-              <mat-error *ngIf="withdrawalForm.value.amount == ''">
-                Amount required
-              </mat-error>
-              <mat-error *ngIf="withdrawalForm.get('amount')?.hasError('pattern')">
-                Amount Invalid
-              </mat-error>
-            </mat-form-field>
-          </div>
-          <div>
-            <mat-form-field class="w-full">
-              <mat-label>Account Number</mat-label>
-              <input formControlName="accountNumber" matInput minlength="8" maxlength="15" required />
-              <mat-hint>Enter destination account number</mat-hint>
-              <mat-error *ngIf="withdrawalForm.value.accountNumber == ''">
-                Account Number required
-              </mat-error>
-              <mat-error *ngIf="withdrawalForm.get('accountNumber')?.hasError('pattern')">
-                Account Number Invalid
-              </mat-error>
-              <mat-error *ngIf="withdrawalForm.get('accountNumber')?.hasError('minlength')">
-                Account Number Incomplete
-              </mat-error>
-            </mat-form-field>
-          </div>
-          <div>
-            <mat-form-field class="w-full">
-              <mat-label>Bank Name</mat-label>
-              <mat-select formControlName="bank" required>
-                <mat-option *ngFor="let bank of banks" [value]="bank">
-                  {{bank}}
-                </mat-option>
-              </mat-select>
-              <mat-hint>Select destination bank</mat-hint>
-              <mat-error>
-                Bank Name required
-              </mat-error>
-            </mat-form-field>
-          </div>
-          <div class="pb-2">
-            <mat-form-field class="w-full">
-              <mat-label>Password</mat-label>
-              <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" required />
-              <mat-hint>Enter your password</mat-hint>
-              <button mat-icon-button matSuffix (click)="hide = !hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-              </button>
-              <mat-error *ngIf="withdrawalForm.value.password == ''">
-                Password required
-              </mat-error>
-              <mat-error *ngIf="withdrawalForm.get('password')?.hasError('invalidPassword')">
-                Password Invalid
-              </mat-error>
-            </mat-form-field>
-          </div>
+          <mat-form-field class="w-full">
+            <mat-label>Amount</mat-label>
+            <input formControlName="amount" matInput required />
+            <mat-hint>How much do you want to withdraw?</mat-hint>
+            <mat-error *ngIf="withdrawalForm.value.amount == ''">
+              Amount required
+            </mat-error>
+            <mat-error *ngIf="withdrawalForm.get('amount')?.hasError('pattern')">
+              Amount invalid
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="w-full">
+            <mat-label>Account Number</mat-label>
+            <input formControlName="bankAccountNumber" matInput minlength="8" maxlength="15" required />
+            <mat-hint>Enter destination account number</mat-hint>
+            <mat-error *ngIf="withdrawalForm.value.bankAccountNumber == ''">
+              Account Number required
+            </mat-error>
+            <mat-error *ngIf="withdrawalForm.get('bankAccountNumber')?.hasError('pattern') || withdrawalForm.get('bankAccountNumber')?.hasError('minlength')">
+              Account Number invalid
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="w-full">
+            <mat-label>Bank Name</mat-label>
+            <mat-select formControlName="bankName" required>
+              <mat-option *ngFor="let bank of banks" [value]="bank">
+                {{bank}}
+              </mat-option>
+            </mat-select>
+            <mat-hint>Select destination bank</mat-hint>
+            <mat-error>
+              Bank Name required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="w-full pb-2">
+            <mat-label>Password</mat-label>
+            <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" required />
+            <mat-hint>Enter your password</mat-hint>
+            <button mat-icon-button matSuffix (click)="hide = !hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="withdrawalForm.value.password == ''">
+              Password required
+            </mat-error>
+            <mat-error *ngIf="withdrawalForm.get('password')?.hasError('invalidPassword')">
+              Password Invalid
+            </mat-error>
+          </mat-form-field>
 
           <div class="text-center">
             <div class="pt-2">
@@ -84,11 +78,11 @@
               </ngb-alert>
             </div>
 
-            <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="withdrawalForm.invalid  || withdrawalForm.value.amount <= 0" class="btn text-lg rounded-2xl p-4">
+            <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="withdrawalForm.invalid  || withdrawalForm.value.amount <= 0" class="btn w-full text-lg rounded-2xl p-4">
               Withdraw
             </button>
-            <button *ngIf="loading" mat-flat-button color="accent" type="submit" class="btn text-lg rounded-2xl p-4">
-              <span>Please wait...</span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner>
+            <button *ngIf="loading" mat-flat-button color="accent" class="btn w-full text-lg rounded-2xl p-4">
+              <span class="flex items-center m-auto">Please wait...<mat-spinner [diameter]="25"></mat-spinner></span>
             </button>
           </div>
         </form>

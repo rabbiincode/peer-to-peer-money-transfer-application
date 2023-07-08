@@ -104,7 +104,7 @@
               Send Message
             </button>
             <button *ngIf="loading" mat-flat-button color="accent" type="submit" class="btn text-lg rounded-2xl p-4">
-              <span>Loading...</span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner>
+              <span class="flex items-center m-auto">Please wait...<mat-spinner [diameter]="25"></mat-spinner></span>
             </button>
           </div>
         </form>    

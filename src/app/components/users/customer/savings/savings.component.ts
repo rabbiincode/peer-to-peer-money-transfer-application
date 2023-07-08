@@ -9,14 +9,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 
 export class SavingsComponent {
-  balance: number
+  read = false
+  plan = false
   loading = false
   amount = ''
+  amountSaved = 0
+  timeDuration = new Date()
+  balance: number
   startDate!: Date
   endDate!: Date
-  savingsForm!: FormGroup
   savingsResponse!: any
   savingsError!: any
+  savingsForm!: FormGroup
 
   constructor(private savings: UserService, private formBuilder: FormBuilder){
     this.balance = savings.userData.balance
@@ -29,5 +33,9 @@ export class SavingsComponent {
       start: [''],
       end: ['']
     })
+  }
+
+  saveNow(){
+    this.plan = true
   }
 }

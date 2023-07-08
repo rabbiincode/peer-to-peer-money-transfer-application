@@ -21,6 +21,9 @@ export class RoleComponent {
   manageClaimsForm!: FormGroup
   selected!: string
   selectedClaim!: string
+  tableData!: any
+  tableData1!: any
+  tableData2!: any
   rolesResponse!: any
   userRoleResponse!: any
   userClaimsResponse!: any
@@ -29,6 +32,7 @@ export class RoleComponent {
   userClaimsErrorMessage!: any
   roles: string[] = ['Get user role', 'Add user to role', 'Remove user from role']
   claims: string[] = ['Get user claim', 'Add claim to user', 'Remove user claim']
+  tableHeader: string[] = ['#', 'role name', 'id', 'role claims', 'created at', 'updated at', 'active']
 
   constructor(private formBuilder: FormBuilder, private role: AdminService){}
 
@@ -47,10 +51,14 @@ export class RoleComponent {
     })
   }
 
+  back(){
+    this.tableData = ''
+  }
+
   getAllRoles(){
     this.loading = true
     this.role.getAllRoles().subscribe((data) => {
-      this.rolesResponse = data
+      this.tableData = data
       this.loading = false
     }, (error) => {
       this.rolesErrorMessage = error
@@ -72,7 +80,7 @@ export class RoleComponent {
   getUserRole(){
     this.loading2 = true
     this.role.getUserRoles(this.manageRolesForm.value.userName).subscribe((data) => {
-      this.userRoleResponse = data
+      this.tableData1 = data
       this.loading2 = false
     }, (error) => {
       this.userRoleErrorMessage = error
@@ -105,7 +113,7 @@ export class RoleComponent {
   getUserClaims(){
     this.loading3 = true
     this.role.getUserClaims(this.manageClaimsForm.value.userName).subscribe((data) => {
-      this.userClaimsResponse = data
+      this.tableData2 = data
       this.loading3 = false
     }, (error) => {
       this.userClaimsErrorMessage = error

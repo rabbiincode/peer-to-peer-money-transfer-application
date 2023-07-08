@@ -54,6 +54,7 @@ import { CustomerTransactionsComponent } from './users/customer/customer-transac
 import { ContactUsComponent } from './users/customer/contact-us/contact-us.component';
 import { ProfileComponent } from './users/customer/profile/profile.component';
 import { FinanceComponent } from './body/finance/finance.component';
+import { UtilitiesComponent } from './users/customer/utilities/utilities.component';
 
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import { FinanceComponent } from './body/finance/finance.component';
     ContactUsComponent,
     ProfileComponent,
     FinanceComponent,
+    UtilitiesComponent,
   ],
   imports: [
     CommonModule,

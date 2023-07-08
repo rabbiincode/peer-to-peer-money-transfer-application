@@ -7,21 +7,20 @@ import { UserData } from '../../interfaces/user';
 })
 
 export class UserService {
-  url = "https://localhost:44340/CashMingle/Admin"
-  url1 = "https://localhost:44340/CashMingle/Account"
+  url = "https://localhost:44376/CashMingle/Admin"
+  url1 = "https://localhost:44376/CashMingle/Account"
   userData: UserData = {
     firstName: '',
     middleName: '',
     lastName: '',
     userName: '',
     email: '',
-    phoneNumber: '',
+    phoneNumber: 0,
     accountNumber: 0,
-    address: '',  
+    address: '',
     birthday: new Date,
     businessName: '',
-    userTypeId: 0,
-    accountType: '',
+    userType: '',
     balance: 0,
     deleted: false,
     active: false,
@@ -45,26 +44,13 @@ export class UserService {
       this.userData.address = data.address
       this.userData.birthday = data.birthday
       this.userData.businessName = data.businessName
-      this.userData.userTypeId = data.userTypeId
+      this.userData.userType = data.userTypeId
       this.userData.balance = data.balance
       this.userData.deleted = data.deleted
       this.userData.active = data.active
       this.userData.twoFactorEnabled = data.twoFactorEnabled
       this.userData.createdAt = data.createdAt
       this.userData.updatedAt = data.updatedAt
-
-      if (data.userTypeId == 1){
-        this.userData.accountType = 'Individual'
-      }
-      if (data.userTypeId == 2){ 
-        this.userData.accountType = 'Corporate'
-      }
-      if (data.userTypeId == 3){
-        this.userData.accountType = 'Admin'
-      }
-      if (data.userTypeId == 4){
-        this.userData.accountType = 'SuperAdmin'
-      }
     })
   }
 

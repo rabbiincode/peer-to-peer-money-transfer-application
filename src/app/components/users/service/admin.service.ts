@@ -6,8 +6,8 @@ import { Injectable } from '@angular/core';
 })
 
 export class AdminService {
-  url = "https://localhost:44340/CashMingle/Admin"
-  url2 = "https://localhost:44340/CashMingle/Roles_And_Claims"
+  url = "https://localhost:44376/CashMingle/Admin"
+  url2 = "https://localhost:44376/CashMingle/Roles_And_Claims"
 
   constructor(private http: HttpClient) {}
 
@@ -19,8 +19,8 @@ export class AdminService {
     return this.http.get(`${this.url}/get-all-customers`)
   }
 
-  getCustomersByCategory(categoryNumber: number){
-    return this.http.get(`${this.url}/get-all-customers-by-category?category=${categoryNumber}`) 
+  getCustomersByCategory(category: string){
+    return this.http.get(`${this.url}/get-all-customers-by-category?category=${category}`) 
   }
 
   getCustomersByEmailOrUserName(emailAddressOrUserName: string){

@@ -1,5 +1,5 @@
 <div class="bg-blue-300 min-h-screen">
-  <div class="bg-blue-200">
+  <div class="bg-blue-200 sticky top-[65px] z-[5]">
     <span class="text-black text-2xl font-medium px-4 py-6 shadow-lg">User Roles</span>
   </div>
 
@@ -26,7 +26,7 @@
                   <mat-icon *ngIf="!arrow">arrow_drop_down</mat-icon>
                 </mat-expansion-panel-header>
 
-                <div>
+                <div class="max-w-[500px]">
                   <ngb-alert *ngIf="rolesResponse" [type]="'success'" (closed)="rolesResponse = ''">{{rolesResponse?.result}}</ngb-alert>
                   <ngb-alert *ngIf="rolesErrorMessage && rolesErrorMessage?.status > 0 && rolesErrorMessage?.status <= 499" [type]="'danger'" (closed)="rolesErrorMessage = ''">
                     {{rolesErrorMessage?.error?.error}} {{rolesErrorMessage?.error?.message}}
@@ -36,35 +36,61 @@
                   </ngb-alert>
                 </div>
 
-                <div class="bg-violet-100 flex items-center justify-between p-4 mb-4 rounded">
-                  <span>Get All Roles</span>
-                  <button type="button" (click)="getAllRoles()"
-                    class="bg-gradient-to-l from-purple-300 to-purple-500 px-4 py-1 ml-2 text-white text-lg font-medium rounded-md hover:from-purple-500 hover:to-purple-300 hover:font-semibold"
-                  >
-                    <span *ngIf="!loading">Proceed</span>
-                    <span *ngIf="loading">loading...</span>
-                  </button>
-                </div>
-
-                <form [formGroup]="rolesForm" (submit)="createRole()" class="bg-violet-100 p-4 rounded">
-                  <p>Create Role</p>
-                  <mat-form-field>
-                    <mat-label>Role Name</mat-label>
-                    <input formControlName="roleName" matInput required />
-                    <mat-error>
-                      Role Name required
-                    </mat-error>
-                  </mat-form-field>
-
-                  <div>
-                    <button *ngIf="!loading1" mat-flat-button color="primary" type="submit" [disabled]="rolesForm.invalid" class="btn w-[50%] text-lg">Create Role</button>
-                    <button *ngIf="loading1" mat-flat-button color="accent" class="btn w-[50%] text-lg">
-                      Please wait...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
+                <div class="bg-violet-100 p-4 mb-4 rounded">
+                  <div class="flex items-center justify-between text-lg font-medium mb-2">
+                    <span *ngIf="!tableData">Get All Roles</span>
+                    <span *ngIf="tableData">All Roles</span>
+                    <button *ngIf="!tableData" type="button" (click)="getAllRoles()"
+                      class="bg-gradient-to-l from-purple-300 to-purple-500 px-4 py-1 ml-2 text-white rounded-md hover:from-purple-500 hover:to-purple-300 hover:font-semibold"
+                    >
+                      <span *ngIf="!loading">Proceed</span>
+                      <span *ngIf="loading">loading...</span>
+                    </button>
+                    <button *ngIf="tableData" (click)="back()" class="flex justify-center text-lg font-normal hover:bg-sky-200">
+                      <i class="bi bi-arrow-left text-2xl pr-2"></i> Back
                     </button>
                   </div>
-                </form>
+
+                  <div class="overflow-auto">
+                    <table *ngIf="tableData">
+                      <thead>
+                        <tr>
+                          <th *ngFor="let header of tableHeader; let e = even" [ngClass]="e ?'even' : 'odd'">{{header | uppercase}}</th>
+                        </tr>
+                      </thead>
+          
+                      <tbody>
+                        <tr *ngFor="let data of tableData; let e = even; let o = odd; let i = index"  [ngClass]="e ?'even1' : 'odd1'">
+                          <td>{{i + 1}}</td> <td>{{data.name}}</td> <td>{{data.id}}</td> <td>{{data.roleClaims}}</td>
+                          <td>{{data.createdAt}}</td> <td>{{data.updatedAt}}</td> <td>{{data.active}}</td>
+                        </tr>
+                      </tbody>         
+                    </table>
+                  </div>
+                </div>
+
+                <div class="bg-violet-100 text-lg font-medium p-4 rounded">
+                  <form [formGroup]="rolesForm" (submit)="createRole()" class="max-w-[500px]">
+                    <p>Create User Role</p>
+                    <mat-form-field class="w-full">
+                      <mat-label>Role Name</mat-label>
+                      <input formControlName="roleName" matInput required />
+                      <mat-hint>Enter the role name to create</mat-hint>
+                      <mat-error>
+                        Role Name required
+                      </mat-error>
+                    </mat-form-field>
   
-              </mat-expansion-panel>
+                    <div class="mt-3">
+                      <button *ngIf="!loading1" mat-flat-button color="primary" type="submit" [disabled]="rolesForm.invalid" class="btn w-[100%] text-lg">Create Role</button>
+                      <button *ngIf="loading1" mat-flat-button color="accent" class="btn w-[100%] text-lg">
+                        Please wait...<mat-spinner [diameter]="25"></mat-spinner>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+     
+           </mat-expansion-panel>
             </mat-accordion>
           </div>
         </div>
@@ -84,7 +110,7 @@
                   <mat-icon *ngIf="!arrow1">arrow_drop_down</mat-icon>
                 </mat-expansion-panel-header>
 
-                <div>
+                <div class="max-w-[500px]">
                   <ngb-alert *ngIf="userRoleResponse" [type]="'success'" (closed)="userRoleResponse = ''">{{userRoleResponse?.result}}</ngb-alert>
                   <ngb-alert *ngIf="userRoleErrorMessage && userRoleErrorMessage?.status > 0 && userRoleErrorMessage?.status <= 499" [type]="'danger'" (closed)="userRoleErrorMessage = ''">
                     {{userRoleErrorMessage?.error?.error}} {{userRoleErrorMessage?.error?.message}}
@@ -100,31 +126,41 @@
                   </mat-radio-button>
                 </mat-radio-group>
 
-                <form [formGroup]="manageRolesForm" *ngIf="selected" (submit)="manageRoles()" class="py-2">
-                  <div>
-                    <mat-form-field>
-                      <mat-label>UserName</mat-label>
-                      <input formControlName="userName" matInput required />
-                      <mat-error>
-                        UserName required
-                      </mat-error>
-                    </mat-form-field>
-                  </div>
+                <div *ngIf="tableData1" class="text-green-800 text-lg font-medium mb-3">
+                  <span *ngIf="tableData1.length == 0" class="text-red-400">No User Role(s) for {{manageRolesForm.value.userName | titlecase}}</span>
+                  <span *ngIf="tableData1.length > 0 && manageRolesForm.value.userName != ''">
+                    {{manageRolesForm.value.userName | titlecase}} Role(s) :
+                    <span *ngFor="let role of tableData1" class="text-xl text-black mr-3">__  {{role}}</span>
+                  </span>
+                </div>
 
-                  <div *ngIf="selected != 'Get user role'">
-                    <mat-form-field>
-                      <mat-label>Role Name</mat-label>
-                      <input formControlName="roleName" matInput [required]="selected == 'Add user to role' || selected == 'Remove user from role'" />
-                      <mat-error>
-                        Role Name required
-                      </mat-error>
-                    </mat-form-field> 
-                  </div>
+                <form [formGroup]="manageRolesForm" *ngIf="selected" class="max-w-[500px] py-2">
+                  <mat-form-field class="w-full">
+                    <mat-label>UserName</mat-label>
+                    <input formControlName="userName" matInput required />
+                    <mat-hint>Enter userName</mat-hint>
+                    <mat-error>
+                      UserName required
+                    </mat-error>
+                  </mat-form-field>
 
-                  <div>
-                    <button *ngIf="!loading2" mat-flat-button color="primary" type="submit" [disabled]="manageRolesForm.invalid" class="btn w-[50%] text-lg">Proceed</button>
-                    <button *ngIf="loading2" mat-flat-button color="accent" class="btn w-[50%] text-lg">
-                      Please wait...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
+                  <mat-form-field *ngIf="selected != 'Get user role'" class="w-full">
+                    <mat-label>Role Name</mat-label>
+                    <input formControlName="roleName" matInput [required]="selected == 'Add user to role' || selected == 'Remove user from role'" />
+                    <mat-hint>Enter role name</mat-hint>
+                    <mat-error>
+                      Role Name required
+                    </mat-error>
+                  </mat-form-field>
+
+                  <div class="mt-3">
+                    <button *ngIf="!loading2" mat-flat-button color="primary" type="button" (click)="manageRoles()" class="btn w-[100%] text-lg"
+                      [disabled]="manageRolesForm.invalid && selected != 'Get user role' || selected == 'Get user role' && manageRolesForm.value.userName == ''"
+                    >
+                      Proceed
+                    </button>
+                    <button *ngIf="loading2" mat-flat-button color="accent" class="btn w-[100%] text-lg">
+                      <span class="flex items-center m-auto">Please wait...<mat-spinner [diameter]="25"></mat-spinner></span>
                     </button>
                   </div>
                 </form>
@@ -149,7 +185,7 @@
                   <mat-icon *ngIf="!arrow2">arrow_drop_down</mat-icon>
                 </mat-expansion-panel-header>
 
-                <div>
+                <div class="max-w-[500px]">
                   <ngb-alert *ngIf="userClaimsResponse" [type]="'success'" (closed)="userClaimsResponse = ''">{{userClaimsResponse?.result}}</ngb-alert>
                   <ngb-alert *ngIf="userClaimsErrorMessage && userClaimsErrorMessage?.status > 0 && userClaimsErrorMessage?.status <= 499" [type]="'danger'" (closed)="userClaimsErrorMessage = ''">
                     {{userClaimsErrorMessage?.error?.error}} {{userClaimsErrorMessage?.error?.message}}
@@ -165,41 +201,50 @@
                   </mat-radio-button>
                 </mat-radio-group>
 
-                <form [formGroup]="manageClaimsForm" *ngIf="selectedClaim" (submit)="manageClaims()" class="py-2">
-                  <div>
-                    <mat-form-field>
-                      <mat-label>UserName</mat-label>
-                      <input formControlName="userName" matInput required />
-                      <mat-error>
-                        UserName required
-                      </mat-error>
-                    </mat-form-field>
-                  </div>
+                <div *ngIf="tableData2" class="text-green-800 text-lg font-medium mb-3">
+                  <span *ngIf="tableData2.length == 0" class="text-red-400">No User Claim(s) for {{manageClaimsForm.value.userName | titlecase}}</span>
+                  <span *ngIf="tableData2.length > 0 && manageClaimsForm.value.userName != ''">
+                    {{manageClaimsForm.value.userName | titlecase}} Claim(s) :
+                    <span *ngFor="let claim of tableData2" class="text-xl text-black mr-3">__  Claim Name: {{claim.type}} - Claim Value - {{claim.value}}</span>
+                  </span>
+                </div>
 
-                  <div *ngIf="selectedClaim != 'Get user claim'">
-                    <mat-form-field>
-                      <mat-label>Claim Name</mat-label>
-                      <input formControlName="claimName" matInput [required]="selectedClaim == 'Add claim to user' || selectedClaim == 'Remove user claim'" />
-                      <mat-error>
-                        Claim Name required
-                      </mat-error>
-                    </mat-form-field> 
-                  </div>
+                <form [formGroup]="manageClaimsForm" *ngIf="selectedClaim" class="max-w-[500px] py-2">
+                  <mat-form-field class="w-full">
+                    <mat-label>UserName</mat-label>
+                    <input formControlName="userName" matInput required />
+                    <mat-hint>Enter userName</mat-hint>
+                    <mat-error>
+                      UserName required
+                    </mat-error>
+                  </mat-form-field>
 
-                  <div *ngIf="selectedClaim != 'Get user claim'">
-                    <mat-form-field>
-                      <mat-label>Claim Value</mat-label>
-                      <input formControlName="claimValue" matInput [required]="selectedClaim == 'Add claim to user' || selectedClaim == 'Remove user claim'" />
-                      <mat-error>
-                        Claim Value required
-                      </mat-error>
-                    </mat-form-field> 
-                  </div>
+                  <mat-form-field *ngIf="selectedClaim != 'Get user claim'" class="w-full">
+                    <mat-label>Claim Name</mat-label>
+                    <input formControlName="claimName" matInput [required]="selectedClaim == 'Add claim to user' || selectedClaim == 'Remove user claim'" />
+                    <mat-hint>Enter claim name</mat-hint>
+                    <mat-error>
+                      Claim Name required
+                    </mat-error>
+                  </mat-form-field>
 
-                  <div>
-                    <button *ngIf="!loading3" mat-flat-button color="primary" type="submit" [disabled]="manageClaimsForm.invalid" class="btn w-[50%] text-lg">Proceed</button>
-                    <button *ngIf="loading3" mat-flat-button color="accent" class="btn w-[50%] text-lg">
-                      Please wait...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
+                  <mat-form-field *ngIf="selectedClaim != 'Get user claim'" class="w-full">
+                    <mat-label>Claim Value</mat-label>
+                    <input formControlName="claimValue" matInput [required]="selectedClaim == 'Add claim to user' || selectedClaim == 'Remove user claim'" />
+                    <mat-hint>Enter claim value</mat-hint>
+                    <mat-error>
+                      Claim Value required
+                    </mat-error>
+                  </mat-form-field> 
+
+                  <div class="mt-3">
+                    <button *ngIf="!loading3" mat-flat-button color="primary" type="button" (click)="manageClaims()" class="btn w-[100%] text-lg"
+                      [disabled]="manageClaimsForm.invalid && selectedClaim != 'Get user claim' || selectedClaim == 'Get user claim' && manageClaimsForm.value.userName == ''" 
+                    >
+                      Proceed
+                    </button>
+                    <button *ngIf="loading3" mat-flat-button color="accent" class="btn w-[100%] text-lg">
+                      <span class="flex items-center m-auto">Please wait...<mat-spinner [diameter]="25"></mat-spinner></span>
                     </button>
                   </div>
                 </form>
@@ -209,6 +254,7 @@
           </div>
         </div>
 
+      </div>
     </div>
   </div>
 </div>

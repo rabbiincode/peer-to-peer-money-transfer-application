@@ -58,7 +58,7 @@
             <div>
               <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="loginForm.invalid" class="btn w-[90%] text-lg">Login</button>
               <button *ngIf="loading" mat-flat-button color="accent" class="btn w-[90%] text-lg">
-                Loading...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
+                <span class="flex items-center m-auto">Please wait...<mat-spinner [diameter]="25"></mat-spinner></span>
               </button>
             </div>
           </form>
@@ -89,7 +89,7 @@
             <div>
               <button *ngIf="!loading1" mat-flat-button color="primary" type="submit" [disabled]="twoFactorAuthForm.invalid" class="btn w-[90%] text-lg">Login</button>
               <button *ngIf="loading1" mat-flat-button color="accent" class="btn w-[90%] text-lg">
-                Loading...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
+                <span class="flex items-center m-auto">Please wait...<mat-spinner [diameter]="25"></mat-spinner></span>
               </button>
             </div>
           </form>

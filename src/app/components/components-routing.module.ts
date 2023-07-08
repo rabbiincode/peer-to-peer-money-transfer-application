@@ -9,6 +9,7 @@ import { WithdrawalComponent } from './users/customer/withdrawal/withdrawal.comp
 import { TransferComponent } from './users/customer/transfer/transfer.component';
 import { SavingsComponent } from './users/customer/savings/savings.component';
 import { CustomerTransactionsComponent } from './users/customer/customer-transactions/customer-transactions.component';
+import { UtilitiesComponent } from './users/customer/utilities/utilities.component';
 import { ContactUsComponent } from './users/customer/contact-us/contact-us.component';
 import { ProfileComponent } from './users/customer/profile/profile.component';
 import { FinanceComponent } from './body/finance/finance.component';
@@ -28,6 +29,7 @@ const routes: Routes = [
       { path: 'transfer', component: TransferComponent },
       { path: 'savings', component: SavingsComponent },
       { path: 'transactions', component: CustomerTransactionsComponent },
+      { path: 'utilities', component: UtilitiesComponent },
       { path: 'contact', component: ContactUsComponent },
       { path: 'finance', component: FinanceComponent },
       { path: 'profile', component: ProfileComponent }

@@ -9,7 +9,7 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 
 export class AuthService {
   isAuthenticated = false
-  url = "https://localhost:44340/CashMingle/Account"
+  url = "https://localhost:44376/CashMingle/Account"
   helper = new JwtHelperService()
   
   tokenData: TokenData = {

@@ -1,0 +1,106 @@
+<div class="bg-blue-200 min-h-screen">
+  <div class="sticky top-[65px] z-[5]">
+    <div class="bg-blue-300">
+      <span class="text-white text-2xl font-medium px-4 py-8 shadow-lg">Utilities</span>
+    </div>
+    <div class="flex justify-between text-black text-base">
+      <span class="text-center text-lg px-4">
+        Pay Bills
+      </span>
+      <span class="font-medium px-2 py-1 shadow-lg">Balance: {{balance | currency}}</span>
+    </div>
+  </div>
+
+  <div class="px-3 py-8">
+    <div class="max-w-[600px]">
+      <h2 class="text-green-800">Airtime Purchase</h2>
+      <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="airtimeChoiceValue">
+        <div class="text-yellow-600 text-lg font-medium">Purchase airtime for</div>
+        <mat-radio-button class="example-radio-button" *ngFor="let choice of airtime" [value]="choice">
+          {{choice | titlecase}}
+        </mat-radio-button>
+      </mat-radio-group>
+
+      <span *ngIf="airtimeChoiceValue">
+        <form *ngIf="airtimeChoiceValue == 'others'" [formGroup]="airtimeForm">
+          <mat-form-field class="w-[80%]">
+            <mat-label>PhoneNumber</mat-label>
+            <input formControlName="phoneNumber" matInput required />
+            <mat-hint>Enter the number you want to recharge</mat-hint>
+            <mat-error *ngIf="airtimeForm.value.phoneNumber == ''">
+              PhoneNumber required
+            </mat-error>
+            <mat-error *ngIf="airtimeFormControl?.['phoneNumber']?.errors?.['invalidPhoneNumber']">
+              PhoneNumber invalid
+            </mat-error>
+          </mat-form-field>
+        </form>
+    
+        <mat-radio-group aria-labelledby="example-radio-group-label" [(ngModel)]="amountChoiceValue">
+          <div class="text-yellow-600 text-lg font-medium">How much do you want to recharge?</div>
+          <mat-radio-button class="example-radio-button" *ngFor="let number of amount" [value]="number">
+            {{number | titlecase}}
+          </mat-radio-button>
+        </mat-radio-group>
+    
+        <form [formGroup]="amountForm" class="my-3">
+          <mat-form-field *ngIf="amountChoiceValue == 'other amount'" class="w-[80%]">
+            <mat-label>Amount</mat-label>
+            <input formControlName="amount" matInput required />
+            <mat-hint>Enter the amount you want to recharge</mat-hint>
+            <mat-error *ngIf="amountForm.value.amount == ''">
+              Amount required
+            </mat-error>
+            <mat-error *ngIf="amountForm.get('amount')?.hasError('pattern')">
+              Amount invalid
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field *ngIf="amountChoiceValue" class="w-[80%]">
+            <mat-label>Password</mat-label>
+            <input formControlName="password" matInput required />
+            <mat-hint>Enter your password</mat-hint>
+            <mat-error *ngIf="amountForm.value.password == ''">
+              Password required
+            </mat-error>
+            <mat-error *ngIf="amountForm.get('password')?.hasError('invalidPassword')">
+              Password invalid
+            </mat-error>
+          </mat-form-field>
+        </form>
+
+        <div class="w-[80%]">
+          <ngb-alert *ngIf="airtimeResponse" [type]="'success'" (closed)="airtimeResponse = ''">Recharge successful ✔️</ngb-alert>
+            <ngb-alert *ngIf="airtimeError && airtimeError?.status > 0 && airtimeError?.status <= 499" [type]="'danger'" (closed)="airtimeError = ''">
+              {{airtimeError?.error?.error}} {{airtimeError?.error?.message}}
+            </ngb-alert>
+            <ngb-alert *ngIf="airtimeError && airtimeError?.status >= 500 || airtimeError?.status == 0" [type]="'danger'" (closed)="airtimeError = ''">
+              Failed...please try again
+            </ngb-alert>
+        </div>
+    
+        <div>
+          <button *ngIf="!loading" mat-flat-button color="primary" type="button" (click)="purchaseAirtime()" class="btn w-[80%] text-lg"
+            [disabled]="!amountChoiceValue || amountForm.invalid || amountChoiceValue == 'other amount' && amountForm.value.amount <= 0"
+          >
+            Recharge
+          </button>
+          <button *ngIf="loading" mat-flat-button color="accent" class="btn w-[80%] text-lg">
+            <span class="flex items-center m-auto">Please wait...<mat-spinner [diameter]="25"></mat-spinner></span>
+          </button>
+        </div>
+      </span>
+    </div>
+
+    <div>
+      <hr>
+      <h2 class="text-green-800">Utilities Bills</h2>
+      <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="utilityChoiceValue">
+        <div class="text-yellow-600 text-lg font-medium">Pay your bills</div>
+        <mat-radio-button class="example-radio-button" *ngFor="let choice of utility" [value]="choice" disabled>
+          {{choice | uppercase}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+  </div>
+</div>

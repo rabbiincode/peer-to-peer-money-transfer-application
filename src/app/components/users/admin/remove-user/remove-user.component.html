@@ -1,5 +1,5 @@
 <div class="bg-blue-200 min-h-screen">
-  <div class="bg-blue-300">
+  <div class="bg-blue-300 sticky top-[65px] z-[5]">
     <span class="text-white text-2xl font-medium px-4 py-6 shadow-lg">Remove</span>
   </div>
   
@@ -17,7 +17,7 @@
               <mat-icon>edit</mat-icon>Deactivate
             </span>
 
-            <div>
+            <div class="max-w-[500px]">
               <ngb-alert *ngIf="deactivateUserResponse" [type]="'success'" (closed)="deactivateUserResponse = ''">{{deactivateUserResponse?.result}}</ngb-alert>
               <ngb-alert *ngIf="deactivateUserErrorMessage && deactivateUserErrorMessage?.status > 0 && deactivateUserErrorMessage?.status <= 499" [type]="'danger'" (closed)="deactivateUserErrorMessage = ''">
                 {{deactivateUserErrorMessage?.error?.error}} {{deactivateUserErrorMessage?.error?.message}}
@@ -36,19 +36,20 @@
                   <mat-icon *ngIf="!arrow">arrow_drop_down</mat-icon>
                 </mat-expansion-panel-header>
 
-                <form [formGroup]="deactivateUserForm" (submit)="deactivateUser()" class="py-2">
-                  <mat-form-field>
+                <form [formGroup]="deactivateUserForm" (submit)="deactivateUser()" class="max-w-[500px] py-2">
+                  <mat-form-field class="w-full">
                     <mat-label>UserName</mat-label>
                     <input formControlName="userName" matInput required />
+                    <mat-hint>Enter userName to deactivate</mat-hint>
                     <mat-error>
                       UserName required
                     </mat-error>
                   </mat-form-field>
 
-                  <div>
-                    <button *ngIf="!loading" mat-flat-button color="accent" type="submit" [disabled]="deactivateUserForm.invalid" class="btn w-[50%] text-lg">Deactivate User</button>
-                    <button *ngIf="loading" mat-flat-button color="primary" class="btn w-[50%] text-lg">
-                      Please wait...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
+                  <div class="mt-3">
+                    <button *ngIf="!loading" mat-flat-button color="accent" type="submit" [disabled]="deactivateUserForm.invalid" class="btn w-[100%] text-lg">Deactivate User</button>
+                    <button *ngIf="loading" mat-flat-button color="primary" class="btn w-[100%] text-lg">
+                      <span class="flex items-center m-auto">Please wait...<mat-spinner [diameter]="25"></mat-spinner></span>
                     </button>
                   </div>
                 </form>
@@ -63,7 +64,7 @@
               <mat-icon>delete_sweep</mat-icon>Delete
             </span>
 
-            <div>
+            <div class="max-w-[500px]">
               <ngb-alert *ngIf="deleteResponse" [type]="'success'" (closed)="deleteResponse = ''">{{deleteResponse?.result}}</ngb-alert>
               <ngb-alert *ngIf="deleteErrorMessage && deleteErrorMessage?.status > 0 && deleteErrorMessage?.status <= 499" [type]="'danger'" (closed)="deleteErrorMessage = ''">
                 {{deleteErrorMessage?.error?.error}} {{deleteErrorMessage?.error?.message}}
@@ -82,19 +83,20 @@
                   <mat-icon *ngIf="!arrow1">arrow_drop_down</mat-icon>
                 </mat-expansion-panel-header>
 
-                <form [formGroup]="deleteForm" (submit)="delete()" class="py-2">
-                  <mat-form-field>
+                <form [formGroup]="deleteForm" (submit)="delete()" class="max-w-[500px] py-2">
+                  <mat-form-field class="w-full">
                     <mat-label>UserName</mat-label>
                     <input formControlName="userName" matInput required />
+                    <mat-hint>Enter userName to delete</mat-hint>
                     <mat-error>
                       UserName required
                     </mat-error>
                   </mat-form-field>
 
-                  <div>
-                    <button *ngIf="!loading1" mat-flat-button color="warn" type="submit" [disabled]="deleteForm.invalid" class="btn w-[50%] text-lg">Delete User</button>
-                    <button *ngIf="loading1" mat-flat-button color="accent" class="btn w-[50%] text-lg">
-                      Please wait...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
+                  <div class="mt-3">
+                    <button *ngIf="!loading1" mat-flat-button color="warn" type="submit" [disabled]="deleteForm.invalid" class="btn w-[100%] text-lg">Delete User</button>
+                    <button *ngIf="loading1" mat-flat-button color="accent" class="btn w-[100%] text-lg">
+                      <span class="flex items-center m-auto">Please wait...<mat-spinner [diameter]="25"></mat-spinner></span>
                     </button>
                   </div>
                 </form>
@@ -109,7 +111,7 @@
               <mat-icon>delete_forever</mat-icon>Delete
             </span>
             
-            <div>
+            <div class="max-w-[500px]">
               <ngb-alert *ngIf="deleteUserResponse" [type]="'success'" (closed)="deleteUserResponse = ''">{{deleteUserResponse?.result}}</ngb-alert>
               <ngb-alert *ngIf="deleteUserErrorMessage && deleteUserErrorMessage?.status > 0 && deleteUserErrorMessage?.status <= 499" [type]="'danger'" (closed)="deleteUserErrorMessage = ''">
                 {{deleteUserErrorMessage?.error?.error}} {{deleteUserErrorMessage?.error?.message}}
@@ -128,19 +130,20 @@
                   <mat-icon *ngIf="!arrow2">arrow_drop_down</mat-icon>
                 </mat-expansion-panel-header>
 
-                <form [formGroup]="deleteUserForm" (submit)="deleteUser()" class="py-2">
-                  <mat-form-field>
+                <form [formGroup]="deleteUserForm" (submit)="deleteUser()" class="max-w-[500px] py-2">
+                  <mat-form-field class="w-full">
                     <mat-label>UserName</mat-label>
                     <input formControlName="userName" matInput required />
+                    <mat-hint>Enter userName to delete</mat-hint>
                     <mat-error>
                       UserName required
                     </mat-error>
                   </mat-form-field>
 
-                  <div>
-                    <button *ngIf="!loading2" mat-flat-button color="warn" type="submit" [disabled]="deleteUserForm.invalid" class="btn w-[50%] text-lg">Delete User</button>
-                    <button *ngIf="loading2" mat-flat-button color="accent" class="btn w-[50%] text-lg">
-                      Please wait...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
+                  <div class="mt3">
+                    <button *ngIf="!loading2" mat-flat-button color="warn" type="submit" [disabled]="deleteUserForm.invalid" class="btn w-[100%] text-lg">Delete User</button>
+                    <button *ngIf="loading2" mat-flat-button color="accent" class="btn w-[100%] text-lg">
+                      <span class="flex items-center m-auto">Please wait...<mat-spinner [diameter]="25"></mat-spinner></span>
                     </button>
                   </div>
                 </form>

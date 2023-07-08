@@ -1,12 +1,14 @@
-<div [ngClass]="editPassword ? 'bg-slate-200' : 'bg-purple-100'" class="min-h-screen">
-  <div [ngClass]="editPassword ? 'bg-slate-300' : 'bg-purple-200'" class="flex justify-between">
-    <span></span>  
-    <span class="text-black text-xl font-medium px-3 py-1 shadow-lg">My Profile</span>
-  </div>
-
-  <div class="flex justify-between text-black text-base">
-    <span class="text-lg font-normal px-3 py-1 shadow-lg">Edit Profile</span>
-    <span></span>
+<div [ngClass]="editPassword ? 'bg-slate-200' : 'bg-sky-100'" class="min-h-screen">
+  <div class="sticky top-[65px] z-[5]">
+    <div [ngClass]="editPassword ? 'bg-slate-300' : 'bg-sky-200'" class="flex justify-between">
+      <span></span>
+      <span class="text-black text-xl font-medium px-3 py-1 shadow-lg">My Profile</span>
+    </div>
+  
+    <div class="flex justify-between text-black text-base">
+      <span class="text-lg font-medium px-3 py-1 shadow-lg">Edit Profile</span>
+      <span></span>
+    </div>
   </div>
 
   <div *ngIf="!editPassword" class="px-3 py-8">
@@ -17,7 +19,7 @@
         <thead>
           <tr>
             <th>FullName</th>
-            <th *ngIf="tableData.userTypeId == 2">Business Name</th>
+            <th *ngIf="tableData.userType == 'Corporate'">Business Name</th>
             <th>UserName</th>
             <th>Email Address</th>
             <th>Account Number</th>
@@ -30,13 +32,13 @@
         <tbody>
           <tr>
             <td>{{tableData.firstName}} {{tableData.lastName}}, {{tableData.middleName}}</td>
-            <td *ngIf="tableData.userTypeId == 2">{{tableData.businessName}}</td>
+            <td *ngIf="tableData.userType == 'Corporate'">{{tableData.businessName}}</td>
             <td>{{tableData.userName}}</td>
             <td>{{tableData.email}}</td>
             <td>{{tableData.accountNumber}}</td>
             <td>{{tableData.address}}</td>
             <td>{{tableData.phoneNumber}}</td>
-            <td>{{tableData.accountType}}</td>
+            <td>{{tableData.userType}}</td>
             <td>{{tableData.active == true ? 'Active' : 'Disabled'}}</td>
           </tr>
         </tbody>
@@ -86,7 +88,7 @@
           Edit
         </button>
         <button *ngIf="loading" mat-flat-button color="accent" class="btn w-[50%] text-lg">
-          Please wait...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
+          <span class="flex items-center m-auto">Please wait...<mat-spinner [diameter]="25"></mat-spinner></span>
         </button>
         <p class="mt-2">📞 Contact customer support for any other update you want to make.</p>
       </div>
@@ -168,7 +170,7 @@
                 Delete
               </button>
               <button *ngIf="loading2" mat-flat-button color="accent" class="btn w-[100%] text-lg">
-                Please wait...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
+                Please wait...<mat-spinner [diameter]="25"></mat-spinner>
               </button>
             </div>
           </div>

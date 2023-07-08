@@ -76,6 +76,19 @@ img {
   animation: spin 1.3s linear infinite;
 }
 
+.loader {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin: 2px 4px;
+  float: right;
+  border-radius: 50%;
+  border: 3px solid #fdd;
+  border-color: #fdd transparent;
+  animation: spin 1.2s linear infinite;
+}
+
 @media (max-width: 500px) {
   .spinner{
     height: 50px;
@@ -111,10 +124,6 @@ img {
   background-color: #a0a0a0;
 }
 
-mat-form-field {
-  padding-bottom: 1rem;
-}
-
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
@@ -133,6 +142,16 @@ mat-form-field {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #004d80;
+}
+
+// angular material component custom styling
+mat-form-field {
+  padding-bottom: 1rem;
+}
+
+mat-spinner {
+  float: right;
+  margin-left: 8px;
 }
 
 /* Importing Bootstrap SCSS file. */

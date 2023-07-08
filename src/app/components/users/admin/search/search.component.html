@@ -1,5 +1,5 @@
 <div class="bg-blue-300 min-h-screen">
-  <div class="bg-blue-200">
+  <div class="bg-blue-200 sticky top-[65px] z-[5]">
     <span class="text-black text-2xl font-medium px-4 py-6 shadow-lg">Search</span>
   </div>
     
@@ -11,7 +11,7 @@
           <span class=" text-xl text-[#012970] flex items-center font-medium"><i class="bi bi-search pr-2"></i>Search</span>
           <button *ngIf="show" (click)="back()" class="flex justify-center text-lg font-normal hover:bg-sky-100">
             <i class="bi bi-arrow-left text-2xl pr-2"></i> Back
-          </button>        
+          </button>       
         </div>
   
         <div *ngIf="!show" class="row">
@@ -30,7 +30,7 @@
                         <mat-icon *ngIf="!arrow">arrow_drop_down</mat-icon>
                       </mat-expansion-panel-header>
 
-                      <div>
+                      <div class="max-w-[500px]">
                         <ngb-alert *ngIf="getCustomersByCategoryError && getCustomersByCategoryError?.status > 0 && getCustomersByCategoryError?.status <= 499" [type]="'danger'" (closed)="getCustomersByCategoryError = ''">
                           {{getCustomersByCategoryError?.error?.error}} {{getCustomersByCategoryError?.error?.message}}
                         </ngb-alert>
@@ -39,18 +39,20 @@
                         </ngb-alert>
                       </div>
               
-                      <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="category">
+                      <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="customerCategoryValue">
                         <mat-radio-button class="example-radio-button" *ngFor="let customer of customerCategory" [value]="customer">
                           {{customer}}
                         </mat-radio-button>
                       </mat-radio-group>
-              
-                      <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="!category" (click)="selectCategory()" class="btn w-[50%] text-lg">
-                        Proceed
-                      </button>
-                      <button *ngIf="loading" mat-flat-button color="accent" class="btn w-[50%] text-lg">
-                        Please wait...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
-                      </button>
+         
+                      <div class="max-w-[500px] mt-3">
+                        <button *ngIf="!loading" mat-flat-button color="primary" type="button" [disabled]="!customerCategoryValue" (click)="searchByCategory()" class="btn w-[100%] text-lg">
+                          Proceed
+                        </button>
+                        <button *ngIf="loading" mat-flat-button color="accent" class="btn w-[100%] text-lg">
+                          <span class="flex items-center m-auto">Please wait...<mat-spinner [diameter]="25"></mat-spinner></span>
+                        </button>
+                      </div>
                         
                     </mat-expansion-panel>
                   </mat-accordion>
@@ -74,7 +76,7 @@
                         <mat-icon *ngIf="!arrow1">arrow_drop_down</mat-icon>
                       </mat-expansion-panel-header>
 
-                      <div>
+                      <div class="max-w-[500px]">
                         <ngb-alert *ngIf="searchCustomerError && searchCustomerError?.status > 0 && searchCustomerError?.status <= 499" [type]="'danger'" (closed)="searchCustomerError = ''">
                           {{searchCustomerError?.error?.error}} {{searchCustomerError?.error?.message}}
                         </ngb-alert>
@@ -83,25 +85,25 @@
                         </ngb-alert>
                       </div>
               
-                      <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="search">
+                      <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="searchByValue">
                         <mat-radio-button class="example-radio-button" *ngFor="let searchCustomer of searchBy" [value]="searchCustomer">
                           {{searchCustomer}}
                         </mat-radio-button>
                       </mat-radio-group>
 
-                      <form [formGroup]="userNameOrEmailForm" *ngIf="search" (submit)="searchCustomer()" class="py-2">
-                        <mat-form-field *ngIf="search == 'Email/ UserName'">
+                      <form [formGroup]="userNameOrEmailForm" *ngIf="searchByValue == 'Email/ UserName'" class="max-w-[500px] py-2">
+                        <mat-form-field class="w-full">
                           <mat-label>UserName or Email</mat-label>
                           <input formControlName="emailAddressOrUserName" matInput required />
-                          <mat-hint>Enter userName</mat-hint>
+                          <mat-hint>Enter userName or email address</mat-hint>
                           <mat-error>
                             UserName or Email required
                           </mat-error>
                         </mat-form-field>
                       </form>
                       
-                      <form [formGroup]="accountNumberForm" *ngIf="search" (submit)="searchCustomer()" class="py-2">
-                        <mat-form-field *ngIf="search == 'Account Number'">
+                      <form [formGroup]="accountNumberForm" *ngIf="searchByValue == 'Account Number'" class="max-w-[500px] py-2">
+                        <mat-form-field class="w-full">
                           <mat-label>Account Number</mat-label>
                           <input formControlName="accountNumber" matInput minlength="10" maxlength="10" required />
                           <mat-hint>Enter account number</mat-hint>
@@ -113,15 +115,18 @@
                           </mat-error>
                         </mat-form-field>
                       </form>
-           
-                      <button *ngIf="!loading1" mat-flat-button color="primary" type="submit" (click)="searchCustomer()" class="btn w-[50%] text-lg"
-                        [disabled]="!search || userNameOrEmailForm.invalid && search == 'Email/ UserName' || accountNumberForm.invalid && search == 'Account Number'"
-                      >
-                        Proceed
-                      </button>
-                      <button *ngIf="loading1" mat-flat-button color="accent" class="btn w-[50%] text-lg">
-                        Please wait...<span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner></span>
-                      </button>                    
+
+                      <div class="max-w-[500px] mt-3">
+                        <button *ngIf="!loading1" mat-flat-button color="primary" type="button" (click)="searchCustomer()" class="btn w-[100%] text-lg"
+                          [disabled]="!searchByValue || userNameOrEmailForm.invalid && searchByValue == 'Email/ UserName' || accountNumberForm.invalid && searchByValue == 'Account Number'"
+                        >
+                          Proceed
+                        </button>
+                        <button *ngIf="loading1" mat-flat-button color="accent" class="btn w-[100%] text-lg">
+                          <span class="flex items-center m-auto">Please wait...<mat-spinner [diameter]="25"></mat-spinner></span>
+                        </button>
+                      </div>
+                      
                     </mat-expansion-panel>
                   </mat-accordion>
                 </div>

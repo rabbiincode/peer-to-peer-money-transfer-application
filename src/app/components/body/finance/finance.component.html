@@ -1,9 +1,9 @@
 <div class="bg-sky-200 min-h-screen">
-  <div [ngClass]="!authenticated ? 'sticky-top' : ''">
+  <div [ngClass]="!authenticated ? 'sticky-top' : 'sticky top-[65px] z-[5]'">
     <div class="bg-sky-300">
       <span class="text-green-700 text-2xl font-medium px-3 shadow-lg">Pay Yourself First</span>
     </div>
-    
+
     <div class="flex justify-between text-black text-base">
       <span *ngIf="!authenticated" routerLink="/home" class="flex justify-center text-lg font-normal px-3 py-1 cursor-pointer shadow-lg hover:bg-sky-100">
         <i class="bi bi-arrow-left text-2xl pr-2"></i> Back
@@ -11,7 +11,7 @@
       <span *ngIf="authenticated" routerLink="/user" class="flex justify-center text-lg font-normal px-3 py-1 cursor-pointer shadow-lg hover:bg-sky-100">
         <i class="bi bi-arrow-left text-2xl pr-2"></i> Back
       </span>
-      <span class="text-lg font-normal px-3 py-1 shadow-lg">Financial Freedom</span>
+      <span class="text-lg font-medium px-3 py-1 shadow-lg">Financial Freedom</span>
     </div>
   </div> 
 

@@ -9,7 +9,7 @@ import { Team } from '../../interfaces/body';
 
 export class TeamComponent {
   @Input() scrollPagePosition!: string
-  
+
   team: Team[] = [
     {
       name: 'Benedict Ezemenahi',
@@ -21,7 +21,7 @@ export class TeamComponent {
       animation: 'animate__animated animate__fadeInTopLeft'
     },
     {
-      name: 'Chibueze Charles C',
+      name: 'Chibueze Charles .C.',
       position: 'Team Associate',
       image: 'assets/images/team/team2.jpg',
       github: 'http://www.github.com/Charles-04',

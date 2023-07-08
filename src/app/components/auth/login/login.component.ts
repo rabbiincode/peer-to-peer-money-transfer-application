@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   accessDenied = false
   twoFactorAuth = false
   errorMessage: any
-  number = '****'
+  number = 0
   loginForm!: FormGroup
   twoFactorAuthForm!: FormGroup
  
@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.loading = !this.loading
+    // Implement validate password before user data loads - pending
     this.userData.getUserData(this.loginForm.value.emailAddressOrUserName)
 
     this.login.loginUser(this.loginForm.value).subscribe((data: any) => {

@@ -1,10 +1,12 @@
 <div class="bg-blue-300 min-h-screen">
-  <div class="bg-blue-200">
-    <span class="text-black text-2xl font-medium px-4 py-8 shadow-lg">Deposit</span>
-  </div>
-  <div class="flex justify-between text-black text-base">
-    <span></span>
-    <span class="px-2 py-1 shadow-lg">Balance: {{balance | currency}}</span>
+  <div class="sticky top-[65px] z-[5]">
+    <div class="bg-blue-200">
+      <span class="text-black text-2xl font-medium px-4 py-8 shadow-lg">Deposit</span>
+    </div>
+    <div class="flex justify-between text-black text-base">
+      <span></span>
+      <span class="font-medium px-2 py-1 shadow-lg">Balance: {{balance | currency}}</span>
+    </div>
   </div>
 
   <div class="px-3 py-8">
@@ -12,7 +14,7 @@
     <div class="max-w-[600px] m-auto">
       <span class="flex justify-center pb-4"><mat-icon>monetization_on</mat-icon></span>
       <div class="bg-[#e0f8e9] px-2 rounded-md">
-        <form [formGroup]="depositForm" (submit)="depositNow()" class="m-auto py-6">
+        <form [formGroup]="depositForm" class="m-auto py-6">
           <div class="pt-2">
             <ngb-alert *ngIf="depositResponse" [type]="'success'" (closed)="depositResponse = ''">Deposit successful ✔️</ngb-alert>
             <ngb-alert *ngIf="depositError && depositError?.status > 0 && depositError?.status <= 499" [type]="'danger'" (closed)="depositError = ''">
@@ -23,66 +25,71 @@
             </ngb-alert>
           </div>
 
+          <mat-form-field class="w-full">
+            <mat-label>Amount</mat-label>
+            <input formControlName="amount" [(ngModel)]="amount" matInput required />
+            <mat-hint>How much do you want to deposit?</mat-hint>
+            <mat-error *ngIf="depositForm.value.amount == ''">
+              Amount required
+            </mat-error>
+            <mat-error *ngIf="depositForm.get('amount')?.hasError('pattern')">
+              Amount Invalid
+            </mat-error>
+          </mat-form-field>
+
           <div>
-            <mat-form-field class="w-full">
-              <mat-label>Amount</mat-label>
-              <input formControlName="amount" [(ngModel)]="amount" matInput required />
-              <mat-hint>How much do you want to deposit?</mat-hint>
-              <mat-error *ngIf="depositForm.value.amount == ''">
-                Amount required
-              </mat-error>
-              <mat-error *ngIf="depositForm.get('amount')?.hasError('pattern')">
-                Amount Invalid
-              </mat-error>
-            </mat-form-field>
-          </div>
-         
-          <div class="flex flex-col text-center mt-1">
-            <span class="text-yellow-500 pb-2">Pay with</span>
-            <button mat-flat-button color="accent" type="submit" class="btn text-lg rounded-2xl p-4"
-              [disabled]="depositForm.value.amount == '' || depositForm.value.amount <= 0 || depositForm.get('amount')?.hasError('pattern') || card == true"
-            >
-              PayPal
-            </button>
-            <span class="line px-4 py-2">OR</span>
-            <button mat-flat-button color="warn" type="submit" (click)="payWithCard()" class="btn text-lg rounded-2xl p-4"
-              [disabled]="depositForm.value.amount == '' || depositForm.value.amount <= 0 || depositForm.get('amount')?.hasError('pattern')"
-            >
-              Debit or Credit Card
-            </button>
+            <div *ngIf="show" class="relative bg-red-100 text-center text-base font-medium p-4">
+              <span (click)="payPal()" class="absolute right-1 top-1"><mat-icon>close</mat-icon></span>
+              <p>Paypal Payment not available at the moment.</p>
+              <span>Available Soon...</span>
+            </div>
+
+            <div *ngIf="!show" class="flex flex-col text-center mt-1">
+              <span class="text-yellow-500 pb-2">Pay with</span>
+
+              <button mat-flat-button color="accent" type="button" (click)="payPal()" class="btn text-lg rounded-2xl p-4"
+                [disabled]="depositForm.value.amount == '' || depositForm.value.amount <= 0 || depositForm.get('amount')?.hasError('pattern') || card == true"
+              >
+                PayPal
+              </button>
+              <span class="line px-4 py-2">OR</span>
+              <button mat-flat-button color="warn" type="button" (click)="payWithCard()" class="btn text-lg rounded-2xl p-4"
+                [disabled]="depositForm.value.amount == '' || depositForm.value.amount <= 0 || depositForm.get('amount')?.hasError('pattern')"
+              >
+                Debit or Credit Card
+              </button>
+            </div>
           </div>
 
           <div *ngIf="card" class="mt-8">
-            <div>
-              <mat-form-field class="w-full">
-                <mat-label>Card Number</mat-label>
-                <input formControlName="cardNumber" matInput required placeholder="**** **** **** ****" minlength="16" maxlength="16" />
-                <mat-hint>Enter your card number</mat-hint>
-                <mat-error *ngIf="depositForm.value.cardNumber == ''">
-                  Card Number required
-                </mat-error>
-                <mat-error *ngIf="depositForm.get('cardNumber')?.hasError('pattern')">
-                  Card Number Invalid
-                </mat-error>
-                <mat-error *ngIf="depositForm.get('cardNumber')?.hasError('minlength')">
-                  Card Number Incomplete
-                </mat-error>
-              </mat-form-field>
-            </div>
-            <div>
-              <mat-form-field class="w-full">
-                <mat-label>Card Name</mat-label>
-                <input formControlName="cardName" matInput required />
-                <mat-hint>Enter your card name</mat-hint>
-                <mat-error>
-                  Card Name required
-                </mat-error>
-              </mat-form-field>
-            </div>
+            <mat-form-field class="w-full">
+              <mat-label>Card Number</mat-label>
+              <input formControlName="cardNumber" matInput required placeholder="**** **** **** ****" minlength="16" maxlength="16" />
+              <mat-hint>Enter your card number</mat-hint>
+              <mat-error *ngIf="depositForm.value.cardNumber == ''">
+                Card Number required
+              </mat-error>
+              <mat-error *ngIf="depositForm.get('cardNumber')?.hasError('pattern')">
+                Card Number Invalid
+              </mat-error>
+              <mat-error *ngIf="depositForm.get('cardNumber')?.hasError('minlength')">
+                Card Number Incomplete
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="w-full">
+              <mat-label>Card Name</mat-label>
+              <input formControlName="cardName" matInput required />
+              <mat-hint>Enter your card name</mat-hint>
+              <mat-error>
+                Card Name required
+              </mat-error>
+            </mat-form-field>
+
             <div class="flex">
               <mat-form-field class="w-full pr-3 mb-2">
                 <mat-label>Card Expiry</mat-label>
-                <input formControlName="cardExpiry" matInput required placeholder="MM / YY" pattern="[0-9]*" />
+                <input formControlName="cardExpiryDate" matInput required placeholder="MM / YY" pattern="[0-9]*" maxlength="5" />
                 <mat-hint>Enter your card expiration date</mat-hint>
                 <mat-error>
                   Card Expiry required
@@ -100,12 +107,13 @@
                 </mat-error>
               </mat-form-field>
             </div>
+
             <div class="mt-2">
-              <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="depositForm.invalid  || depositForm.value.amount <= 0" class="btn w-full text-lg rounded-2xl p-4">
+              <button *ngIf="!loading" mat-flat-button color="primary" type="button" (click)="depositNow()" [disabled]="depositForm.invalid  || depositForm.value.amount <= 0" class="btn w-full text-lg rounded-2xl p-4">
                 Deposit {{amount | currency}}
               </button>
-              <button *ngIf="loading" mat-flat-button color="accent" type="submit" class="btn w-full text-lg rounded-2xl p-4">
-                <span>Please wait...</span><mat-spinner [diameter]="25" style="float: right; margin-left: 8px"></mat-spinner>
+              <button *ngIf="loading" mat-flat-button color="accent" class="btn w-full text-lg rounded-2xl p-4">
+                <span class="flex items-center m-auto">Please wait...<mat-spinner [diameter]="25"></mat-spinner></span>
               </button>
             </div>
           </div>
