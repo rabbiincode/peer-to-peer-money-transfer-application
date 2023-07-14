@@ -1,0 +1,26 @@
+.line {
+  display: flex;
+  flex-direction: row;
+}
+
+.line:before, .line:after {
+  content: "";
+  flex: 1 1;
+  border-bottom: 1px solid;
+  margin: auto;
+}
+
+.line:before {
+  margin-right: 10px
+}
+
+.line:after {
+  margin-left: 10px
+}
+
+@media (min-width: 640px){
+  img {
+    width: 25rem;
+    height: 25rem;
+  }
+}

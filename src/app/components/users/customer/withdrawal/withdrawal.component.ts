@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../service/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PasswordPatternValidator } from 'src/app/components/auth/customValidation/custom-validation/custom-validation.component';
+import { PasswordPatternValidator } from 'src/app/components/customValidation/custom-validation/custom-validation.component';
 import { CustomerService } from '../../service/customer.service';
+import { UserData } from 'src/app/components/interfaces/user';
 
 @Component({
   selector: 'cashMingle-withdrawal',
@@ -11,9 +12,8 @@ import { CustomerService } from '../../service/customer.service';
 })
 
 export class WithdrawalComponent {
-  hide = true
   loading = false
-  balance: number
+  userData!: UserData
   withdrawalResponse!: any
   withdrawalError!: any
   withdrawalForm!: FormGroup
@@ -22,7 +22,7 @@ export class WithdrawalComponent {
   ]
 
   constructor(private withdraw: UserService, private withdrawal: CustomerService, private formBuilder: FormBuilder){
-    this.balance = withdraw.userData.balance
+    this.userData = withdraw.userData
   }
 
   ngOnInit(): void {
@@ -39,6 +39,8 @@ export class WithdrawalComponent {
     this.loading = true
     this.withdrawal.withdrawal(this.withdrawalForm.value).subscribe((data) => {
       this.withdrawalResponse = data
+      this.withdraw.getRefreshedData.subscribe(data => this.userData = data)
+      this.withdraw.updatedData()
       this.loading = false
     }, (error) => {
       this.withdrawalError = error

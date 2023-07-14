@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../service/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PasswordPatternValidator } from 'src/app/components/auth/customValidation/custom-validation/custom-validation.component';
+import { PasswordPatternValidator } from 'src/app/components/customValidation/custom-validation/custom-validation.component';
 import { CustomerService } from '../../service/customer.service';
+import { UserData } from 'src/app/components/interfaces/user';
 
 @Component({
   selector: 'cashMingle-transfer',
@@ -11,15 +12,14 @@ import { CustomerService } from '../../service/customer.service';
 })
 
 export class TransferComponent {
-  hide = true
   loading = false
-  balance: number
+  userData!: UserData
   transferResponse!: any
   transferError!: any
   transferForm!: FormGroup
 
   constructor(private transfer: UserService, private transferFund: CustomerService, private formBuilder: FormBuilder){
-    this.balance = transfer.userData.balance
+    this.userData = transfer.userData
   }
 
   ngOnInit(): void {
@@ -31,11 +31,13 @@ export class TransferComponent {
       description: ['']
     })
   }
-  
+
   transferNow(){
     this.loading = true
     this.transferFund.transfer(this.transferForm.value).subscribe((data) => {
       this.transferResponse = data
+      this.transfer.getRefreshedData.subscribe(data => this.userData = data)
+      this.transfer.updatedData()
       this.loading = false
     }, (error) => {
       this.transferError = error

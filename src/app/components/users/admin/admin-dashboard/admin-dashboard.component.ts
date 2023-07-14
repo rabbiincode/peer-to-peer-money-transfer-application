@@ -15,4 +15,8 @@ export class AdminDashboardComponent {
     admin.userData.firstName ? this.name = admin.userData.firstName : this.name = 'Administrator'
     admin.userData.userType ? this.accountType = admin.userData.userType : this.accountType = 'Admin'
   }
+
+  notifications = [
+   '/assets/images/notification/n4.jpg', '/assets/images/notification/n5.jpg', '/assets/images/notification/n6.jpg'
+  ]
 }

@@ -8,14 +8,9 @@
       <p class="font-medium text-lg text-[#009688]">Here are services available to you</p>
     </div>
 
-    
     <mdb-carousel [controls]="true" [indicators]="true" [animation]="'fade'">
       <mdb-carousel-item *ngFor="let slider of slide">
-        <img
-          src={{slider.image}}
-          class="d-block w-100"
-          alt="image"
-        />
+        <img src={{slider.image}} class="d-block w-100" alt="image" />
         <div class="carousel-caption block">
           <h2 class="text-orange-600">{{slider.title}}</h2>
           <p [style]="slider.color" class="font-medium text-xl">{{slider.content}}</p>

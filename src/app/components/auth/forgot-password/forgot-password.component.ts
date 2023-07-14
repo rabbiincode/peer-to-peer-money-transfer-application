@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder ,FormGroup } from '@angular/forms';
-import { EmailValidator, MatchPasswordValidator, PasswordPatternValidator } from '../customValidation/custom-validation/custom-validation.component';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { EmailValidator, PasswordPatternValidator, MatchPasswordValidator } from '../../customValidation/custom-validation/custom-validation.component';
 import { AuthService } from '../service/auth.service';
 
 @Component({

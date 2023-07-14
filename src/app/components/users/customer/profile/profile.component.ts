@@ -19,8 +19,7 @@ export class ProfileComponent {
   editPassword = false
   deleteChecked!: boolean  
   checked!: boolean
-  twoFactorAuth!: boolean
-  tableData!: UserData
+  userData!: UserData
   editForm!: FormGroup
   twoFactorAuthForm!: FormGroup
   deleteForm!: FormGroup
@@ -33,11 +32,11 @@ export class ProfileComponent {
   editDataValue!: string
   editData: string[] = ['address', 'userName', 'password', 'phoneNumber']
 
-  constructor(private profile: UserService, private deleteUser: AdminService, private formBuilder: FormBuilder, private route: Router){}
+  constructor(private profile: UserService, private deleteUser: AdminService, private formBuilder: FormBuilder, private route: Router){
+    this.userData = profile.userData
+  }
 
   ngOnInit(){
-    this.tableData = this.profile.userData
-    this.twoFactorAuth = this.profile.userData.twoFactorEnabled
     this.editForm = this.formBuilder.group({
       operationType: [0],
       path: [{value: '', disabled: true}],
@@ -77,6 +76,8 @@ export class ProfileComponent {
     this.loading = true
     this.profile.editUserDetails(this.profile.userData.userName, [this.editForm.getRawValue()]).subscribe((data) => {
       this.editUserResponse = data
+      this.profile.getRefreshedData.subscribe(data => this.userData = data)
+      this.profile.updatedData()
       this.loading = false
     }, (error) => {
       this.editUserError = error
@@ -89,6 +90,8 @@ export class ProfileComponent {
     this.loading1 = true
     this.profile.editUserDetails(this.profile.userData.userName, [this.twoFactorAuthForm.getRawValue()]).subscribe((data) => {
       this.toggleTwoFactorAuthResponse = data
+      this.profile.getRefreshedData.subscribe(data => this.userData = data)
+      this.profile.updatedData()
       this.loading1 = false
     }, (error) => {
       this.toggleTwoFactorAuthError = error
@@ -104,7 +107,7 @@ export class ProfileComponent {
       this.loading2 = false
       setTimeout(() => {
         this.route.navigate(['/home'])
-      }, 4000);
+      }, 5000);
     }, (error) => {
       this.deleteAccountError = error
       this.loading2 = false

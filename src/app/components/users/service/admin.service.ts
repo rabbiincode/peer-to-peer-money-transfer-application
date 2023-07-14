@@ -9,7 +9,7 @@ export class AdminService {
   url = "https://localhost:44376/CashMingle/Admin"
   url2 = "https://localhost:44376/CashMingle/Roles_And_Claims"
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient){}
 
   getData(){
     return this.http.get(`${this.url}/get-all`)

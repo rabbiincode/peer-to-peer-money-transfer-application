@@ -16,7 +16,7 @@
         <div class="card mb-4">
           <div class="card-body bg-[#e0f8e9] break-all">
             <span class="card-title text-xl text-[#012970] font-medium pl-2">Welcome Back,</span>
-  
+
             <div class="flex items-center py-3">
               <div class="bg-[#f6f6fe] text-[#4154f1] text-3xl w-16 h-16 rounded-circle flex items-center justify-center hover:bg-gray-200">
                 <i class="bi bi-person-fill"></i>
@@ -31,7 +31,7 @@
         <div class="card mb-4">
           <div class="card-body bg-[#e0f8e9]">
             <span class="card-title text-xl text-[#012970] font-medium">Task Reminder</span>
-  
+
             <div class="flex items-center py-3">
               <div class="bg-[#f6f6fe] text-[#4154f1] text-3xl w-16 h-16 rounded-circle flex items-center justify-center hover:bg-gray-200">
                 <i class="bi bi-alarm-fill"></i>
@@ -44,9 +44,13 @@
     </div>
 
     <div class="row">
-      <div class="col-xxl-6 col-md-6">
-        <h2>Company News</h2>
-      </div>
+      <h2 class="text-green-900">Company News</h2>
+
+      <mdb-carousel [controls]="true" [indicators]="true" [animation]="'fade'">
+        <mdb-carousel-item *ngFor="let alert of notifications">
+          <img [src]="alert" class="d-block w-100" alt="image" />
+        </mdb-carousel-item>
+      </mdb-carousel>
     </div>
 
   </div>

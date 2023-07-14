@@ -12,14 +12,19 @@ import { fade, fade1 } from '../../animations/home-animations';
 })
 
 export class HomeComponent {
-  scroll = false 
   hover = false
+  scroll = false
+  notify = false
   scrollPagePosition!: string
 
   constructor(private route: Router, private scrollPosition: TrackScrollPositionService){
     scrollPosition.currentSection.subscribe((res) => {
       this.scrollPagePosition = res.toString()
     })
+
+    setTimeout(() => {
+      this.notify = true
+    }, 15000)
   }
 
   @HostListener("document:scroll")
@@ -36,6 +41,10 @@ export class HomeComponent {
 
   navigateSection(fragment: string){
     this.route.navigateByUrl('#' + fragment)
+  }
+
+  showNotification(){
+    this.notify = false
   }
   
   cards: Card[] = [

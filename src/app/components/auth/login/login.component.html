@@ -1,7 +1,16 @@
-<div *ngIf="!open" class="fixed bg-slate-300 top-0 left-0 w-full h-[100vh] z-50">
+<div *ngIf="!open" class="bg-slate-300 h-[100vh] z-50">
   <div class="bg-slate-400">
     <span class="text-blue-700 text-xl font-semibold px-4 py-6 shadow-lg">CashMingle</span>
   </div>
+
+  <div *ngIf="sessionTimeOut" class="session-timeout bg-transparent">
+    <div class="bg-red-100 rounded-sm px-4 py-2">
+      <h3>Session Time Out</h3>
+      <p>Please login to continue</p>
+      <button class="bg-slate-50 p-1" (click)="sessionTimeOut = !sessionTimeOut">Ok</button>
+    </div>
+  </div>
+
   <div class="login p-4">
     <img src="/assets/images/image/header.png" alt="image" [routerLink]="['/home']" width="35rem" height="35rem" class="m-auto pb-4" />
 
@@ -12,7 +21,7 @@
           <div class="header text-blue-800">
             <h2>Login</h2>
           </div>
-  
+
           <div>
             <ngb-alert *ngIf="errorMessage && errorMessage?.status > 0 && errorMessage?.status <= 499" [type]="'danger'" (closed)="errorMessage = ''">
               {{errorMessage?.error?.error}} {{errorMessage?.error?.message}}
@@ -22,7 +31,7 @@
             </ngb-alert>
             <ngb-alert *ngIf="accessDenied" [type]="'danger'" (closed)="accessDenied = false">Access Denied</ngb-alert>
           </div>
-  
+
           <form [formGroup]="loginForm" (submit)="loginUser()" class="py-2">
             <div class="space">
               <mat-form-field class="length">
@@ -33,7 +42,7 @@
                 </mat-error>
               </mat-form-field>
             </div>
-      
+
             <div class="space">
               <mat-form-field class="length">
                 <mat-label>Password</mat-label>
@@ -48,7 +57,7 @@
                   Password Invalid
                 </mat-error>
               </mat-form-field>
-              
+
               <div class="flex items-center justify-between w-[90%] text-teal-500 text-base font-medium m-auto pb-4">
                 <span class="flex items-center"><input type="checkbox" />Remember Me</span>
                 <span (click)="ChangePasswordOpen()" class="cursor-pointer hover:text-red-300">Forgot Password?</span>
@@ -62,7 +71,7 @@
               </button>
             </div>
           </form>
-    
+
           <div class="text-center w-[80%] text-base font-medium m-auto pt-2">
             Don't have an account? 
             <span [routerLink]="['/register']" class=" text-blue-700 cursor-pointer hover:text-teal-500">Create an Account</span>
@@ -73,7 +82,7 @@
           <div class="header text-blue-800">
             <h2>Two Factor Authentication</h2>
           </div>
-          
+ 
           <form [formGroup]="twoFactorAuthForm" (submit)="twoFactorAuthLogin()" class="py-2">
             <div class="space">
               <mat-form-field class="length">

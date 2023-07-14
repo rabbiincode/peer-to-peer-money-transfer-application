@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserData } from '../../interfaces/user';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,49 +10,28 @@ import { UserData } from '../../interfaces/user';
 export class UserService {
   url = "https://localhost:44376/CashMingle/Admin"
   url1 = "https://localhost:44376/CashMingle/Account"
-  userData: UserData = {
-    firstName: '',
-    middleName: '',
-    lastName: '',
-    userName: '',
-    email: '',
-    phoneNumber: 0,
-    accountNumber: 0,
-    address: '',
-    birthday: new Date,
-    businessName: '',
-    userType: '',
-    balance: 0,
-    deleted: false,
-    active: false,
-    twoFactorEnabled: false,
-    createdAt: new Date,
-    updatedAt: new Date
-  }
+  userData!: UserData
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient){}
+
+  private refreshData$ = new Subject<UserData>()
 
   getUserData(EmailAddressOrUserName: string){
     this.http.get(`${this.url}/get-customer-by-email-or-userName?EmailAddressOrUserName=${EmailAddressOrUserName}`)
     .subscribe((data: any) => {
-      this.userData.firstName = data.firstName
-      this.userData.middleName = data.middleName
-      this.userData.lastName = data.lastName
-      this.userData.userName = data.userName
-      this.userData.email = data.email
-      this.userData.phoneNumber = data.phoneNumber
-      this.userData.accountNumber = data.accountNumber
-      this.userData.address = data.address
-      this.userData.birthday = data.birthday
-      this.userData.businessName = data.businessName
-      this.userData.userType = data.userTypeId
-      this.userData.balance = data.balance
-      this.userData.deleted = data.deleted
-      this.userData.active = data.active
-      this.userData.twoFactorEnabled = data.twoFactorEnabled
-      this.userData.createdAt = data.createdAt
-      this.userData.updatedAt = data.updatedAt
+      this.refreshData$.next(data)
+      this.userData = data
+    }, (error) => {
+      this.userData = this.userData
     })
+  }
+
+  get getRefreshedData(){
+    return this.refreshData$
+  }
+
+  updatedData(){
+    this.getUserData(this.userData.email)
   }
 
   editUserDetails(userName: string, edit: any){

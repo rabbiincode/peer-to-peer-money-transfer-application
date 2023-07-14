@@ -4,10 +4,9 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class TrackScrollPositionService {
-
   currentSection: BehaviorSubject<String> = new BehaviorSubject<String>('home');
-
   sections: string[] = ['home', 'about', 'services', 'team', 'faq', 'contact']
 
   constructor() {

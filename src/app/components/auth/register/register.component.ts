@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { EmailValidator, MatchPasswordValidator, NumberValidator, PasswordPatternValidator, PhoneNumberValidator, SpaceCheckValidator } from '../customValidation/custom-validation/custom-validation.component';
+import { EmailValidator, MatchPasswordValidator, NumberValidator, PasswordPatternValidator, PhoneNumberValidator, SpaceCheckValidator } from '../../customValidation/custom-validation/custom-validation.component';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
 
@@ -90,7 +90,7 @@ export class RegisterComponent implements OnInit {
       this.loading = false
       setTimeout(() => {
         this.route.navigate(['/login'])
-      }, 5000);
+      }, 8000)
       this.registerForm.reset()
       }, (error) => {
         this.errorMessage = error

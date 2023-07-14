@@ -1,4 +1,8 @@
 <div>
+  <div *ngIf="notify" class="animate__animated animate__fadeInLeft notify m-3">
+    <cashMingle-notifications (showNotification)="showNotification()"></cashMingle-notifications>
+  </div>
+
   <div class="max-xs:hidden bg-blue-400 flex items-center justify-between px-8 py-2 text-base">
     <span class="flex max-md:justify-between max-md:items-center max-md:m-auto">
       <span class="flex items-center pr-4"><i class="bi bi-envelope-paper text-xl pr-1"></i> support@cashmingle.com</span>
@@ -10,29 +14,29 @@
       <a href="https://www.linkedin.com/in/successisaiah" target="_blank"><i class="bi bi-linkedin text-white text-xl"></i></a>
     </span>
   </div>
-  
+
   <div class="sticky top-0 z-50">
     <cashMingle-header [changeBackground]="scroll" [styleLinkOnScroll]="scrollPagePosition" (navigateToSection)="navigateSection($event)"></cashMingle-header>
   </div>
-  
+
   <div class="relative max-md:image bg-gradient-to-r from-blue-400 from-20% via-blue-500 via-30% to-blue-950 to-80%">
     <section id="home">
       <div class="container">
         <div class="row flex items-center py-16 max-md:py-0">
-  
+
           <div class="col-md-8 text-white text-xl lg:text-2xl">
             <h1 class="animate__animated animate__bounceInDown">Welcome to the Future</h1>
             <p class="mb-0 animate__animated animate__bounceInLeft animate__delay-2s">The No 1 peer-to-peer platform</p>
             <h3 class="animate__animated animate__bounceInRight animate__delay-3s">Deposit, Save and Send Money Seamlessly</h3>
             <span @fade1>Faster than lightening with just the click of a button</span>
-  
+
             <div @fade1 class="pt-4">
               <button type="button" [routerLink]="['/register']" 
                class="animate__animated animate__pulse animate__infinite bg-gradient-to-r from-green-400 to-blue-500 px-4 py-2 mr-4 text-black text-lg font-medium rounded-md hover:from-pink-500 hover:to-yellow-500 hover:font-semibold"
               >
                 Register
               </button>
-              
+
               <button type="button" [routerLink]="['/login']"
                class="animate__animated animate__headShake animate__infinite bg-gradient-to-l from-green-400 to-blue-500 px-4 py-2 text-black text-lg font-medium rounded-md hover:from-pink-500 hover:to-yellow-500 hover:font-semibold"
               >
@@ -40,14 +44,14 @@
               </button>
             </div>
           </div>
-                 
+ 
           <div @fade class="col-md-4 max-md:hidden">
             <img src="/assets/images/image/home.png" alt="image" class="img-fluid pics">
           </div>
           
         </div>
       </div>
-  
+
       <div class="max-md:hidden cards flex justify-center">
         <mat-card (mouseover)="hover=true" (mouseleave)="hover=false" [ngClass]="card.animation"
           class="card rounded-3xl" *ngFor="let card of cards" [style]="hover ? card.hover : card.background"

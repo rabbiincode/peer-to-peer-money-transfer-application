@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Sidebar } from '../../interfaces/user';
 import { AuthService } from '../../auth/service/auth.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'cashMingle-user-header',
@@ -16,7 +15,7 @@ export class UserHeaderComponent {
   @Output() togglePageWidth = new EventEmitter<boolean>()
   @Input() sidebar!: Sidebar[]
 
-  constructor(private header: AuthService, private route: Router){
+  constructor(private header: AuthService){
     this.showSettings = header.tokenData.role.includes('User')
   }
 
@@ -31,6 +30,5 @@ export class UserHeaderComponent {
 
   logOut(){
     this.header.logOut()
-    this.route.navigate(['/home'])
   }
 }

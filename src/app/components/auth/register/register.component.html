@@ -229,6 +229,12 @@
               I have read and accepted the <a href="#" class="text-red-500 text-sm font-medium px-1 hover:text-green-600">Terms & Conditions</a> of Services.
             </div>
           </div>
+
+          <div class="w-[90%] m-auto">
+            <ngb-alert *ngIf="registerUserResponse" [type]="'success'" (closed)="registerUserResponse = ''">{{registerUserResponse?.result}} {{registerUserResponse?.message}}</ngb-alert>
+            <ngb-alert *ngIf="errorMessage && errorMessage?.status > 0 && errorMessage?.status <= 499" [type]="'danger'" (closed)="errorMessage = ''">{{errorMessage?.error?.error}}</ngb-alert>
+            <ngb-alert *ngIf="errorMessage && errorMessage?.status >= 500 || errorMessage?.status == 0" [type]="'danger'" (closed)="errorMessage = ''">Registration Failed...please try again</ngb-alert>
+          </div>
         
           <div>
             <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="registerForm.invalid || !checked" class="btn w-[90%] text-lg">
@@ -239,12 +245,6 @@
             </button>
           </div>
         </form>
-
-        <div class="w-[90%] m-auto">
-          <ngb-alert *ngIf="registerUserResponse" [type]="'success'" (closed)="registerUserResponse = ''">{{registerUserResponse?.message}}</ngb-alert>
-          <ngb-alert *ngIf="errorMessage && errorMessage?.status > 0 && errorMessage?.status <= 499" [type]="'danger'" (closed)="errorMessage = ''">{{errorMessage?.error?.error}}</ngb-alert>
-          <ngb-alert *ngIf="errorMessage && errorMessage?.status >= 500 || errorMessage?.status == 0" [type]="'danger'" (closed)="errorMessage = ''">Registration Failed...please try again</ngb-alert>
-        </div>
 
       </mat-card-content>
     </mat-card>

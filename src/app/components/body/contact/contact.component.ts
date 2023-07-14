@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { EmailValidator, PhoneNumberValidator } from '../../auth/customValidation/custom-validation/custom-validation.component';
+import { EmailValidator, PhoneNumberValidator } from '../../customValidation/custom-validation/custom-validation.component';
 import { BodyService } from '../body-service/body.service';
 
 @Component({
@@ -14,9 +14,9 @@ export class ContactComponent {
   sendMailResponse = false
   sendMailError!: any
   contactForm!: FormGroup
-  
+
   @Input() scrollPagePosition!: string
-  
+
   constructor(private formBuilder: FormBuilder, private mail: BodyService){}
 
   ngOnInit(): void {

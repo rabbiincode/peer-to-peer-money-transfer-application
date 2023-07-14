@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { EmailValidator, PhoneNumberValidator } from 'src/app/components/auth/customValidation/custom-validation/custom-validation.component';
+import { EmailValidator, PhoneNumberValidator } from 'src/app/components/customValidation/custom-validation/custom-validation.component';
 import { BodyService } from 'src/app/components/body/body-service/body.service';
 import { UserService } from '../../service/user.service';
 

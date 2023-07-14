@@ -10,7 +10,6 @@ import { Slider } from '../../interfaces/body';
 export class ServiceComponent {
   @Input() scrollPagePosition!: string
 
-  
   slide: Slider[] = [
     {
       image: '/assets/images/service/s1.jpg',

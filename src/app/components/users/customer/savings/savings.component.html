@@ -140,7 +140,7 @@
                   <div *ngIf="savingsForm.value.amount > 0 && startDate && !savingsResponse" class="text-green-600 text-center font-medium">
                     Save {{amount | currency}} from {{startDate | date:'fullDate'}} <span *ngIf="endDate">to {{endDate | date:'fullDate'}}</span>
                   </div>
-                  <ngb-alert *ngIf="plan" [type]="'danger'" (closed)="plan = false" class="text-center mt-3">Savings plan not available at the moment...Available Shortly</ngb-alert>
+                  <ngb-alert *ngIf="plan" [type]="'danger'" (closed)="plan = false" class="mt-3">Savings plan not available at the moment...Available Shortly</ngb-alert>
 
                   <div>
                     <button *ngIf="!loading" mat-flat-button color="primary" type="button" (click)="saveNow()" [disabled]="savingsForm.invalid || savingsForm.value.amount <= 0" class="btn w-[100%] text-lg mt-2">Save Now</button>

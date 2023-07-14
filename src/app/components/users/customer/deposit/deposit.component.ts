@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserService } from '../../service/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomerService } from '../../service/customer.service';
+import { UserData } from 'src/app/components/interfaces/user';
 
 @Component({
   selector: 'cashMingle-deposit',
@@ -13,14 +14,14 @@ export class DepositComponent {
   card = false
   show = false
   loading = false
-  balance: number
   amount = ''
+  userData!: UserData
   depositResponse!: any
   depositError!: any
   depositForm!: FormGroup
 
   constructor(private deposit: UserService, private pay: CustomerService, private formBuilder: FormBuilder){
-    this.balance = deposit.userData.balance
+    this.userData = deposit.userData
   }
 
   ngOnInit(): void {
@@ -39,13 +40,15 @@ export class DepositComponent {
   }
 
   payWithCard(){
-    this.card = true 
+    this.card = true
   }
-  
+
   depositNow(){
     this.loading = true
     this.pay.cardDeposit(this.depositForm.value).subscribe((data) => {
       this.depositResponse = data
+      this.deposit.getRefreshedData.subscribe(data => this.userData = data)
+      this.deposit.updatedData()
       this.loading = false
     }, (error) => {
       this.depositError = error

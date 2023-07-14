@@ -19,7 +19,7 @@
         <thead>
           <tr>
             <th>FullName</th>
-            <th *ngIf="tableData.userType == 'Corporate'">Business Name</th>
+            <th *ngIf="userData.userType == 'Corporate'">Business Name</th>
             <th>UserName</th>
             <th>Email Address</th>
             <th>Account Number</th>
@@ -31,15 +31,15 @@
         </thead>
         <tbody>
           <tr>
-            <td>{{tableData.firstName}} {{tableData.lastName}}, {{tableData.middleName}}</td>
-            <td *ngIf="tableData.userType == 'Corporate'">{{tableData.businessName}}</td>
-            <td>{{tableData.userName}}</td>
-            <td>{{tableData.email}}</td>
-            <td>{{tableData.accountNumber}}</td>
-            <td>{{tableData.address}}</td>
-            <td>{{tableData.phoneNumber}}</td>
-            <td>{{tableData.userType}}</td>
-            <td>{{tableData.active == true ? 'Active' : 'Disabled'}}</td>
+            <td>{{userData.firstName}} {{userData.lastName}}, {{userData.middleName}}</td>
+            <td *ngIf="userData.userType == 'Corporate'">{{userData.businessName}}</td>
+            <td>{{userData.userName}}</td>
+            <td>{{userData.email}}</td>
+            <td>{{userData.accountNumber}}</td>
+            <td>{{userData.address}}</td>
+            <td>{{userData.phoneNumber}}</td>
+            <td>{{userData.userType}}</td>
+            <td>{{userData.active == true ? 'Active' : 'Disabled'}}</td>
           </tr>
         </tbody>
       </table>
@@ -98,7 +98,7 @@
     <div class="max-w-[500px] mb-4">
       <hr>
       <h2 class="text-teal-500">
-        Two Factor Authentication - <span [ngClass]="twoFactorAuth ? 'text-green-700' : 'text-red-700'" class="text-base">[{{twoFactorAuth ? 'ON✔️' : 'OFF❌'}}]</span>
+        Two Factor Authentication - <span [ngClass]="userData.twoFactorEnabled ? 'text-green-700' : 'text-red-700'" class="text-base">[{{userData.twoFactorEnabled ? 'ON✔️' : 'OFF❌'}}]</span>
       </h2>
       <p>Enable 2FA to increase your security and make your account more secured.</p>
 
@@ -115,8 +115,8 @@
 
         <div class="flex items-center">
           <span class="text-xl font-medium mr-3">2-FA :</span>
-          <mat-slide-toggle formControlName="value" [(ngModel)]="twoFactorAuth" [checked]="twoFactorAuth">
-            <span class="text-xl font-medium">{{!twoFactorAuth ? 'Enable' : 'Disable'}}</span>
+          <mat-slide-toggle formControlName="value" [(ngModel)]="userData.twoFactorEnabled" [checked]="userData.twoFactorEnabled">
+            <span class="text-xl font-medium">{{!userData.twoFactorEnabled ? 'Enable' : 'Disable'}}</span>
           </mat-slide-toggle>
   
           <button mat-raised-button color="primary" type="submit" class="ml-3">{{!loading1 ? 'Save' : 'Please wait'}}</button>

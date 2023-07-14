@@ -16,6 +16,26 @@
   background: linear-gradient(to top, #cfd8dc 50%, transparent 50%);
 }
 
+.notify{
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 200px;
+  z-index: 100;
+}
+
+@media only screen and (max-width: 640px){
+  .notify{
+    top: 100px;
+  }
+}
+
+@media only screen and (max-width: 350px){
+  .notify{
+    top: 50px;
+  }
+}
+
 @media only screen and (min-width: 1024px){
   .card{
     width: 200px;

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../service/user.service';
-import { PasswordPatternValidator, PhoneNumberValidator } from 'src/app/components/auth/customValidation/custom-validation/custom-validation.component';
-import { Airtime } from 'src/app/components/interfaces/user';
+import { PasswordPatternValidator, PhoneNumberValidator } from 'src/app/components/customValidation/custom-validation/custom-validation.component';
+import { Airtime, UserData } from 'src/app/components/interfaces/user';
 import { CustomerService } from '../../service/customer.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { CustomerService } from '../../service/customer.service';
 
 export class UtilitiesComponent {
   loading = false
-  balance: number
+  userData!: UserData
   airtimeChoiceValue!: string
   amountChoiceValue!: string
   utilityChoiceValue!: string
@@ -26,7 +26,7 @@ export class UtilitiesComponent {
   amountForm!: FormGroup
 
   constructor(private utilities: UserService, private airtimePurchase: CustomerService, private formBuilder: FormBuilder){
-    this.balance = utilities.userData.balance
+    this.userData = utilities.userData
   }
 
   ngOnInit(){
@@ -69,6 +69,8 @@ export class UtilitiesComponent {
     this.loading = true
     this.airtimePurchase.airtimePurchase(this.airtimeData).subscribe((data) => {
       this.airtimeResponse = data
+      this.utilities.getRefreshedData.subscribe(data => this.userData = data)
+      this.utilities.updatedData()
       this.loading = false
     }, (error) => {
       this.airtimeError = error

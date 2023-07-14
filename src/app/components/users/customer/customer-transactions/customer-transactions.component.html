@@ -23,7 +23,7 @@
       </button>
     </div>
     <div class="overflow-auto">
-      <table *ngIf="tableData"> 
+      <table *ngIf="transactions > 0"> 
         <thead>
           <tr>
             <th *ngFor="let header of tableHeader; let e = even" [ngClass]="e ?'even' : 'odd'">{{header | uppercase}}</th>
