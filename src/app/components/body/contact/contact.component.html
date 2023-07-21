@@ -67,7 +67,7 @@
           <div class="flex pb-2 max-sm:flex-col">
             <mat-form-field class="w-full pr-4">
               <mat-label>PhoneNumber</mat-label>
-              <input formControlName="phoneNumber" matInput />
+              <input formControlName="phoneNumber" matInput maxlength="15" />
               <mat-error *ngIf="contactFormControl?.['phoneNumber']?.errors?.['invalidPhoneNumber']">
                 PhoneNumber not valid
               </mat-error>

@@ -36,7 +36,7 @@ export class AdminComponent {
       url: '/admin/users'
     },
     {
-      service: 'View Database',
+      service: 'View Database 🥇',
       icon: 'contact_emergency',
       url: '/admin/database'
     },
@@ -56,7 +56,7 @@ export class AdminComponent {
       url: '/admin/remove-user'
     },
     {
-      service: 'User Role',
+      service: 'User Role 🥇',
       icon: 'person',
       url: '/admin/role'
     }

@@ -16,8 +16,8 @@ export class EditComponent {
   nameForm!: FormGroup
   editForm!: FormGroup
   editChoiceValue!: string
-  editChoice: string[] = ['firstName', 'lastName', 'middleName', 'balance', 'recoveryMail', 'dateOfBirth', 'userTypeId', 'businessName', 'nin',
-   'cac', 'businessType', 'profession', 'bvn', 'address', 'verified', 'activated', 'lien', 'logins', 'userName',  'email', 'emailConfirmed', 
+  editChoice: string[] = ['firstName', 'lastName', 'middleName', 'balance', 'recoveryMail', 'dateOfBirth', 'userType', 'businessName', 'nin',
+   'cac', 'businessType', 'profession', 'bvn', 'address', 'verified', 'activated', 'lien', 'logins', 'userName', 'email', 'emailConfirmed', 
    'phoneNumber', 'phoneNumberConfirmed', 'twoFactorEnabled', 'lockoutEnd', 'lockoutEnabled', 'accessFailedCount' 
   ]
 

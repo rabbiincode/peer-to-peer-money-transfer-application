@@ -17,8 +17,8 @@
   </table>
 </div>
 
-<div *ngIf="show == 'second'" class="overflow-auto">
-  <table class="flex">
+<div *ngIf="show == 'second'">
+  <table class="flex overflow-auto">
     <thead>
       <tr class="flex flex-col">
         <th *ngFor="let header of tableHeader; let e = even" [ngClass]="e ?'even' : 'odd'">{{header | uppercase}}</th>

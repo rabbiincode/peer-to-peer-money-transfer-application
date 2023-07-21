@@ -88,9 +88,11 @@ export class RegisterComponent implements OnInit {
     this.register.registerUser(formValue, this.user).subscribe((data) => {
       this.registerUserResponse = data
       this.loading = false
-      setTimeout(() => {
-        this.route.navigate(['/login'])
-      }, 8000)
+      if (!this.authenticate){
+        setTimeout(() => {
+          this.route.navigate(['/login'])
+        }, 8000)
+      }
       this.registerForm.reset()
       }, (error) => {
         this.errorMessage = error

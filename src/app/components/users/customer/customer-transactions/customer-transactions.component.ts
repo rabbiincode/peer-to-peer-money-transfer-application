@@ -19,6 +19,13 @@ export class CustomerTransactionsComponent {
     this.getTransactionHistory()
   }
 
+  get sortData(){
+    // sort data to display recent transactions first
+    return this.tableData.sort((a: any, b: any) => {
+      return <any>new Date(b.dateStamp) - <any>new Date(a.dateStamp);
+    })
+  }
+
   getTransactionHistory(){
     this.loading = true
     this.transaction.transactionHistory(this.user.userData.accountNumber).subscribe((data: any) => {

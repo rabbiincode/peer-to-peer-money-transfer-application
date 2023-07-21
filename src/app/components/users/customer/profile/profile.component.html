@@ -55,44 +55,38 @@
         </mat-radio-button>
       </mat-radio-group>
 
-      <form [formGroup]="editForm" class="py-2">
-        <div>
-          <ngb-alert *ngIf="editUserResponse" [type]="'success'" (closed)="editUserResponse = ''">{{editUserResponse?.result}}</ngb-alert>
-          <ngb-alert *ngIf="editUserError && editUserError?.status > 0 && editUserError?.status <= 499" [type]="'danger'" (closed)="editUserError = ''">
-            {{editUserError?.error?.error}} {{editUserError?.error?.message}}
-          </ngb-alert>
-          <ngb-alert *ngIf="editUserError && editUserError?.status >= 500 || editUserError?.status == 0" [type]="'danger'" (closed)="editUserError = ''">
-            Failed...please try again
-          </ngb-alert>
-        </div>
-
-        <div>
-          <mat-form-field>
-            <mat-label>Edit</mat-label>
-            <input formControlName="path" [value]="editDataValue" matInput required />
-          </mat-form-field>
-        </div>
-        <div *ngIf="editDataValue && editDataValue != 'password'">
-          <mat-form-field>
-            <mat-label>Value</mat-label>
-            <input formControlName="value" matInput [required]="editDataValue != 'password'" />
-            <mat-error>
-              Value required
-            </mat-error>
-          </mat-form-field>
-        </div>
-      </form>
-
       <div>
-        <button *ngIf="!loading" mat-flat-button color="primary" type="button" (click)="selected()" [disabled]="!editDataValue || editForm.invalid && editDataValue != 'password'" class="btn w-[50%] text-lg">
+        <ngb-alert *ngIf="editUserResponse" [type]="'success'" (closed)="editUserResponse = ''">{{editUserResponse?.result}}</ngb-alert>
+        <ngb-alert *ngIf="editUserError && editUserError?.status > 0 && editUserError?.status <= 499" [type]="'danger'" (closed)="editUserError = ''">
+          {{editUserError?.error?.error}} {{editUserError?.error?.message}}
+        </ngb-alert>
+        <ngb-alert *ngIf="editUserError && editUserError?.status >= 500 || editUserError?.status == 0" [type]="'danger'" (closed)="editUserError = ''">
+          Failed...please try again
+        </ngb-alert>
+      </div>
+
+      <form [formGroup]="editForm" class="max-w-[400px] py-2">
+        <mat-form-field class="w-full mb-2">
+          <mat-label>Edit</mat-label>
+          <input formControlName="path" [value]="editDataValue" matInput required />
+        </mat-form-field>
+
+        <mat-form-field *ngIf="editDataValue && editDataValue != 'password'" class="w-full mb-2">
+          <mat-label>Value</mat-label>
+          <input formControlName="value" matInput [required]="editDataValue != 'password'" />
+          <mat-error>
+            Value required
+          </mat-error>
+        </mat-form-field>
+
+        <button *ngIf="!loading" mat-flat-button color="primary" type="button" (click)="selected()" [disabled]="!editDataValue || editForm.invalid && editDataValue != 'password'" class="btn w-full text-lg">
           Edit
         </button>
-        <button *ngIf="loading" mat-flat-button color="accent" class="btn w-[50%] text-lg">
+        <button *ngIf="loading" mat-flat-button color="accent" class="btn w-full text-lg">
           <span class="flex items-center m-auto">Please wait...<mat-spinner [diameter]="25"></mat-spinner></span>
         </button>
-        <p class="mt-2">📞 Contact customer support for any other update you want to make.</p>
-      </div>
-      
+      </form>
+      <p class="mt-2">📞 Contact customer support for any other update you want to make.</p>
     </div>
 
     <div class="max-w-[500px] mb-4">
@@ -177,7 +171,6 @@
         </mat-expansion-panel>
       </mat-accordion>
     </div>
-
   </div>
 
   <div *ngIf="editPassword">

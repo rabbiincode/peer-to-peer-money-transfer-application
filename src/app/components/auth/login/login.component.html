@@ -82,15 +82,28 @@
           <div class="header text-blue-800">
             <h2>Two Factor Authentication</h2>
           </div>
- 
+
+          <div>
+            <ngb-alert *ngIf="responseMessage" [type]="'info'" (closed)="responseMessage = ''">{{responseMessage?.message}}</ngb-alert>
+            <ngb-alert *ngIf="twoFactorAuthErrorMessage && twoFactorAuthErrorMessage?.status > 0 && twoFactorAuthErrorMessage?.status <= 499" [type]="'danger'" (closed)="twoFactorAuthErrorMessage = ''">
+              {{twoFactorAuthErrorMessage?.error?.error}} {{twoFactorAuthErrorMessage?.error?.message}}
+            </ngb-alert>
+            <ngb-alert *ngIf="twoFactorAuthErrorMessage && twoFactorAuthErrorMessage?.status >= 500 || twoFactorAuthErrorMessage?.status == 0" [type]="'danger'" (closed)="twoFactorAuthErrorMessage = ''">
+              Login Failed...please try again
+            </ngb-alert>
+          </div>
+
           <form [formGroup]="twoFactorAuthForm" (submit)="twoFactorAuthLogin()" class="py-2">
             <div class="space">
               <mat-form-field class="length">
                 <mat-label>OTP</mat-label>
-                <input formControlName="token" matInput required />
-                <mat-hint>Enter the One Time Password sent to {{number}}</mat-hint>
-                <mat-error>
+                <input formControlName="token" matInput minlength="6" maxlength="6" required />
+                <mat-hint>Enter the One Time Password sent to {{email}}</mat-hint>
+                <mat-error *ngIf="twoFactorAuthForm.value.token == ''">
                   OTP required
+                </mat-error>
+                <mat-error *ngIf="twoFactorAuthForm.get('token')?.hasError('pattern') || twoFactorAuthForm.get('token')?.hasError('minlength')">
+                  OTP Invalid
                 </mat-error>
               </mat-form-field>
             </div>

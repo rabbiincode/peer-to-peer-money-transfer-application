@@ -19,6 +19,10 @@ export class AdminService {
     return this.http.get(`${this.url}/get-all-customers`)
   }
 
+  getCustomersByUserId(userId: string){
+    return this.http.get(`${this.url}/get-all-customer-by-user-id?userId=${userId}`)
+  }
+
   getCustomersByCategory(category: string){
     return this.http.get(`${this.url}/get-all-customers-by-category?category=${category}`) 
   }
@@ -34,8 +38,12 @@ export class AdminService {
   getCustomersByAccountNumber(accountNumber: number){
     return this.http.get(`${this.url}/get-customer-by-accountNumber?accountNumber=${accountNumber}`)
   }
+
+  getAllTransactions(){
+    return this.http.get(`${this.url}/get-all-transactions`)
+  }
   
-  getTransactions(transactionId: number){
+  getIndividualTransaction(transactionId: number){
     return this.http.get(`${this.url}/get-transaction-by-id?id=${transactionId}`)
   }
 

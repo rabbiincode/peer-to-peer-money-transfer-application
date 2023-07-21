@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AdminService } from '../../service/admin.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { AuthService } from 'src/app/components/auth/service/auth.service';
 
 @Component({
   selector: 'cashMingle-remove-user',
@@ -15,6 +16,7 @@ export class RemoveUserComponent {
   loading = false
   loading1 = false
   loading2 = false
+  access = false
   deactivateUserForm!: FormGroup
   deleteForm!: FormGroup
   deleteUserForm!: FormGroup
@@ -25,9 +27,10 @@ export class RemoveUserComponent {
   deleteErrorMessage!: any
   deleteUserErrorMessage!: any
   
-  constructor(private formBuilder: FormBuilder, private removeUser: AdminService){}
+  constructor(private formBuilder: FormBuilder, private auth: AuthService, private removeUser: AdminService){}
 
   ngOnInit(): void {
+    this.access = this.auth.tokenData.role.includes(('SuperAdmin'))
     this.deactivateUserForm = this.formBuilder.group({
       userName: ['']
     })

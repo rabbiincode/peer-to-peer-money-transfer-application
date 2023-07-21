@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PasswordPatternValidator } from '../../customValidation/custom-validation/custom-validation.component';
 import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
@@ -12,6 +12,7 @@ import { UserService } from '../../users/service/user.service';
 })
 
 export class LoginComponent implements OnInit {
+  email = ''
   hide = true
   open = false
   loading = false
@@ -19,8 +20,9 @@ export class LoginComponent implements OnInit {
   accessDenied = false
   twoFactorAuth = false
   sessionTimeOut = false
+  responseMessage: any
   errorMessage: any
-  number = 0
+  twoFactorAuthErrorMessage: any
   loginForm!: FormGroup
   twoFactorAuthForm!: FormGroup
 
@@ -33,7 +35,8 @@ export class LoginComponent implements OnInit {
       password: ['', {validators: PasswordPatternValidator}]
     })
     this.twoFactorAuthForm = this.formBuilder.group({
-      token: ['']
+      userName: [''],
+      token: ['', Validators.pattern('^[0-9]*$')]
     })
   }
 
@@ -44,12 +47,14 @@ export class LoginComponent implements OnInit {
     }
     this.loading = !this.loading
     // Implement validate password before user data loads - pending
-    // Check if user is active or deleted before login - pending
     this.userData.getUserData(this.loginForm.value.emailAddressOrUserName)
-
+     
     this.login.loginUser(this.loginForm.value).subscribe((data: any) => {
       if (this.userData.userData.twoFactorEnabled){
-        this.number = this.userData.userData.phoneNumber
+        this.responseMessage = data
+        this.twoFactorAuthForm.patchValue({userName: this.userData.userData.userName})
+        // hash some letters of the email
+        this.email = this.userData.userData.email.replace(/^(.)(.*)(.@.*)$/, (_: any, a: any, b: any, c: any) => a + b.replace(/./g, '*') + c)
         this.twoFactorAuth = true
       }
       else{
@@ -65,8 +70,9 @@ export class LoginComponent implements OnInit {
     this.login.storeJwtToken(data.token)
     this.login.validateLogin(true)
     this.loading = false
+    this.loading1 = false
 
-    if (this.login.tokenData.role.includes('Admin') || this.login.tokenData.role.includes('Super Admin')){
+    if (this.login.tokenData.role.includes('Admin') || this.login.tokenData.role.includes('SuperAdmin')){
       this.route.navigate(['/admin'])
     }
     else if (this.login.tokenData.role.includes('User')){
@@ -83,6 +89,12 @@ export class LoginComponent implements OnInit {
 
   twoFactorAuthLogin(){
     this.loading1 = true
+    this.login.twoFactorAuthLogin(this.twoFactorAuthForm.value).subscribe((data) => {
+      this.directLogin(data)
+    }, (error) => {
+      this.twoFactorAuthErrorMessage = error
+      this.loading1 = false
+    })
   }
 
   ChangePasswordOpen(){

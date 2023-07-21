@@ -8,66 +8,117 @@
     <div class="card mb-4">
       <div class="card-body bg-slate-200">
         <span class="card-title text-xl text-[#012970] flex items-center font-medium pb-6">
-        <i class="bi bi-cash-coin pr-2"></i>Get Customers Transactions
-      </span>
+          <i class="bi bi-cash-coin pr-2"></i>Get Customers Transactions
+        </span>
 
-      <mat-accordion>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header (click)="arrow = !arrow">
-            <mat-panel-title class="text-teal-500 text-lg font-medium">Enter Transaction Id</mat-panel-title>
-            <mat-icon>perm_contact_calendar</mat-icon>
-            <mat-icon *ngIf="arrow">arrow_drop_up</mat-icon>
-            <mat-icon *ngIf="!arrow">arrow_drop_down</mat-icon>         
-          </mat-expansion-panel-header>
-
-          <div class="max-w-[500px]">
-            <ngb-alert *ngIf="getTransactionError && getTransactionError?.status > 0 && getTransactionError?.status <= 499" [type]="'danger'" (closed)="getTransactionError = ''">
-              {{getTransactionError?.error?.error}} {{getTransactionError?.error?.message}}
-            </ngb-alert>
-            <ngb-alert *ngIf="getTransactionError && getTransactionError?.status >= 500 || getTransactionError?.status == 0" [type]="'danger'" (closed)="getTransactionError = ''">
-              Failed...please try again
-            </ngb-alert>
-          </div>
-
-          <form [formGroup]="transactionForm" (submit)="getTransaction()" class="max-w-[500px] py-2">
-            <mat-form-field class="w-full">
-              <mat-label>Transaction Id</mat-label>
-              <input formControlName="transactionId" matInput required />
-              <mat-hint>Enter transaction id</mat-hint>
-              <mat-error>
-                Transaction Id required
-              </mat-error>
-            </mat-form-field>
-            
-            <div class="mt-3">
-              <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="transactionForm.invalid" class="btn w-[100%] text-lg">
-                Get Transaction
-              </button>
-              <button *ngIf="loading" mat-flat-button color="accent" class="btn w-[100%] text-lg">
-                <span class="flex items-center m-auto">Please wait...<mat-spinner [diameter]="25"></mat-spinner></span>
-              </button>
-            </div>
-          </form>
-
-          <div>
-            <table *ngIf="tableData" class="flex overflow-auto">
-              <thead>
-                <tr class="flex flex-col">
-                  <th *ngFor="let header of tableHeader; let e = even" [ngClass]="e ?'even' : 'odd'">{{header | uppercase}}</th>
-                </tr>
-              </thead>
+        <div class="mb-4">
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header (click)="arrow = !arrow">
+                <mat-panel-title class="text-teal-500 text-lg font-medium">Get Individual Transaction</mat-panel-title>
+                <mat-icon>perm_contact_calendar</mat-icon>
+                <mat-icon *ngIf="arrow">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="!arrow">arrow_drop_down</mat-icon>         
+              </mat-expansion-panel-header>
   
-              <tbody>
-                <tr class="flex flex-col">
-                  <td>{{tableData.id}}</td> <td>{{tableData.userId}}</td> <td>{{tableData.dateStamp}}</td>
-                  <td>{{tableData.transactionType}}</td> <td>{{tableData.amount}}</td> <td>{{tableData.description}}</td>
-                </tr>
-              </tbody>         
-            </table>
-          </div>
+              <div class="max-w-[500px]">
+                <ngb-alert *ngIf="getTransactionError && getTransactionError?.status > 0 && getTransactionError?.status <= 499" [type]="'danger'" (closed)="getTransactionError = ''">
+                  {{getTransactionError?.error?.error}} {{getTransactionError?.error?.message}}
+                </ngb-alert>
+                <ngb-alert *ngIf="getTransactionError && getTransactionError?.status >= 500 || getTransactionError?.status == 0" [type]="'danger'" (closed)="getTransactionError = ''">
+                  Failed...please try again
+                </ngb-alert>
+              </div>
+  
+              <form [formGroup]="transactionForm" (submit)="getIndividualTransaction()" class="max-w-[500px] py-2">
+                <mat-form-field class="w-full">
+                  <mat-label>Transaction Id</mat-label>
+                  <input formControlName="transactionId" matInput required />
+                  <mat-hint>Enter transaction id</mat-hint>
+                  <mat-error>
+                    Transaction Id required
+                  </mat-error>
+                </mat-form-field>
+              
+                <div class="mt-3">
+                  <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="transactionForm.invalid" class="btn w-[100%] text-lg">
+                    Get Transaction
+                  </button>
+                  <button *ngIf="loading" mat-flat-button color="accent" class="btn w-[100%] text-lg">
+                    <span class="flex items-center m-auto">Please wait...<mat-spinner [diameter]="25"></mat-spinner></span>
+                  </button>
+                </div>
+              </form>
+  
+              <div>
+                <table *ngIf="tableData" class="flex overflow-auto">
+                  <thead>
+                    <tr class="flex flex-col">
+                      <th *ngFor="let header of tableHeader; let e = even" [ngClass]="e ?'even' : 'odd'">{{header | uppercase}}</th>
+                    </tr>
+                  </thead>
+    
+                  <tbody>
+                    <tr class="flex flex-col">
+                      <td>{{tableData.id}}</td> <td>{{tableData.userId}}</td> <td>{{tableData.dateStamp}}</td>
+                      <td>{{tableData.transactionType}}</td> <td>{{tableData.amount}}</td> <td>{{tableData.description}}</td>
+                    </tr>
+                  </tbody>         
+                </table>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
 
-        </mat-expansion-panel>
-      </mat-accordion>
+        <div>
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header (click)="arrow1 = !arrow1">
+                <mat-panel-title class="text-teal-500 text-lg font-medium">Get All Transactions 🥇</mat-panel-title>
+                <mat-icon>perm_contact_calendar</mat-icon>
+                <mat-icon *ngIf="arrow1">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="!arrow1">arrow_drop_down</mat-icon>         
+              </mat-expansion-panel-header>
+
+              <div class="max-w-[500px]">
+                <ngb-alert *ngIf="getTransactionError1 && getTransactionError1?.status > 0 && getTransactionError1?.status <= 499" [type]="'danger'" (closed)="getTransactionError1 = ''">
+                  {{getTransactionError1?.error?.error}} {{getTransactionError1?.error?.message}}
+                </ngb-alert>
+                <ngb-alert *ngIf="getTransactionError1 && getTransactionError1?.status >= 500 || getTransactionError1?.status == 0" [type]="'danger'" (closed)="getTransactionError1 = ''">
+                  Failed...please try again
+                </ngb-alert>
+              </div>
+  
+              <div class="overflow-auto">
+                <table *ngIf="tableData1"> 
+                  <thead>
+                    <tr>
+                      <th *ngFor="let header of tableHeader1; let e = even" [ngClass]="e ?'even' : 'odd'">{{header | uppercase}}</th>
+                    </tr>
+                  </thead>
+          
+                  <tbody>
+                    <tr *ngFor="let data of sortData; let e = even; let o = odd; let i = index"  [ngClass]="e ?'even1' : 'odd1'">
+                      <td>{{i + 1}}</td> <td>{{data.id}}</td> <td>{{data.userId}}</td> <td>{{data.dateStamp}}</td>
+                      <td>{{data.transactionType}}</td> <td>{{data.amount}}</td> <td>{{data.description}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="max-w-[500px] mt-4">
+                <button *ngIf="!loading1" mat-flat-button color="primary" type="button" (click)="getAllTransactions()" [disabled]="!access" class="btn w-[100%] text-lg">
+                  Get All Transactions
+                </button>
+                <button *ngIf="loading1" mat-flat-button color="accent" class="btn w-[100%] text-lg">
+                  <span class="flex items-center m-auto">Please wait...<mat-spinner [diameter]="25"></mat-spinner></span>
+                </button>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+        
+      </div>
     </div>
   </div>
 </div>

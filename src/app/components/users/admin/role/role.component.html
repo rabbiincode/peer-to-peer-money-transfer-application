@@ -8,7 +8,7 @@
     <div class="card mb-4">
       <div class="card-body bg-slate-200">
         <span class="card-title text-xl text-[#012970] flex items-center font-medium pb-6">
-          <i class="bi bi-record-btn-fill pr-2"></i>Manage User Roles And Claims
+          <i class="bi bi-record-btn-fill pr-2"></i>Manage User Roles And Claims 🥇
         </span>
 
         <div class="card mb-4">
@@ -40,7 +40,7 @@
                   <div class="flex items-center justify-between text-lg font-medium mb-2">
                     <span *ngIf="!tableData">Get All Roles</span>
                     <span *ngIf="tableData">All Roles</span>
-                    <button *ngIf="!tableData" type="button" (click)="getAllRoles()"
+                    <button *ngIf="!tableData" type="button" [disabled]="!access" (click)="getAllRoles()"
                       class="bg-gradient-to-l from-purple-300 to-purple-500 px-4 py-1 ml-2 text-white rounded-md hover:from-purple-500 hover:to-purple-300 hover:font-semibold"
                     >
                       <span *ngIf="!loading">Proceed</span>
@@ -74,7 +74,7 @@
                     <p>Create User Role</p>
                     <mat-form-field class="w-full">
                       <mat-label>Role Name</mat-label>
-                      <input formControlName="roleName" matInput required />
+                      <input formControlName="roleName" matInput [readonly]="!access" required />
                       <mat-hint>Enter the role name to create</mat-hint>
                       <mat-error>
                         Role Name required
@@ -121,7 +121,7 @@
                 </div>
 
                 <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="selected">
-                  <mat-radio-button class="example-radio-button" *ngFor="let role of roles" [value]="role">
+                  <mat-radio-button class="example-radio-button" *ngFor="let role of roles" [value]="role" [disabled]="!access">
                     {{role}}
                   </mat-radio-button>
                 </mat-radio-group>
@@ -196,7 +196,7 @@
                 </div>
 
                 <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="selectedClaim">
-                  <mat-radio-button class="example-radio-button" *ngFor="let claim of claims" [value]="claim">
+                  <mat-radio-button class="example-radio-button" *ngFor="let claim of claims" [value]="claim" [disabled]="!access">
                     {{claim}}
                   </mat-radio-button>
                 </mat-radio-group>

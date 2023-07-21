@@ -82,7 +82,7 @@ export class ForgotPasswordComponent {
       this.changePasswordForm.reset()
       setTimeout(() => {
         this.CloseChangePassword()
-      }, 3000);
+      }, 5000)
       }, (error) => {
         this.resetPasswordErrorMessage = error
         this.resetPasswordProgress = false

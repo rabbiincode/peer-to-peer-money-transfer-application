@@ -3,7 +3,7 @@
     <div class="flex items-center">
       <div class="flex items-center">
         <img src="/assets/images/image/header.png" alt="image" width="25rem" height="25rem">
-        <span class="max-md:hidden text-blue-400 text-2xl font-semibold pr-32 pl-2">CashMingle</span>
+        <span class="max-md:hidden text-blue-400 text-2xl font-semibold pr-32 pl-2">CashMingle<span class="text-red-700 text-3xl">.</span></span>
       </div>
 
       <mat-icon class="pl-2" (click)="toggleSidebar()">menu</mat-icon>
@@ -20,8 +20,8 @@
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin-left: -40px;">
           <li *ngIf="showSettings" routerLink="/user/profile" class="dropdown-item">User Profile</li>
-          <li class="dropdown-item">Dark Mode</li>
           <li (click)="logOut()" class="dropdown-item">LogOut</li>
+          <li class="dropdown-item cursor-not-allowed">Dark Mode 🌙</li>
         </ul>
       </div>
 

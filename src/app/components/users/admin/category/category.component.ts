@@ -13,5 +13,4 @@ export class CategoryComponent {
   @Input() show!: string
   @Input() tableData!: any
   @Input() tableData1!: any
-  @Input() tableData2!: any
 }

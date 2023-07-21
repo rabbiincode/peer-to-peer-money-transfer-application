@@ -3,7 +3,7 @@
     <span class="px-4 py-6 shadow-lg">{{name}}</span>
   </div>
 
-  <button *ngIf="user" (click)="back()" class="absolute top-10 right-4 px-3 py-2 flex justify-center text-lg font-normal hover:bg-sky-50">
+  <button *ngIf="user" (click)="back()" class="absolute top-10 right-4 px-3 py-2 flex justify-center text-lg font-normal">
     <i class="bi bi-arrow-left text-2xl pr-2"></i> Back
   </button>
 
@@ -77,7 +77,7 @@
       
                 <mat-form-field class="length pb-4">
                   <mat-label>PhoneNumber</mat-label>
-                  <input formControlName="phoneNumber" matInput required placeholder="08000000000" />
+                  <input formControlName="phoneNumber" matInput required minlength="8" maxlength="15" placeholder="08000000000" />
                   <mat-error *ngIf="registerForm.value.phoneNumber == ''">
                     PhoneNumber required
                   </mat-error>

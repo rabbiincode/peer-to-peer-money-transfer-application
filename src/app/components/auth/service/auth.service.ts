@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Login, ResetPassword, TokenData } from '../../interfaces/auth';
+import { Login, ResetPassword, TokenData, TwoFactorAuth } from '../../interfaces/auth';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { Router } from '@angular/router';
 import { UserService } from '../../users/service/user.service';
@@ -12,6 +12,7 @@ import { UserService } from '../../users/service/user.service';
 export class AuthService {
   isAuthenticated = false
   sessionTimeOut = false
+  clearTimeOut: any
   url = "https://localhost:44376/CashMingle/Account"
   helper = new JwtHelperService()
   tokenData: TokenData = {
@@ -26,7 +27,7 @@ export class AuthService {
     return this.http.post(`${this.url}/login`, login)
   }
 
-  twoFactorAuthLogin(token: string){
+  twoFactorAuthLogin(token: TwoFactorAuth){
     return this.http.post(`${this.url}/verify-otp`, token)
   }
 
@@ -55,7 +56,7 @@ export class AuthService {
     let currentTime = new Date().getTime()
     let expiryTime: any = this.helper.getTokenExpirationDate(token)?.getTime()
     let expirationTime = expiryTime - currentTime
-    setTimeout(() => {
+    this.clearTimeOut = setTimeout(() => {
       this.sessionTimeOut = true
       this.logOut()
     }, expirationTime)
@@ -63,7 +64,11 @@ export class AuthService {
 
   logOut(){
     this.validateLogin(false)
+    if (this.clearTimeOut){
+      clearTimeout(this.clearTimeOut)
+    }
     localStorage.clear()
+    this.sessionTimeOut = false
     this.route.navigate(['/login'])
   }
 
@@ -87,10 +92,10 @@ export class AuthService {
   }
 
   getToken(email: string){
-    return this.http.post(`${this.url}/forgot-password?email=${email}`, email)
+    return this.http.post(`${this.url}/get-forgotten-password-reset-token?email=${email}`, email)
   }
 
   resetPassword(reset: ResetPassword){
-    return this.http.post(`${this.url}/reset-password`, reset)
+    return this.http.post(`${this.url}/reset-forgotten-password`, reset)
   }
 }

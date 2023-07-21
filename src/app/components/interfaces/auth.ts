@@ -3,6 +3,11 @@ export interface Login {
   password: string
 }
 
+export interface TwoFactorAuth {
+  userName: string,
+  token: string
+}
+
 export interface ResetPassword {
   email: string,
   password: string,

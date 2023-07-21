@@ -9,7 +9,7 @@
       <div class="card-body bg-slate-200">
         <div class="card-title flex justify-between items-center pb-6">
           <span class=" text-xl text-[#012970] flex items-center font-medium"><i class="bi bi-search pr-2"></i>Search</span>
-          <button *ngIf="show" (click)="back()" class="flex justify-center text-lg font-normal hover:bg-sky-100">
+          <button *ngIf="show" (click)="back()" class="flex justify-center text-lg font-normal">
             <i class="bi bi-arrow-left text-2xl pr-2"></i> Back
           </button>       
         </div>
@@ -18,7 +18,7 @@
           <div class="col-xxl-6 col-md-6">
             <div class="card mb-4">
               <div class="card-body bg-[#e0f8e9]">
-                <span class="card-title text-xl text-[#012970] font-medium pl-2">Get All Customers by Category</span>
+                <span class="card-title text-xl text-[#012970] font-medium pl-2">Get All Customers by Category 🥇</span>
       
                 <div class="mt-4 m-auto">
                   <mat-accordion>
@@ -39,7 +39,7 @@
                         </ngb-alert>
                       </div>
               
-                      <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="customerCategoryValue">
+                      <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [disabled]="!access" [(ngModel)]="customerCategoryValue">
                         <mat-radio-button class="example-radio-button" *ngFor="let customer of customerCategory" [value]="customer">
                           {{customer}}
                         </mat-radio-button>
@@ -86,10 +86,21 @@
                       </div>
               
                       <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="searchByValue">
-                        <mat-radio-button class="example-radio-button" *ngFor="let searchCustomer of searchBy" [value]="searchCustomer">
-                          {{searchCustomer}}
+                        <mat-radio-button class="example-radio-button" *ngFor="let searchCustomer of searchBy" [value]="searchCustomer" [disabled]="!access && searchCustomer == 'User Id'">
+                          {{searchCustomer}} <span *ngIf="searchCustomer == 'User Id'">🥇</span>
                         </mat-radio-button>
                       </mat-radio-group>
+
+                      <form [formGroup]="userIdForm" *ngIf="searchByValue == 'User Id'" class="max-w-[500px] py-2">
+                        <mat-form-field class="w-full">
+                          <mat-label>UserId</mat-label>
+                          <input formControlName="userId" matInput required />
+                          <mat-hint>Enter userId</mat-hint>
+                          <mat-error>
+                            UserId required
+                          </mat-error>
+                        </mat-form-field>
+                      </form>
 
                       <form [formGroup]="userNameOrEmailForm" *ngIf="searchByValue == 'Email/ UserName'" class="max-w-[500px] py-2">
                         <mat-form-field class="w-full">
@@ -118,7 +129,8 @@
 
                       <div class="max-w-[500px] mt-3">
                         <button *ngIf="!loading1" mat-flat-button color="primary" type="button" (click)="searchCustomer()" class="btn w-[100%] text-lg"
-                          [disabled]="!searchByValue || userNameOrEmailForm.invalid && searchByValue == 'Email/ UserName' || accountNumberForm.invalid && searchByValue == 'Account Number'"
+                          [disabled]="!searchByValue || userNameOrEmailForm.invalid && searchByValue == 'Email/ UserName' || accountNumberForm.invalid && searchByValue == 'Account Number'
+                          || userIdForm.invalid && searchByValue == 'User Id'"
                         >
                           Proceed
                         </button>
@@ -142,6 +154,5 @@
         
       </div>
     </div>
-  
   </div>     
 </div>

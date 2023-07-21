@@ -8,7 +8,7 @@
     <div class="card mb-4">
       <div class="card-body bg-slate-200">
         <span class="card-title text-xl text-[#012970] flex items-center font-medium pb-6">
-          <i class="bi bi-eye-fill pr-2"></i>View DataBase
+          <i class="bi bi-eye-fill pr-2"></i>View DataBase 🥇
         </span>
 
         <div class="mb-4">
@@ -33,7 +33,7 @@
               <form [formGroup]="userForm" (submit)="searchUser()" class="max-w-[500px] py-2">
                 <mat-form-field class="w-full">
                   <mat-label>UserName or Email</mat-label>
-                  <input formControlName="emailAddressOrUserName" matInput required />
+                  <input formControlName="emailAddressOrUserName" matInput [readonly]="!access" required />
                   <mat-hint>Enter userName or email address</mat-hint>
                   <mat-error>
                     UserName or Email required
@@ -89,7 +89,7 @@
                 <mat-icon *ngIf="!arrow1">arrow_drop_down</mat-icon>
               </mat-expansion-panel-header>
 
-              <div>
+              <div class="max-w-[500px]">
                 <ngb-alert *ngIf="viewDataError && viewDataError?.status > 0 && viewDataError?.status <= 499" [type]="'danger'" (closed)="viewDataError = ''">
                   {{viewDataError?.error?.error}} {{viewDataError?.error?.message}}
                 </ngb-alert>
@@ -124,9 +124,9 @@
                 </table>
               </div>
 
-              <div class="max-w-[500px]">
-                <button *ngIf="show && !loading1" mat-flat-button color="primary" type="button" (click)="viewData()" class="btn w-[100%] text-lg mt-4">View Database</button>
-                <button *ngIf="loading1" mat-flat-button color="accent" class="btn w-[100%] text-lg mt-4">
+              <div class="max-w-[500px] mt-4">
+                <button *ngIf="show && !loading1" mat-flat-button color="primary" type="button" (click)="viewData()" [disabled]="!access" class="btn w-[100%] text-lg">View Database</button>
+                <button *ngIf="loading1" mat-flat-button color="accent" class="btn w-[100%] text-lg">
                   <span class="flex items-center m-auto">Please wait...<mat-spinner [diameter]="25"></mat-spinner></span>
                 </button>
               </div>

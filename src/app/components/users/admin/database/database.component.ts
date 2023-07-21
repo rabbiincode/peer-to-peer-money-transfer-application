@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AdminService } from '../../service/admin.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { AuthService } from 'src/app/components/auth/service/auth.service';
 
 @Component({
   selector: 'cashMingle-database',
@@ -14,6 +15,7 @@ export class DatabaseComponent {
   arrow1 = false
   loading = false
   loading1 = false
+  access = false
   userForm!: FormGroup
   searchUserError!: any
   tableHeader: string[] = ['#', 'first name', 'last name', 'middle name', 'account number', 'balance', 'recovery mail', 'date of birth', 'userType id', 'business name', 'nin',
@@ -25,16 +27,16 @@ export class DatabaseComponent {
   tableData1!: any
   viewDataError!: any
 
-  constructor(private formBuilder: FormBuilder, private data: AdminService){}
+  constructor(private formBuilder: FormBuilder, private auth: AuthService, private data: AdminService){}
 
   ngOnInit(): void {
+    this.access = this.auth.tokenData.role.includes(('SuperAdmin'))
     this.userForm = this.formBuilder.group({
       emailAddressOrUserName: ['']
     })
   }
 
   searchUser(){
-    console.log(this.userForm.value)
     this.loading = true
     this.data.getCustomersByEmailOrUserNameAll(this.userForm.value.emailAddressOrUserName).subscribe((data: any) => {
       this.tableData1 = data

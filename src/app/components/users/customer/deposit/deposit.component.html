@@ -62,18 +62,22 @@
           </div>
 
           <div *ngIf="card" class="mt-8">
+            <div class="flex items-center justify-center my-4">
+              <img src="/assets/images/cards/visa.png" alt="image" class="mr-4" />
+              <img src="/assets/images/cards/master.png" alt="image" class="mr-4" />
+              <img src="/assets/images/cards/discover.png" alt="image" class="mr-4" />
+              <img src="/assets/images/cards/AE.png" alt="image" class="" />
+            </div>
+
             <mat-form-field class="w-full">
               <mat-label>Card Number</mat-label>
-              <input formControlName="cardNumber" matInput required placeholder="**** **** **** ****" minlength="16" maxlength="16" />
+              <input formControlName="cardNumber" matInput required placeholder="**** **** **** ****" minlength="8" maxlength="19" />
               <mat-hint>Enter your card number</mat-hint>
               <mat-error *ngIf="depositForm.value.cardNumber == ''">
                 Card Number required
               </mat-error>
-              <mat-error *ngIf="depositForm.get('cardNumber')?.hasError('pattern')">
+              <mat-error *ngIf="depositForm.get('cardNumber')?.hasError('pattern') || depositForm.get('cardNumber')?.hasError('minlength')">
                 Card Number Invalid
-              </mat-error>
-              <mat-error *ngIf="depositForm.get('cardNumber')?.hasError('minlength')">
-                Card Number Incomplete
               </mat-error>
             </mat-form-field>
 

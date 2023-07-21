@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AdminService } from '../../service/admin.service';
+import { AuthService } from 'src/app/components/auth/service/auth.service';
 
 @Component({
   selector: 'cashMingle-role',
@@ -16,6 +17,7 @@ export class RoleComponent {
   loading1 = false
   loading2 = false
   loading3 = false
+  access = false
   rolesForm!: FormGroup
   manageRolesForm!: FormGroup
   manageClaimsForm!: FormGroup
@@ -34,9 +36,10 @@ export class RoleComponent {
   claims: string[] = ['Get user claim', 'Add claim to user', 'Remove user claim']
   tableHeader: string[] = ['#', 'role name', 'id', 'role claims', 'created at', 'updated at', 'active']
 
-  constructor(private formBuilder: FormBuilder, private role: AdminService){}
+  constructor(private formBuilder: FormBuilder, private auth: AuthService, private role: AdminService){}
 
   ngOnInit(): void {
+    this.access = this.auth.tokenData.role.includes(('SuperAdmin'))
     this.rolesForm = this.formBuilder.group({
       roleName: ['']
     })

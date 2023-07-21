@@ -31,7 +31,7 @@
         </thead>
 
         <tbody>
-          <tr *ngFor="let data of tableData; let e = even; let o = odd; let i = index"  [ngClass]="e ?'even1' : 'odd1'">
+          <tr *ngFor="let data of sortData; let e = even; let o = odd; let i = index"  [ngClass]="e ?'even1' : 'odd1'">
             <td>{{i + 1}}</td> <td>{{data.id}}</td> <td>{{data.transactionType}}</td> 
             <td>{{data.amount}}</td> <td>{{data.dateStamp}}</td> <td>{{data.description}}</td>
           </tr>
