@@ -58,17 +58,21 @@ export class AuthService {
     let expirationTime = expiryTime - currentTime
     this.clearTimeOut = setTimeout(() => {
       this.sessionTimeOut = true
-      this.logOut()
+      this.exit()
     }, expirationTime)
   }
 
   logOut(){
+    this.sessionTimeOut = false
+    this.exit()
+  }
+
+  exit(){
     this.validateLogin(false)
     if (this.clearTimeOut){
       clearTimeout(this.clearTimeOut)
     }
     localStorage.clear()
-    this.sessionTimeOut = false
     this.route.navigate(['/login'])
   }
 
