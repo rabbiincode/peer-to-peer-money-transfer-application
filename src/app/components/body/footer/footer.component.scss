@@ -1,4 +1,4 @@
-a{
+a {
   text-decoration: none;
 }
 
@@ -19,4 +19,13 @@ a{
 .circle-icon:hover {
   color: #fff;
   border-color: #fff;
+}
+
+.link {
+  span {
+    cursor: pointer;
+    &:hover {
+      color: #60a5fa;
+    }
+  }
 }

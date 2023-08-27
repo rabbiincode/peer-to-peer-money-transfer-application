@@ -11,9 +11,8 @@ import { AuthService } from '../../auth/service/auth.service';
 export class UserHeaderComponent {
   open = true
   showSettings!: boolean
-
-  @Output() togglePageWidth = new EventEmitter<boolean>()
   @Input() sidebar!: Sidebar[]
+  @Output() togglePageWidth = new EventEmitter<boolean>()
 
   constructor(private header: AuthService){
     this.showSettings = header.tokenData.role.includes('User')
@@ -22,10 +21,6 @@ export class UserHeaderComponent {
   toggleSidebar(){
     this.open = !this.open
     this.togglePageWidth.emit(this.open)
-  }
-
-  sidebarHideOnClick(){
-    this.open = true
   }
 
   logOut(){

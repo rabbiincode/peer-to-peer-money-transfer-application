@@ -4,7 +4,7 @@
   height: 35px;
 }
 
-.circle-icon {
+.circle-icon{
   background: #9fadaf;
   display: flex;
   align-items: center;
@@ -17,15 +17,15 @@
   transition: 0.3s;
 }
 
-.circle-icon:hover {
+.circle-icon:hover{
   background: #b3c5c7;
 }
 
-.dropdown:hover>.dropdown-menu {
+.dropdown:hover>.dropdown-menu{
   display: block;
   background: #b0bec5;
 }
 
-.dropdown>.dropdown-toggle:active {
+.dropdown>.dropdown-toggle:active{
   pointer-events: none; // Without this, clicking will make it sticky
 }

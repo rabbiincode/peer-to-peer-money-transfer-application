@@ -1,24 +1,27 @@
-<div [class.toggle]="sidebarToggle" [class.hide]="sidebarToggle" class="sidebar bg-blue-100 pt-8">
+<div [class.toggle]="sidebarToggle" [class.hide]="sidebarToggle" class="sidebar bg-blue-100">
+  <div class="side pt-8">
+    <div class="sidebar-content">
+      <div class="content flex items-center pl-5 py-2 mb-3" *ngFor="let content of sidebarContent" routerLinkActive="active">
+        <mat-icon>{{content.icon}}</mat-icon>
+        <span [routerLink]="content.url" (click)="hideOnClick()" class="text-lg font-normal pl-4 cursor-pointer">{{content.service}}</span>
+      </div>
 
-  <div class="side">
-    <div class="sidebar-content flex items-center pl-6 py-2 mb-3" *ngFor="let content of sidebarContent" routerLinkActive="active">
-      <mat-icon>{{content.icon}}</mat-icon>
-      <span [routerLink]="content.url" (click)="hideOnClick()" class="text-lg font-normal pl-4 cursor-pointer">{{content.service}}</span>
+      <div class="xs:hidden">
+        <div class="content flex items-center pl-6 py-2 mb-3" routerLinkActive="active">
+          <mat-icon>settings</mat-icon>
+          <span routerLink="/user/profile" (click)="hideOnClick()" class="text-lg font-normal pl-4 cursor-pointer">Settings</span>
+        </div>
+        <div class="content flex items-center pl-6 py-2 mb-3">
+          <mat-icon>logout</mat-icon>
+          <span (click)="logOut()" class="text-lg font-normal pl-4 cursor-pointer">LogOut</span>
+        </div>
+      </div>
     </div>
 
-    <div class="xs:hidden">
-      <div *ngIf="showSettings" class="sidebar-content flex items-center pl-6 py-2 mb-3" routerLinkActive="active">
-        <mat-icon>settings</mat-icon>
-        <span routerLink="/user/profile" (click)="hideOnClick()" class="text-lg font-normal pl-4 cursor-pointer">Settings</span>
-      </div>
-      <div class="sidebar-content flex items-center pl-6 py-2 mb-3">
-        <mat-icon>logout</mat-icon>
-        <span (click)="logOut()" class="text-lg font-normal pl-4 cursor-pointer">LogOut</span>
-      </div>
+    <div class="name text-blue-400 text-xl mt-8 mb-4">
+      <span class="hover:line-through">CashMingle<span class="text-red-700 text-2xl">.</span></span>
     </div>
   </div>
 
-  <div class="name text-blue-400 text-2xl mb-4 pt-8 font-semibold">
-    <h2 class="hover:line-through">CashMingle<span class="text-red-700 text-3xl">.</span></h2>
-  </div>
+  <div [class.hide-transparent-bg]="sidebarToggle" (click)="hideOnClick()" class="transparent-bg"></div>
 </div>

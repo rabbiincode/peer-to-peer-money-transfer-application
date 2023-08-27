@@ -10,7 +10,6 @@
   </div>
 
   <div class="px-3 py-8">
-
     <div class="row">
       <div class="col-xxl-6 col-md-6">
         <div class="card mb-4">
@@ -48,7 +47,7 @@
 
       <mdb-carousel [controls]="true" [indicators]="true" [animation]="'fade'">
         <mdb-carousel-item *ngFor="let alert of notifications">
-          <img [src]="alert" class="d-block w-100" alt="image" />
+          <img [src]="alert" class="d-block w-100 rounded" alt="image" />
         </mdb-carousel-item>
       </mdb-carousel>
     </div>
@@ -60,6 +59,5 @@
         <li class="flex"><i class="bi bi-check-circle-fill text-blue-800 text-xl pr-2"></i> Go to the financial services page to learn more about personal finance.</li>
       </ul>
     </div>
-
   </div>
 </div>

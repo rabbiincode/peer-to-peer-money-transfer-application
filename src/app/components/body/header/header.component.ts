@@ -8,9 +8,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 export class HeaderComponent {
   open = false
-  
-  background='background:linear-gradient(to right, #60a5fa 20%, #3b82f6 30%, #172554 50%)'
   color='color:#4338ca'
+  background='background:linear-gradient(to right, #60a5fa 20%, #3b82f6 30%, #172554 50%)'
   
   @Input() changeBackground = false
   @Input() styleLinkOnScroll = ""

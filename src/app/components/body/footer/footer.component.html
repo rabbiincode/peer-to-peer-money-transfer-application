@@ -3,8 +3,8 @@
     <div class="row">
       <div class="col-lg-5 col-md-12">
         <span class="flex items-center pb-2 break-all">
-          <img src="/assets/images/image/header.png" alt="image" width="40rem" height=40rem>
-          <span class="text-blue-400 text-2xl font-semibold pl-1" [routerLink]="['/home']">CashMingle<span class="text-red-700 text-3xl">.</span></span>
+          <img src="/assets/images/image/header.png" alt="image" width="35rem" height=35rem>
+          <span class="text-blue-400 text-2xl font-semibold pl-1 cursor-pointer" [routerLink]="['/']">CashMingle<span class="text-red-700 text-3xl">.</span></span>
         </span>
 
         <p>
@@ -12,24 +12,25 @@
           the way individuals/ businesses handle transactions.
         </p>
         <p>The best financial services you can get, unrivalled elsewhere.</p>
-        
+
         <div class="flex py-4">
           <a href="https://github.com/Myxic" target="_blank"><i class="bi bi-github circle-icon text-white text-xl"></i></a>
           <a href="https://twitter.com/CharlesCeeJay05" target="_blank"><i class="bi bi-twitter circle-icon text-white text-xl"></i></a>
           <a href="https://www.linkedin.com/in/successisaiah" target="_blank"><i class="bi bi-linkedin circle-icon text-white text-xl"></i></a>
         </div>
       </div>
-           
+
       <div class="col-lg-2 col-6">
         <h3>Useful Links</h3>
-        <p class="text-[#eceff1] opacity-80">
-          Register<br>
-          About us<br>
-          Services<br>
-          Terms of service<br>
-          Privacy policy<br>
+        <p class="link">
+          <span [routerLink]="['/register']">Register</span><br>
+          <span [routerLink]="['/']">About us</span><br>
+          <span [routerLink]="['/']">Services</span><br>
+          <span [routerLink]="['/']">Terms of service</span><br>
+          <span [routerLink]="['/']">Privacy policy</span><br>
+        </p>
       </div>
-    
+
       <div class="col-lg-2 col-6">
         <h3>Our Services</h3>
         <p class="text-[#eceff1] opacity-80">
@@ -49,11 +50,10 @@
           <span>Twitter:</span> twitter.com/cashmingle<br>
         </p>
       </div>
-    
     </div>
   </div>
-    
+
   <div class="container pb-4 text-center text-white text-base">
-    Copyright &copy; <span class="text-blue-400 hover:line-through">CashMingle</span>. All Rights Reserved
+    &copy; {{date}} <span class="text-blue-400 hover:line-through">CashMingle</span>. All Rights Reserved.
   </div>
 </div>

@@ -9,7 +9,6 @@ import { Sidebar } from 'src/app/components/interfaces/user';
 
 export class CustomerComponent {
   fullWidth = true
-
   togglePage(pageWidth: boolean){
     this.fullWidth = pageWidth
   }

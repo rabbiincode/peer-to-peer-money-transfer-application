@@ -9,7 +9,6 @@ import { Sidebar } from '../../../interfaces/user';
 
 export class AdminComponent {
   fullWidth = true
-
   togglePage(pageWidth: boolean){
     this.fullWidth = pageWidth
   }

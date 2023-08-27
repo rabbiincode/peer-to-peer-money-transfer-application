@@ -28,6 +28,5 @@ export class UserSidebarComponent {
 
   logOut(){
     this.sidebar.logOut()
-    this.route.navigate(['/home'])
   }
 }
