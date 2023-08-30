@@ -18,22 +18,14 @@
 
 .notify{
   position: fixed;
-  right: 0;
+  top: 0;
+  bottom: 0;
   left: 0;
-  top: 200px;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 100;
-}
-
-@media only screen and (max-width: 640px){
-  .notify{
-    top: 100px;
-  }
-}
-
-@media only screen and (max-width: 350px){
-  .notify{
-    top: 50px;
-  }
 }
 
 @media only screen and (min-width: 1024px){

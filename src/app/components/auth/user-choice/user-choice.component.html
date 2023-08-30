@@ -1,15 +1,16 @@
 <div class="user">
   <div class="choice p-4">
-    <img src="/assets/images/image/header.png" alt="image" [routerLink]="['/home']" width="35rem" height="35rem" class="m-auto pb-4 cursor-pointer" />
-    
+    <img src="/assets/images/image/header.png" alt="img" *ngIf="authenticated" width="35rem" height="35rem" class="m-auto pb-4"/>
+    <img src="/assets/images/image/header.png" alt="img" *ngIf="!authenticated" [routerLink]="['/home']" width="35rem" height="35rem" class="m-auto pb-4 cursor-pointer"/>
+
     <mat-card>
       <mat-card-content class="bg-gray-200">
         <label id="example-radio-group-label">
           <h2 class="text-blue-800">What type of account do you want to open?</h2>
         </label>
         <mat-radio-group [(ngModel)]="user" aria-labelledby="example-radio-group-label" class="example-radio-group">
-          <mat-radio-button class="example-radio-button" *ngFor="let user of users" [value]="user" 
-            [ngClass]="!show && user == 'admin' ? 'displayChoice' : ''" [disabled]="user =='savings...[coming soon]'"
+          <mat-radio-button class="example-radio-button" *ngFor="let user of users" [value]="user"
+            [ngClass]="!authenticated && user == 'admin' ? 'displayChoice' : ''" [disabled]="user =='savings...[coming soon]'"
           >
             <span class="font-medium">{{user | uppercase}}</span>
           </mat-radio-button>
@@ -17,9 +18,9 @@
         <button mat-flat-button color="primary" type="submit" [disabled]="!user" (click)="selectUser(user)" class="btn w-[100%] text-lg">
           Proceed
         </button>
-  
-        <div class="text-center w-[80%] text-base font-medium m-auto pt-2">
-          Already have an account? 
+
+        <div *ngIf="!authenticated" class="text-center w-[80%] text-base font-medium m-auto pt-2">
+          Already have an account?
           <span [routerLink]="['/login']" class="text-blue-700 hover:text-teal-500 cursor-pointer">Login</span>
         </div>
       </mat-card-content>

@@ -66,7 +66,7 @@ export class ProfileComponent {
         this.editPassword = true
       break;
       default:
-        this.editCustomerData()
+      this.editCustomerData()
       break;
     }
   }

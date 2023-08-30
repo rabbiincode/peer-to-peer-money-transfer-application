@@ -1,37 +1,20 @@
-<div>
-  <div class="bg-slate-400">
-    <img src="/assets/images/image/header.png" alt="image" width="30rem" height="30rem" class="m-auto" />
+<div class='fixed bg-slate-200 top-0 w-full h-full z-[100]'>
+  <div class="bg-slate-300 p-1">
+    <img src="/assets/images/image/header.png" alt="img" width="25rem" height="25rem" class="m-auto"/>
   </div>
 
-  <button (click)="CloseSidebar()" class="absolute top-10 right-4 flex text-black mt-2">
+  <button (click)="CloseSidebar()" class="absolute top-12 right-6 flex text-black mt-2">
     <mat-icon>close</mat-icon>
   </button>
-    
-  <div class="flex flex-col px-8 py-16 text-black text-lg font-medium cursor-pointer">
-    <span (click)="navigateSection('')" class="hover:text-teal-500">
-      Home
-    </span>
-    <span (click)="navigateSection('about')" class="hover:text-teal-500 pt-8">
-      About
-    </span>
-    <span (click)="navigateSection('services')" class="hover:text-teal-500 pt-8">
-      Services
-    </span>
-    <span (click)="navigateSection('team')" class="hover:text-teal-500 pt-8">
-      Our Team
-    </span>
-    <span (click)="navigateSection('faq')" class="hover:text-teal-500 pt-8">
-      FAQs
-    </span>
-    <span (click)="navigateSection('contact')" class="hover:text-teal-500 pt-8">
-      Contact
-    </span>
-    <span routerLink="/finance" class="hover:text-teal-500 pt-8">
-      Finance
-    </span>
-  </div>
 
-  <div class="name text-blue-400 text-2xl mb-2 font-semibold">
-    <h2 class="hover:line-through">CashMingle</h2>
+  <div class="sidebar m-8 mt-12 text-black text-lg font-medium">
+    <p (click)="navigateSection('')">Home</p>
+    <p (click)="navigateSection('about')">About</p>
+    <p (click)="navigateSection('services')">Services</p>
+    <p (click)="navigateSection('team')">Our Team</p>
+    <p (click)="navigateSection('faq')">Faqs</p>
+    <p (click)="navigateSection('contact')">Contact</p>
+    <p routerLink="/finance">Finance</p>
   </div>
+  <span class="name text-blue-400 text-xl font-medium hover:line-through">CashMingle</span>
 </div>

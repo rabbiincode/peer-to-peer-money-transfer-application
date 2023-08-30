@@ -8,12 +8,12 @@ import { AuthService } from '../service/auth.service';
 })
 
 export class UserChoiceComponent {
-  show = false
   user!: string
+  authenticated = false
   users: string[] = ['admin', 'individual', 'business', 'savings...[coming soon]']
 
   constructor(private userChoice: AuthService){
-    userChoice.isAuthenticated == true ? this.show = true : this.show = false
+    userChoice.isAuthenticated == true ? this.authenticated = true : this.authenticated = false
   }
 
   @Output() selectedUser = new EventEmitter<string>()

@@ -5,10 +5,10 @@ import { Component, HostListener  } from '@angular/core';
   templateUrl: './scroll-to-top.component.html',
   styleUrls: ['./scroll-to-top.component.scss']
 })
+
 export class ScrollToTopComponent {
   isShow!: boolean
   topPositionToStartShowing = 300
-
   @HostListener('window:scroll')
   
   scrollToTop() {

@@ -27,6 +27,7 @@ body {
 }
 
 img {
+  height: auto;
   max-width: 100%;
 }
 
@@ -68,8 +69,8 @@ img {
   left: 0;
   right: 0;
   margin: auto;
-  height: 60px;
-  width: 60px;
+  height: 3.5rem;
+  width: 3.5rem;
   border: 5px solid;
   border-color: #172554 transparent #3b82f6 transparent;
   border-radius: 50%;
@@ -79,8 +80,8 @@ img {
 .loader {
   content: "";
   display: block;
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
   margin: 2px 4px;
   float: right;
   border-radius: 50%;
@@ -91,12 +92,12 @@ img {
 
 @media (max-width: 500px) {
   .spinner{
-    height: 45px;
-    width: 45px; 
+    height: 2.5rem;
+    width: 2.5rem;
   }
 }
 
-.not-found {
+.position-center {
   position: absolute;
   top: 0;
   bottom: 0;

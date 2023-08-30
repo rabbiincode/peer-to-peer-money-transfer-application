@@ -17,15 +17,15 @@ export class DatabaseComponent {
   loading1 = false
   access = false
   userForm!: FormGroup
+  tableData!: any
+  tableData1!: any
+  viewDataError!: any
   searchUserError!: any
   tableHeader: string[] = ['#', 'first name', 'last name', 'middle name', 'account number', 'balance', 'recovery mail', 'date of birth', 'userType id', 'business name', 'nin',
    'cac', 'business type', 'profession', 'bvn', 'address', 'verified', 'activated', 'deleted', 'lien', 'complains', 'created at', 'updated at', 'transaction history',
    'claims', 'logins', 'tokens', 'user roles', 'id', 'userName', 'normalized userName', 'email', 'normalized email', 'email confirmed', 'password hash', 
    'security stamp', 'concurrency stamp', 'phone number', 'phone number confirmed', 'two factor enabled', 'lockout end', 'lockout enabled', 'access failed count' 
   ]
-  tableData!: any
-  tableData1!: any
-  viewDataError!: any
 
   constructor(private formBuilder: FormBuilder, private auth: AuthService, private data: AdminService){}
 

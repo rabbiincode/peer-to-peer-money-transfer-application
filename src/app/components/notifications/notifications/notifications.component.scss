@@ -24,3 +24,9 @@
     height: 25rem;
   }
 }
+
+@media (max-width: 199px){
+  .notify {
+    word-break: break-all;
+  }
+}

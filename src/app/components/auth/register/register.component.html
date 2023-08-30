@@ -1,4 +1,4 @@
-<div [ngClass]="authenticate ? 'bg-blue-200' : 'bg-slate-300'" class="relative min-h-screen">
+<div [ngClass]="authenticate ? 'bg-blue-200 min-h-[calc(100vh-65px)]' : 'bg-slate-300 min-h-screen'" class="relative">
   <div [ngClass]="authenticate ? 'bg-blue-300 text-white text-2xl font-medium sticky top-[65px] z-[5]' : 'bg-slate-400 text-blue-700 text-xl font-semibold sticky-top'">
     <span class="px-4 py-6 shadow-lg">{{name}}</span>
   </div>
@@ -12,7 +12,7 @@
   </div>
 
   <div *ngIf="user" class="register p-4">
-    <img src="/assets/images/image/header.png" alt="image" [routerLink]="['/home']" width="35rem" height="35rem" class="m-auto pb-4 cursor-pointer" />
+    <img src="/assets/images/image/header.png" alt="img" width="35rem" height="35rem" class="m-auto pb-4"/>
 
     <mat-card>
       <mat-card-content class="bg-gray-200">
@@ -33,7 +33,7 @@
               </mat-error>
             </mat-form-field>
           </div>
-    
+
           <div class="pb-4">
             <mat-form-field class="length">
               <mat-label>LastName</mat-label>
@@ -63,7 +63,7 @@
                   <mat-icon *ngIf="arrow">arrow_drop_up</mat-icon>
                   <mat-icon *ngIf="!arrow">arrow_drop_down</mat-icon>
                 </mat-expansion-panel-header>
-  
+
                 <mat-form-field class="length pb-4">
                   <mat-label>EmailAddress</mat-label>
                   <input formControlName="email" matInput required placeholder="example@mail.com" />
@@ -74,7 +74,7 @@
                     Email address is invalid
                   </mat-error>
                 </mat-form-field>
-      
+
                 <mat-form-field class="length pb-4">
                   <mat-label>PhoneNumber</mat-label>
                   <input formControlName="phoneNumber" matInput required minlength="8" maxlength="15" placeholder="08000000000" />
@@ -85,7 +85,7 @@
                     PhoneNumber not valid
                   </mat-error>
                 </mat-form-field>
-      
+
                 <mat-form-field class="length pb-4">
                   <mat-label>UserName</mat-label>
                   <input formControlName="userName" matInput required minlength="4" placeholder="Wilson"/>
@@ -96,7 +96,7 @@
                     UserName should have minimum of 4 characters
                   </mat-error>
                 </mat-form-field>
-  
+
                 <mat-form-field class="length pb-4" *ngIf="user !== 'admin'">
                   <mat-label>Recovery Email Address</mat-label>
                   <input formControlName="recoveryMail" matInput placeholder="recover@mail.com" />
@@ -104,11 +104,10 @@
                     Email address is invalid
                   </mat-error>
                 </mat-form-field>
-                 
               </mat-expansion-panel>
             </mat-accordion>
           </div>
-          
+
           <div class="pb-8 length m-auto">
             <mat-accordion>
               <mat-expansion-panel>
@@ -132,7 +131,7 @@
                     Password should have minimum of 6 characters, at least 1 uppercase and lowercase letter, number and special character
                   </mat-error>
                 </mat-form-field>
-      
+
                 <mat-form-field class="length pb-4">
                   <mat-label>Confirm Password</mat-label>
                   <input formControlName="confirmPassword" matInput [type]="hide1 ? 'password' : 'text'" required placeholder="123@Aa" />
@@ -148,11 +147,10 @@
                     Password does not match
                   </mat-error>
                 </mat-form-field>
-      
               </mat-expansion-panel>
             </mat-accordion>
           </div>
-    
+
           <div class="pb-8 length m-auto">
             <mat-accordion>
               <mat-expansion-panel>
@@ -162,7 +160,7 @@
                   <mat-icon *ngIf="arrow2">arrow_drop_up</mat-icon>
                   <mat-icon *ngIf="!arrow2">arrow_drop_down</mat-icon>
                 </mat-expansion-panel-header>
-            
+
                 <mat-form-field class="length pb-4">
                   <mat-label>Address</mat-label>
                   <input formControlName="address" matInput required placeholder="example layout" />
@@ -170,7 +168,7 @@
                     Address required
                   </mat-error>
                 </mat-form-field>
-            
+
                 <mat-form-field class="length pb-4" *ngIf="user == 'individual'">
                   <mat-label>Profession</mat-label>
                   <input formControlName="profession" matInput [required]="user == 'individual'" placeholder="Engineer" />
@@ -191,7 +189,7 @@
                     Business Type required
                   </mat-error>
                 </mat-form-field>
-                
+
                 <mat-form-field class="length pb-4" *ngIf="user !== 'business'">
                   <mat-label>NIN</mat-label>
                   <input formControlName="nin" matInput minlength="11" maxlength="11" [required]="user == 'admin' || user == 'individual'" placeholder="12345678900" />
@@ -226,7 +224,7 @@
 
             <div class="md:flex md:items-center align-top text-blue-500 mt-3">
               <input type="checkbox" (change)="accept();" />
-              I have read and accepted the <a href="#" class="text-red-500 text-sm font-medium px-1 hover:text-green-600">Terms & Conditions</a> of Services.
+              I have read and accepted the <a href="/terms&conditions" target="_blank" class="text-red-500 text-sm font-medium px-1 hover:text-green-600">Terms & Conditions</a> of Services.
             </div>
           </div>
 
@@ -235,7 +233,7 @@
             <ngb-alert *ngIf="errorMessage && errorMessage?.status > 0 && errorMessage?.status <= 499" [type]="'danger'" (closed)="errorMessage = ''">{{errorMessage?.error?.error}}</ngb-alert>
             <ngb-alert *ngIf="errorMessage && errorMessage?.status >= 500 || errorMessage?.status == 0" [type]="'danger'" (closed)="errorMessage = ''">Registration Failed...please try again</ngb-alert>
           </div>
-        
+
           <div>
             <button *ngIf="!loading" mat-flat-button color="primary" type="submit" [disabled]="registerForm.invalid || !checked" class="btn w-[90%] text-lg">
               Register
@@ -245,7 +243,6 @@
             </button>
           </div>
         </form>
-
       </mat-card-content>
     </mat-card>
   </div>

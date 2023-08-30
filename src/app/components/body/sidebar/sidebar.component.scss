@@ -1,8 +1,21 @@
+.sidebar{
+  p{
+    display: table;
+    margin-top: 2rem;
+    cursor: pointer;
+    transition: all ease 0.3s;
+    &:hover{
+      color: #14b8a6;
+      transform: scaleY(1.5);
+    }
+  }
+}
+
 .name{
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   text-align: center;
-  padding-bottom: 50px;
+  padding-bottom: 10px;
 }

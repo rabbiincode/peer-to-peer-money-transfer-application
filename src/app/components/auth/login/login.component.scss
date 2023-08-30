@@ -40,3 +40,11 @@ input[type=checkbox]{
   height: 15px;
   margin-right: 0.5rem;
 }
+
+@media (max-width: 289px){
+  .change{
+    gap: 0.5rem;
+    align-items: start;
+    flex-direction: column-reverse;
+  }
+}
